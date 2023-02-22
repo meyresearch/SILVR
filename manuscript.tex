@@ -1,0 +1,203 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is a (brief) model paper using the achemso class
+%% The document class accepts keyval options, which should include
+%% the target journal and optionally the manuscript type. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[journal=jacsat,manuscript=article]{achemso}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional packages needed here.  Only include packages
+%% which are essential, to avoid problems later. Do NOT use any
+%% packages which require e-TeX (for example etoolbox): the e-TeX
+%% extensions are not currently available on the ACS conversion
+%% servers.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% If issues arise when submitting your manuscript, you may want to
+%% un-comment the next line.  This provides information on the
+%% version of every file you have used.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\listfiles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional macros here.  Please use \newcommand* where
+%% possible, and avoid layout-changing macros (which are not used
+%% when typesetting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Meta-data block
+%% ---------------
+%% Each author should be given as a separate \author command.
+%%
+%% Corresponding authors should have an e-mail given after the author
+%% name as an \email command. Phone and fax numbers can be given
+%% using \phone and \fax, respectively; this information is optional.
+%%
+%% The affiliation of authors is given after the authors; each
+%% \affiliation command applies to all preceding authors not already
+%% assigned an affiliation.
+%%
+%% The affiliation takes an option argument for the short name.  This
+%% will typically be something like "University of Somewhere".
+%%
+%% The \altaffiliation macro should be used for new address, etc.
+%% On the other hand, \alsoaffiliation is used on a per author basis
+%% when authors are associated with multiple institutions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{Nicholas Runchie}
+\altaffiliation{EaSTCHEM School of Chemistry, University of Edinburgh, EH9 3FJ}
+\author{Antonia S.J.S. Mey}
+\altaffiliation{EaSTCHEM School of Chemistry, University of Edinburgh, EH9 3FJ}
+\email{antonia.mey@ed.ac.uk}
+\phone{xxx}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The document title should be given as usual. Some journals require
+%% a running title from the author: this should be supplied as an
+%% optional argument to \title.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[SILVR: Molecular Generation for binding modes]
+  {SILVR: Conditional diffusion model for molecule generation without additional training}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Some journals require a list of abbreviations or keywords to be
+%% supplied. These should be set up here, and will be printed after
+%% the title and author information, if needed.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\abbreviations{}
+\keywords{ML, generative models, docking}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The manuscript does not need to include \maketitle, which is
+%% executed automatically.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The "tocentry" environment can be used to create an entry for the
+%% graphical table of contents. It is given here as some journals
+%% require that it is printed as part of the abstract page. It will
+%% be automatically moved as appropriate.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tocentry}
+
+Some journals require a graphical entry for the Table of Contents.
+This should be laid out ``print ready'' so that the sizing of the
+text is correct.
+
+Inside the \texttt{tocentry} environment, the font used is Helvetica
+8\,pt, as required by \emph{Journal of the American Chemical
+Society}.
+
+The surrounding frame is 9\,cm by 3.5\,cm, which is the maximum
+permitted for  \emph{Journal of the American Chemical Society}
+graphical table of content entries. The box will not resize if the
+content is too big: instead it will overflow the edge of the box.
+
+This box and the associated title will always be printed on a
+separate page at the end of the document.
+
+\end{tocentry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The abstract environment will automatically gobble the contents
+%% if an abstract is not used by the target journal.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+I'll be an abstract when I grow up. 
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Start the main part of the manuscript here.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+- Equivariant diffusion models have been very promising in predicting 3D structures of drug-like molecules. 
+- This does not make them suitable candidates for a target binding site. 
+- We combine equivariant diffusion models~\cite{huang2022mdm} with Iterative latent variable refinement proposed in Denoising Diffusion probabilistic models~\cite{choi2021ilvr}.
+- This allows the generation of new molecules in the shape of the binding site using information from existing fragments.
+
+\section{Theory}
+\subsectin{Unconditional Equivariant Denoising Diffusion probabilistic models}
+The main idea behind diffusion models is for a neural netowrk to learn the reverse of a diffusion process, often referred to as denoising. If you start out with a set of data $\mathbf{x}$ and add noise to this data over a time interval t = [0,\ldots,T] you can define the following distribution:
+\begin{equation}
+  p(\mathbf{z}_t)|\mathbf{x} = \mathcal{N}(\mathbf{z}_t|\alpha_t,\amthbf{x}_t,\sigma^2_t\mathbf{I} ) 
+\end{equation}
+
+We do not need to know $\matbf{x}$ and want to approximate this using a neural network $\phi$, according to $\mathbf{x} = \phi(\mathbf{z}_t,t)$
+\subsection{Iterative Latent Variable Refinement as a conditioning tool}
+Choi et al.~\cite{choi2021ilvr} introduced a way to condition DDPMs by sampling their images from the conditional distribution $p(x_0|c)$, with the condition c:
+\begin{equation}
+    P_\theta(x_0|c) = \int p_\theta(x_{0:T}|c)Dx_{1:T}
+\end{equation}
+\subsection{Selective Iterative Variable Refinement}
+
+\begin{algorithm}
+\caption{SILVR}\label{alg:cap}
+\begin{algorithmic}
+\State Sample $x_T \sim \mathcal{N}(0,I)$
+\For {$t$ = $T,...,1$}
+    \State $z \sim \mathcal{N}(0,I)$
+    \State $x_{t-1}^\prime \sim p_\theta(x_{t-1}^\prime|x_t)$
+    \State $y_{t-1} \sim q(y_{t-1}^\prime|y)$
+    \State $x_{t-1} \gets x_{t-1}^\prime - k x_{t-1}^\prime +k y_{t-1}$ \Comment{SILVR equation}
+
+\EndFor
+\State Sample $x,h \sim p(x,h|z_0)$ 
+\end{algorithmic}
+\end{algorithm}
+
+\subsecsection{Algorithm}
+Both of these are wrong. I have just quickly tried to transcribe them and try and modify them. I think the ILVR style is easier to read and convey the point clearly. 
+\begin{algorithm}
+\caption{Sampling from EDM (coppied from EDM)}\label{alg:cap}
+\begin{algorithmic}
+\State Sample $z_T \sim \mathcal{N}(0,I)$
+\For {$t$ in $T, T-1,...,1$ where $s=t-1$}
+    \State Sample $\epsilon \sim \mathcal{N}(0,I)$
+    \State Subtract center of gravity from $\epsilon^{(x)}$ in $\epsilon = [\epsilon^{(x)}, \epsilon^{(h)}]$
+    \State $z_s^\prime = \frac{1}{\alpha_{t|s}}z_t - \frac{\sigma^2_{t|s}}{\alpha_{t|s}\sigma_t} \cdot \phi(z_t,t) + \sigma_{t \to s} \cdot \epsilon$
+    \State $z_s \gets z_s^\prime - \lambda z_s^\prime +\lambda z_{ref}$ \Comment{SILVR equation}
+\EndFor
+\State Sample $x,h \sim p(x,h|z_0)$ 
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+
+\section{Methods}
+
+\section{Results}
+
+
+\section{Discussion and Conclusions}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The "Acknowledgement" section can be given in all manuscript
+%% classes.  This should be given within the "acknowledgement"
+%% environment, which will make the correct section or running title.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{acknowledgement}
+The authors thank \ldots. 
+
+\end{acknowledgement}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The appropriate \bibliography command should be placed here.
+%% Notice that the class file automatically sets \bibliographystyle
+%% and also names the section correctly.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{achemso-demo}
+
+\end{document}
