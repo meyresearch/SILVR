@@ -15,6 +15,8 @@
 \usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{svg}
+\usepackage{amsmath}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% If issues arise when submitting your manuscript, you may want to
 %% un-comment the next line.  This provides information on the
@@ -49,7 +51,7 @@
 %% On the other hand, \alsoaffiliation is used on a per author basis
 %% when authors are associated with multiple institutions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\author{Nicholas Runchie}
+\author{Nicholas Runcie}
 \altaffiliation{EaSTCHEM School of Chemistry, University of Edinburgh, EH9 3FJ}
 \author{Antonia S.J.S. Mey}
 \altaffiliation{EaSTCHEM School of Chemistry, University of Edinburgh, EH9 3FJ}
@@ -123,19 +125,43 @@ I'll be an abstract when I grow up.
 - This allows the generation of new molecules in the shape of the binding site using information from existing fragments.
 
 \section{Theory}
-\subsectin{Unconditional Equivariant Denoising Diffusion probabilistic models}
-The main idea behind diffusion models is for a neural netowrk to learn the reverse of a diffusion process, often referred to as denoising. If you start out with a set of data $\mathbf{x}$ and add noise to this data over a time interval t = [0,\ldots,T] you can define the following distribution:
+\subsection{Unconditional Equivariant Denoising Diffusion probabilistic models}
+\subsubsection*{Denoising Diffusion probabilistic models (DDPM) as generative models}
+DDPMs are often used as generative models that were developed for the generation of new images~\cite{}. More recently the same idea has also been applied to molecular generation~\cite{}. The main idea behind diffusion models is for a neural network to learn the reverse of a diffusion process, often referred to as denoising to \textit{sample} a new image or new molecule. In practice this is done by training a neural network $\phi$ and generating samples $\hat{\mathbf{x}}=\psi(X_t,t)$, with $X_t$ with data $X$, noised up to time $t$.  DDPMs consist of two main parts the diffusion process and the denoising process, see the schematic in figure~\ref{fig:diffusion_schematic}.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Figures/model_no_stickman.png}
+    \caption{This should show the basic idea of a diffusion model}
+    \label{fig:diffusion_schematic}
+\end{figure}
+The \textit{forward} part of the diffusion model is a Markov process, where you start out with a set of data $\mathbf{x}$ and add noise to this data over a time interval t = [0,\ldots,T] according to the following distribution:
 \begin{equation}
-  p(\mathbf{z}_t)|\mathbf{x} = \mathcal{N}(\mathbf{z}_t|\alpha_t,\amthbf{x}_t,\sigma^2_t\mathbf{I} ) 
-\end{equation}
-
-We do not need to know $\matbf{x}$ and want to approximate this using a neural network $\phi$, according to $\mathbf{x} = \phi(\mathbf{z}_t,t)$
+  q(\mathbf{x_{1:T}})|\mathbf{x_0} = q(x_0)\prod_{t=1}^T q(\mathbf{x}_t|\mathbf{x}_{t-1})
+\end{equation}.
+The product of conditional probabilities $q(..)$ can be modelled as a Gaussian Kernel given by:
+\begin{equation}
+    q(x_t, x_s)=\mathcal{N}(x_t|\alpha_t/\alpha_s, \sigma_t^2-\frac{\alpha_t}{\alpha_s}\sigma^2_s
+\end{equation},
+for any $t> s$. The parameters $\alpha_t \in \mathbb{R}^+$ contains the amount of retained signal and $\sigma_t \in \mathbb{R}^+$ represents the variance and thus the amount of white noise added. 
+Different people have looked at different noise schedules~\cite{sohl-dickstein2015deep, ho2020denoising}.
+% Next talk about the denoising step
+$\hat{p}$ is the parametric probability distribution we want to learn. 
+\subsubsection*{Euquivariant diffusion model}
+Unlike in image problems the orientation of molecules matters under translations and rotations. For this purpose, we chose to equivariant diffusion model (EDM) by Hoogeboom et al.~\cite{} as our baseline generative model. The basic concept behind equivarience is that the model is invariant to rotations and translation in this case the E(3) group. This means that scalar (features such as atom types) and vector node properties (such as the positions) will be invariant to group transformations. This means that the order in which a rotation is applied does not matter. You can rotate the input to the model then apply the diffusion/denoising process and get a structure out, or you can apply the diffusion/denoising process first and then do the same rotation to get the same output. 
+Mathematically this means that if we have a set of point $\mathbf{x} = (\mathbf{x}_1,\ldots,\mathbf{x}_N) \in \mathbb{^{N\times 3}}$ and each of these points has a set of scalar feature vectors $\mathbf{h}\in \mathbb{R}^{N\times k}$ associated with it these features are invariant to group transformations. The positions translations and rotations are defined according to the orthogonal matrix: $\mathbf{Rx + t} = (\mathbf{R_{x_1}+t},\ldots, \mathbf{R_{x_N}+t}$.
+%%%%
+% Subsection: ILVR
+%%%%
 \subsection{Iterative Latent Variable Refinement as a conditioning tool}
 Choi et al.~\cite{choi2021ilvr} introduced a way to condition DDPMs by sampling their images from the conditional distribution $p(x_0|c)$, with the condition c:
 \begin{equation}
     P_\theta(x_0|c) = \int p_\theta(x_{0:T}|c)Dx_{1:T}
 \end{equation}
-\subsection{Selective Iterative Variable Refinement}
+
+%%%%
+% Subsection: SILVR
+%%%%
+\subsection{Selective Iterative Latent Variable Refinement}
 
 \begin{algorithm}
 \caption{SILVR}\label{alg:cap}
@@ -152,32 +178,56 @@ Choi et al.~\cite{choi2021ilvr} introduced a way to condition DDPMs by sampling 
 \end{algorithmic}
 \end{algorithm}
 
-\subsecsection{Algorithm}
-Both of these are wrong. I have just quickly tried to transcribe them and try and modify them. I think the ILVR style is easier to read and convey the point clearly. 
-\begin{algorithm}
-\caption{Sampling from EDM (coppied from EDM)}\label{alg:cap}
-\begin{algorithmic}
-\State Sample $z_T \sim \mathcal{N}(0,I)$
-\For {$t$ in $T, T-1,...,1$ where $s=t-1$}
-    \State Sample $\epsilon \sim \mathcal{N}(0,I)$
-    \State Subtract center of gravity from $\epsilon^{(x)}$ in $\epsilon = [\epsilon^{(x)}, \epsilon^{(h)}]$
-    \State $z_s^\prime = \frac{1}{\alpha_{t|s}}z_t - \frac{\sigma^2_{t|s}}{\alpha_{t|s}\sigma_t} \cdot \phi(z_t,t) + \sigma_{t \to s} \cdot \epsilon$
-    \State $z_s \gets z_s^\prime - \lambda z_s^\prime +\lambda z_{ref}$ \Comment{SILVR equation}
-\EndFor
-\State Sample $x,h \sim p(x,h|z_0)$ 
-\end{algorithmic}
-\end{algorithm}
 
 \begin{figure}
     \centering
-    \includegraphics{}
-    \caption{}
+    \includegraphics[width=\textwidth]{Figures/minimal_model.png}
+    \caption{Minimal architecture figure - I prefer this style as it fits better with the theme}
     \label{fig:fig_1}
 \end{figure}
 
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Figures/molecules_silvr_rates_horizontal.png}
+    \caption{This looks much better than I thought}
+    \label{fig:fig_2}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Figures/silvr_plots.png}
+    \caption{Preliminary SILVR results (labels missing). A) Ratio of stable atoms by considering bond distances (note this includes protons but strictly maybe they should be removed. I would have to make new code for that I think). B) RMSD between samples and reference coordinated - pairwise mapping (samples rotated and translated to minimise RMSD). C)Openeye Shapegauss - still concerned I have run this wrong - lower value indicates better shape agreement with receptor D) Geometry stability - samples converted to smiles, geometry predicted using Auto3D, then RMSD with sample}
+    \label{fig:fig_3}
+\end{figure}
+
+
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Figures/fragment_sample_bound.png}
+    \caption{Examples of other reference sets and samples fitting binding site}
+    \label{fig:fig_5}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includesvg{Figures/silvr_model_svg.svg}
+    \caption{SVG of SILVR model - text not correctly aligned. Opinion vs previous figure.}
+    \label{fig:fig_6}
+\end{figure}
+
 
 \section{Methods}
+The selective iterative latent variable refinement (SILVR) method makes use of the pre-trained equivariant diffusion model (EDM) as introduced by Hegeboom et al.~\cite{}. The core of the method is the introduction of an additional refinement within the denoising process during run time. The resulting SILVR model can then produce conditional samples without any conditional training. In this work, we show how SILVR can be applied to fragment-based drug design to produce molecules resembling a reference set of atomic coordinates. 
+
+The EDM by Hoodgeboom et al was trained on the 30 lowest energy conformations of 430,000 molecules from the GEOM dataset with explicit protons. A simplified schematic describing EDM architecture is shared in scheme X for more details on the model theory and training refer to Hegeboom et al.~\cite{}. This model strictly only considers atomic coordinates; all bond information is ignored. During training, the atomic coordinates (and their element) are passed through a forward diffusion process with iterative addition of Gaussian noise, where the extent of noise added at each step is defined by parameter $\beta$ (N.B. scheme X shows the diffusion process as a Markov chain, however in practice the state at time $t$ is determined as a direct transformation of the initial state). The diffusion process is eventually terminated when $t=T$, by which point all structure is lost and all coordinates follow a gaussian distribution. An equivariant graph neural network (EGNN) is then trained to predict the reverse process, predicting the previous state in the sequence given any state. At run time, the generative model is instantiated with a sample from a gaussian distribution and the series of denoising steps are applied resulting in a generated sample consisting of atomic coordinates resembling a drug-like molecule. The XYZ coordinates can then be interpreted using cheminformatics software to determine the molecular graph. As described, the EDM model is only trained to generate random molecules; hoodgeboom’s model does enable training given additional context, however this is outside the scope of this paper. 
+
+
 
 \section{Results}
 
