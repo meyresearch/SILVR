@@ -12,10 +12,12 @@ This project must be run using a GPU. The code in this repo was written to be ru
 Step 1: Clone this repo
 `git clone https://github.com/meyresearch/SILVR.git`
 
-Step 2: Create the conda environment
+Step 2: SILVR model should be downloaded from https://github.com/nichrun/e3_diffusion_for_molecules and moved into `silvr_projects/`
+
+Step 3: Create the conda environment
 `conda env create -f environment.yml`
 
-Step 3: Activate the silvr environment 
+Step 4: Activate the silvr environment 
 `conda activate silvr`
 
 # What is in the repo
