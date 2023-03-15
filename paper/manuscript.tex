@@ -68,7 +68,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[SILVR: Molecular Generation for binding modes]
   {SILVR: Conditional diffusion model for molecule generation without additional training}
-
+\title[SILVR: Molecular Generation for binding modes]
+  {SILVR: Guided molecular generation from diffusion models without additional training}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some journals require a list of abbreviations or keywords to be
 %% supplied. These should be set up here, and will be printed after
@@ -121,6 +122,7 @@ I'll be an abstract when I grow up.
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
+\label{sec:intro}
 - Equivariant diffusion models have been very promising in predicting 3D structures of drug-like molecules. 
 - This does not make them suitable candidates for a target binding site. 
 - We combine equivariant diffusion models~\cite{huang2022mdm} with Iterative latent variable refinement proposed in Denoising Diffusion probabilistic models~\cite{choi2021ilvr}.
@@ -132,6 +134,7 @@ I'll be an abstract when I grow up.
     \label{fig:schematic}
 \end{figure}
 \section{Theory}
+\label{sec:theory}
 \subsection{Unconditional Equivariant Denoising Diffusion probabilistic models}
 \subsubsection*{Denoising Diffusion probabilistic models (DDPM) as generative models}
 DDPMs are often used as generative models that were developed for the generation of new images~\cite{}. More recently the same idea has also been applied to molecular generation~\cite{}. The main idea behind diffusion models is for a neural network to learn the reverse of a diffusion process, often referred to as denoising to \textit{sample} a new image or new molecule. In practice this is done by training a neural network $\phi$ and generating samples $\hat{\mathbf{x}}=\psi(X_t,t)$, with $X_t$ with data $X$, noised up to time $t$.  DDPMs consist of two main parts the diffusion process and the denoising process, see the schematic in figure~\ref{fig:diffusion_schematic}.
@@ -265,9 +268,9 @@ As one of the main motivators for SILVR is to be able to generate new molecules 
 
 In addition to the experiments using two fragments and generating 1000 samples, we also looked at different combinations of fragments and resulting molecules. In general, the trends of Figure~\ref{fig:measures} were preserved for all experiments with slight overall variations. Here we present three cases we investigated in detail.
 \begin{enumerate}
-    \item Using three fragements with substantial overlap as a reference.
-    \item Using two fragements with a slight overlap. 
-    \item Using two fragements that are disconnected to investigate linker generation. This scenario will be presented in detail in section~\ref{sec:linker}.
+    \item Using three fragments with substantial overlap as a reference.
+    \item Using two fragments with a slight overlap. 
+    \item Using two fragments that are disconnected to investigate linker generation. This scenario will be presented in detail in section~\ref{sec:linker}.
 \end{enumerate}
 
 Figure~\ref{fig:samples} A-F shows hand-curated samples for the 3 different scenarios for $r_{\mathrm{S}}=0.005$ (A,C,E) and $r_{\mathrm{S}}=0.01$ (B,D,F).
@@ -279,26 +282,26 @@ Figure~\ref{fig:samples}C shows a merger of two partially overlapping fragments 
 
 In contrast, Figure~\ref{fig:samples}D shows a stricter merging of two fragments, with $r_{\mathrm{S}}=0.01$. Visibly, the scaffold of the lower fragment has been maintained while the top fragment has contributed to a fused ring. Interestingly, the sulfonamide and carbonyl (from opposing fragments) have merged to form N-oxazinane sulfonyl chloride, demonstrating a particularly creative result from SILVR. 
 
-\subsection{Fragements can be linked with SILVR and through the addition of dummy atoms}
+\subsection{Fragements can be linked using SILVR and additional dummy atoms}
 \label{sec:linker}
-Being able to reliably link fragments that sit in a binding site of a protein is crucial for the design of potential new drugs. Being able to do so without retraining a model as was done by~\cite{huang20223dlinker}. Using conditioning through SILVR allows the generation of linkers between fragments without the need to retrain the EDM. This is illustrated in the example of Figure~\ref{fig:samples}E and F. While it was possible to use SILVR as described in the Theory section~\ref{sec:tehory}, better results were obtained with the addition of \textit{dummy atoms}. These are atoms which are present in the EDM without a mapping to a reference atom, and so are free to explore the whole coordinate space without guidance from SILVR. The successful implementation of dummy atoms requires a slight modification of the SILVR algirhtm, and is outlined in the SI. The results of these experiments continue the same trends previously observed where the $r_{\mathrm{S}}=0.005$ produces samples of approximate geometric similarity, whereas $r_{\mathrm{S}}=0.01$ produces a more strict mapping, with a clearly preserved urea group, a slightly modified ring system, and an amide interpreted as a carboxylate.
+Being able to reliably link fragments that sit in a binding site of a protein is crucial for the design of potential new drugs. Being able to do so without retraining a model as was done by~\cite{huang20223dlinker}. Using conditioning through SILVR allows the generation of linkers between fragments without the need to retrain the EDM. This is illustrated in the example of Figure~\ref{fig:samples}E and F. While it was possible to use SILVR as described in the Theory section~\ref{sec:tehory}, better results were obtained with the addition of \textit{dummy atoms}. These are atoms which are present in the EDM without a mapping to a reference atom, and so are free to explore the whole coordinate space without guidance from SILVR. The successful implementation of dummy atoms requires a slight modification of the SILVR algorithm, and is outlined in the SI. The results of these experiments continue the same trends previously observed where the $r_{\mathrm{S}}=0.005$ produces samples of approximate geometric similarity, whereas $r_{\mathrm{S}}=0.01$ produces a more strict mapping, with a clearly preserved urea group, a slightly modified ring system, and an amide interpreted as a carboxylate.
 
 \section{Discussion and Outlook}
 \label{sec:discussion}
-Quick summary of what we have done
+SILVR, as presented, represents a promising proof of concept method in which a general EDM can be conditioned to generate samples that resemble a reference structure without any additional training needed. We could show that SILVR can complete both fragment merging and linking type tasks, without any \textit{a priori} knowledge of these design challenges. Considering all results with respect to the control EDM ($r_{\mathrm{S}}=0.0$), we show that at intermediate values of $r_{\mathrm{S}}$ the SILVR protocol produces molecules of equal quality to that of the unmodified EDM, while also guiding molecules towards reference structures. We, therefore, claim that if a diffusion model can be successfully trained to produce random high-quality drug-like structures, SILVR will provide molecular designs towards desired regions of chemical space without harming the quality of molecules. Our method poses a direct interface between crystallographic fragment data and \textit{de novo} molecular generation. However, there are a few ways in which the current method can be improved further but we deem out of scope for this work. 
 
-Considering all results with respect to the control EDM (rs=0.0), it can be seen that at intermediate values of rs the SILVR protocol produces molecules of equal quality to that of the unmodified EDM, while also being conditionally generated. We, therefore, claim that if a diffusion model can be successfully trained to produce random high-quality drug like structures, SILVR should be applicable to guide generation towards desired regions of chemical space without harming the quality of molecules. While our method poses a direct interface between crystallographic fragment data and \textit{de novo} molecular generation, we believe future work on SILVR could be expanded further. To answer structure-based drug design, a scoring function of protein surface potentials could be used to guide atoms towards energetically favoured pocket regions; issues of synthetic accessibility might be solved by clever design of refinement methods; and interfacing with alternative data sources (such as NMR) might be achievable. 
+\subsection{The number of unfragmented molecules generated can be improved}
+The samples generated by SILVR are often of poorer quality than the samples selected in Figure~\ref{fig:samples}. Across all samples around half of the samples were determined by RDKit to be fragmented, meaning the sample contained two or more distinct molecular graphs. It was observed qualitatively that fragmented samples typically contained corrupted structures (multiple fragmentations, linear carbon chains, flattened rings, etc). We believe this fragmentation is triggered during intermediate steps of denoising, resulting in an unstable latent representation and subsequently poor EDM inference. Fragmentation becomes a particular issue for linker design type SILVR tasks (Figure~\ref{fig:samples}E and F), where the reference coordinates direct the latent variables away from each other, triggering fragmentation. For these experiments, 65\% of all samples were fragmented. Further work is needed both with EDM and with SILVR to reduce these rates of fragmentation. 
 
-Issues:
-- Poor quality of samples and fragmentation
-- Synthetic accessibility of the generated molecules
-- No guaranteed conservation of functional groups in the current scheme. 
-- No information incorporated from the binding site in terms of electrostatics
+\subsection{The synthetic accessibility of the underlying EDM has a direct impact on the generated molecules}
+ For our experiments, the synthetic accessibility of SILVR-generated molecules resembles the performance of the unmodified EDM. In order to achieve synthetically accessible samples with SILVR an improved EDM will need to be designed. An improved version of the EDM we have used has recently been proposed using more explicit information on bond order and represents the next appropriate step for testing SILVR~\cite{vignac2023midi}.
 
-The combined set of case studies demonstrates the ability of SILVR to complete both fragments merging and linking type problems, without any a priori knowledge of these design challenges. It should be noted however that the samples generated by SILVR are often of poorer quality than the samples selected in Figure X. Across all samples around half was determined by RDKit to be fragmented, meaning the sample contained two or more distinct molecular graphs. It was observed qualitatively that fragmented samples typically contained corrupted structures (multiple fragmentations, linear carbon chains, flattened rings, etc). We believe this fragmentation is triggered during intermediate steps of denoising, resulting in an unstable latent representation and subsequently poor EDM inference. Fragmentation becomes of particular issue for linker design type SILVR experiments (figure XE and F), where the reference coordinates direct the latent variables away from each other, triggering fragmentation. For these experiments, 65\% of all samples were fragmented. Further work is needed both with EDM and with SILVR to reduce these rates of fragmentation. Additionally, as is common for generative models, the synthetic accessibility of most sampled molecules is very poor. For our experiments, the synthetic accessibility of SILVR-generated molecules resembles the performance of the unmodified EDM, so in order to achieve synthetically accessible samples with SILVR an improved EDM will need to be designed. 
+\subsection{There is no control over the retention of functional groups from the reference structure}
+When applied to a drug design context, the conservation of key functional groups in exact spacial positions is crucial for the maintenance of protein-ligand interactions. The series of molecules in Figure S2 shows a loss of the sulfonyl chloride group present in the reference, which may be undesirable. This issue can be solved by changing $r_{\mathrm{S}}$ from a scalar to a vector ($\mathbf{r}_{\mathrm{S}}$), and by assigning particularly high $\mathbf{r}_{\mathrm{S}}$ values to selected atoms of the reference. Optimisation of $\mathbf{r}_{\mathrm{S}}$ vectors for actual drug design applications may become viable with a more suitably trained EDM.
 
+\subsection{The inclusion of electrostatic information from proteins will likely improve the newly generated models}
+To answer structure-based drug design, a scoring function of protein surface potentials could be used to guide atoms towards energetically favoured pocket regions; issues of synthetic accessibility might be solved by clever design of refinement methods; and interfacing with alternative data sources (such as NMR) might be achievable. 
 
-When applied to a drug design context, the conservation of key functional groups in exact spacial positions is crucial for maintenance of protein-ligand interactions. The series of molecules in figure S2 shows a loss of the sulfonyl chloride group present in the reference, which may be undesirable. This issue can be solved by changing $r_{\mathrm{S}}$ from a scalar to a vector ($\mathbf{r}_{\mathrm{S}}$), and by assigning particularly high $\mathbf{r}_{\mathrm{S}}$ values to selected atoms of the reference. Optimisation of $\mathbf{r}_{\mathrm{S}}$ vectors for actual drug design applications may become viable with a more suitably trained EDM.
 
 \section{Conclusions}
 
