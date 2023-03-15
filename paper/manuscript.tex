@@ -208,9 +208,9 @@ The EDM was then adapted by introducing SILVR within the denoising process algor
 By introducing iterative refinement steps, the unconditional EDM can be guided to sample from a smaller region of chemical space that resembles the reference set of coordinates. Figure~\ref{fig:} demonstrates this architecture with the example of three disconnected fragments. Here, the model generates a single 5-membered ring molecule with each atom maintaining the same element, however, notice each atom has drifted slightly from the reference. This is due to the competing effects of SILVR and EDM: the EDM tries to push atoms into a chemically reasonable position, while SILVR pulls atoms towards the reference. The resulting samples, therefore, therefore resemble both valid-looking molecules and the reference set of coordinates. The ability for reference atoms of fragments to move during generation distinguishes SILVR from standard linker design~\cite{linkerdesign1, hegeboom_linker}.
 
 \subsection{Reference Dataset: Covid-moonshot}
-Reference molecules were selected from the original 23 non-covalent hits of the SARS-CoV-2 main protease (Mpro) identified by the XChem fragment screen as part of the Covid Moonshot Project~\cite{moonshot}. A more detailed picture of all fragements is presented in Figure~\ref{si:figure}. Fragments were visualised using XXX v XXX and combinations were arbitrarily selected as test cases. Fragments \textit{x0072} and \textit{x0354} were selected for benchmarking the effect of $r_{\mathrm{S}}$ on sampling; \textit{x1093}, \textit{x0072}, \textit{x2193} were selected to represent three significantly overlapping fragments; \textit{x0434}, \textit{x0305} and \textit{x0072}, \textit{x0354} were selected as partially overlapping fragments; and \textit{x0874}, \textit{x0397} were selected as two disconnected fragments, resembling a linker design type problem. Bonding information of selected fragments was deleted and XYZ coordinates were combined into a single XYZ file. Values of $r_{\mathrm{S}}$ were selected and added to the XYZ file to create a reference file containing all experiment setup information. Each experiment was sampled 1000 times. 
+Reference molecules were selected from the original 23 non-covalent hits of the SARS-CoV-2 Main Protease (Mpro) identified by the XChem fragment screen as part of the Covid Moonshot Project~\cite{moonshot}. A more detailed picture of all fragements is presented in Figure~\ref{si:figure}. Fragments were visualised using XXX v XXX and combinations were arbitrarily selected as test cases. Fragments \textit{x0072} and \textit{x0354} were selected for benchmarking the effect of $r_{\mathrm{S}}$ on sampling; \textit{x1093}, \textit{x0072}, \textit{x2193} were selected to represent three significantly overlapping fragments; \textit{x0434}, \textit{x0305} and \textit{x0072}, \textit{x0354} were selected as partially overlapping fragments; and \textit{x0874}, \textit{x0397} were selected as two disconnected fragments, resembling a linker design type problem. Bonding information of selected fragments was deleted and XYZ coordinates were combined into a single XYZ file. Values of $r_{\mathrm{S}}$ were selected and added to the XYZ file to create a reference file containing all experiment setup information. Each experiment was sampled 1000 times. 
 
-\subsection{Diferent observables were monitor to gauge the success of computational experiment for the generation of new models}
+\subsection{Diferent observables were monitored to gauge the success of computational experiment for the generation of new models}
 
 Different observables were used to monitor how realistic and reliable new molecules were generated and how well they can fit into the existing binding site of the SARS-CoV-2 main protease. 
 
@@ -220,34 +220,58 @@ The accuracy of placement of atoms was determined using the stability metric pro
 \subsubsection{SILVR to reference}
 The SILVR algorithm creates a one-to-one mapping between reference atom coordinates and sample atom coordinates. The RMSD for this pairwise mapping, ignoring atom identities, was calculated to determine the spacial similarity of samples to the reference. 
 
+\subsubsection{Geometric stability - Auto3D}
+To determine whether samples represent a true molecular geometry, independent minimisation of molecular geometries was performed using Atoms In Molecules Neural Network Potential (AIMNet) with Auto3D. All samples were read by RDKit and samples containing more than one molecule were removed from the test set. The SMILES string of each molecule was written to a new file, read by Auto3D, and geometry predicted by AIMNet. The RMSD between SILVR-generated coordinates and the Auto3D minimised coordinates were calculated with RDKit.
+
 \subsubsection{Shape similarity of sample to protein}
 The agreement in the shape of samples and the main protease binding site was determined using OpenEye Tools Gaussian scoring function \textit{Shapegauss}. This scoring function measures the shape similarity between the ligand and receptor by considering each heavy atom as a Gaussian function~\cite{mcgann2003gaussian}. The most favourable score occurs “when two atoms touch but do not overlap”.  This metric does not consider any intermolecular interactions. The protein receptor file was prepared from the Mpro-x0072 crystal structure with removal of the ligand. The XYZ coordinates of samples were directly read into OpenEye Tools and the pose was re-scored with \textit{shapegauss}. 
 
-\subsection{Maybe: Docking of molecules}
+\subsubsection{Maybe: Docking of molecules}
+
 
 
 \section{Results}
+In the following, we will demonstrate how SILVR can be used to generate conditioned samples to a reference using a pre-trained EDM without additional training. Some of the flaws in the presented results stem from the underlying EDM, but retraining an improved EDM is out of the scope of this work.  The main questions we set out to answer with SILVR were:
+\begin{enumerate}
+    \item Can we generate samples from the EDM that are similar to the reference structures?
+    \item Is there a SILVR rate $r_{\mathrm{S}}$ that will provide enough diversity while still retaining reference features?
+    \item Do the generated samples of new molecules still fit into the Mpro binding site?
+    \item Can we link molecule fragments without additional training?
+\end{enumerate}
 
-\begin{figure}
+\subsection{The SILVR rate $r_{\mathrm{S}}$ effectively modulates similarity to the reference structures}
+Qualitatively, the generated molecular samples from the recondition EDM  show a clear resemblance to their reference structures, with similarity increasing with $r_{\mathrm{S}}$. Figure S2, in the SI, shows two example samples started from fragments xxx and xxx over a range of SILVR rates between $r_{\mathrm{S}}=0$ to $r_{\mathrm{S}}=0.02$. As expected at no conditioning random samples are generated that do not resemble the reference fragments.  At low values of rs (< 0.0025) the sampled molecules only show an approximate agreement in orientation. At medium values of $r_{\mathrm{S}}$ ($0.0025 \le r_{\mathrm{S}} < 0.01$) the resulting samples begin to produce key structural features like ring systems and heteroatoms at positions seen in the reference. At high values of $r_{\mathrm{S}}$ ( $\ge 0.01$) the resulting samples have a very high resemblance to the reference with most structural features in correct positions, however, the diversity of samples is significantly reduced and structures start to become chemically less reasonable. At very high values of $r_{\mathrm{S}}$ ($> 0.02$) there is a very high similarity between samples and the reference, however, most structures no longer resemble valid molecules. It seems best molecules are formed at intermediate values of $r_{\mathrm{S}}$ ($0.05 < r_{\mathrm{S}} < 0.01$) offering a trade-off between similarity to the reference, sampling diversity, and molecular likeness. This is further validated by looking at stability measures. 
+
+\subsection{Intermediate SILVR rates produce stable and varied molecules}
+To assess the stability and variability of generated molecules we looked at three different metrics, as discussed in the methods section~\ref{sec:methods}. We generated 1000 samples at different $r_{\mathrm{S}}$ from the two fragements \textit{X0072} and \textit{X0354} as a reference. Figure~\ref{fig:measures} summarises the findings from these experiments with box plots generated across the 1000 samples. The zeroth test we made with the generated samples was looking at how many generated molecules were fragemented i.e. are not a single connected molecular graph or not, with respect to $r_{\mathrm{S}}$. This is presented in Figure S4 in the SI. At an intermediate $r_{\mathrm{S}} = 0.025$ just over 50\% of the generated samples are not fragmented meaning that in the worst-case scenario, only one in two generated molecules can be analysed further. The subsequent analysis is carried out only on whole molecular graphs. 
+Figure~\ref{fig:measures} a looks at the \textit{atom stability} measure as introduced by Hoogeboom et al.~\cite{hoogeboom2022equivariant}. Samples generated at low $r_{\mathrm{S}}$ tend to have similar stabilities to each other, samples start becoming less stable around $r_{\mathrm{S}}=0.005$, and become totally unstable at $r_{\mathrm{S}}=0.02$. This trend can largely be explained due to issues around protons. The atom stability measure calculates whether the valance of each atom matches what is expected for that atom, however, the measure requires the presence of explicit protons. A carbon skeleton with appropriate C-C bond lengths would be determined as \textit{unstable} unless each carbon was populated with explicit protons. In the case of high $r_{\mathrm{S}}$ values, the SILVR method pulls atom types strongly towards the reference. Since there are no protons in the reference, all atoms are mapped to heavy atoms, and therefore most atoms are unable to satisfy a full valence. Adding protons explicitly to the molecules, through openBable or RDkit, is a way of improving this measure. 
+
+\begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{paper/Figures/Fig3/fig_3_metrics.png}
-    \caption{Preliminary SILVR results (labels missing). A) Ratio of stable atoms by considering bond distances (note this includes protons but strictly maybe they should be removed. I would have to make new code for that I think). B) RMSD between samples and reference coordinated - pairwise mapping (samples rotated and translated to minimise RMSD). C)Openeye Shapegauss - still concerned I have run this wrong - lower value indicates better shape agreement with receptor D) Geometry stability - samples converted to smiles, geometry predicted using Auto3D, then RMSD with sample}
-    \label{fig:metrics}
+    \caption{Validation measures of SILVR model using fragments Mpro-x0072 and Mpro-x0354 as reference coordinates. a) Ratio of stable atoms - an atom is determine as stable if the valence matches the expected valence for the element b) RMSD from reference - the calculated RMSD between the reference and sample, using an absolute one-to-one mapping ignore atom identity c) OpenEye measure “shapegauss” - a gaussian scoring function describing the shape fit between Mpro and samples, ignoring chemical interactions d) Geometry stability - AIMNet geometry optimisation was completed with Auto3D using the SMILES string of each sample. RMSD was calculated between the predicted geometry and the sampled geometry using RDKit.}
+    \label{fig:measures}
 \end{figure}
+The similarity of samples to their reference set of coordinates was determined by RMSD, with a clear inverse correlation observed between rs and RMSD, as seen in Figure~\ref{fig:measures} b. This indicates that the extent of guidance of atoms towards the reference set of coordinates can be fine-tuned by varying $r_{\mathrm{S}}$. 
 
+A successful 3D generative model should ideally produce ground state conformations. To determine whether the sampled molecular geometries were reasonable, a separate geometry optimisation protocol was applied to the SMILES strings of sampled molecules and RMSD calculated. At low to medium values of $r_{\mathrm{S}}$ ($< 0.01$), the average RMSD values all fall in the $1.6 - 1.7 \AA$ range, which is arguably good, however still leaves sufficient room for improvement. Importantly, no difference is seen between the control set ($r_{\mathrm{S}}=0$) and the SILVR samples ($0 < r_{\mathrm{S}} < 0.01$) indicating the quality of generated molecules was not hindered by the SILVR protocol. 
 
+\subsection{Generated samples with SILVR fit the binding site of Mpro}
+
+The shape complementarity between sampled molecules and Mpro was calculated using the openeye shapegauss scoring function; a scoring function which only considers the shape of molecules and ignores any intermolecular interactions. As expected, the shape complementarity of samples improved with increasing rs, demonstrating that SILVR can produce ligands of binding site geometry when guided by the coordinates of fragment molecules. The lack of plot data for rs=2.0 and rs=3.0 was because all shapegauss calculations failed. We believe this was due to the atom coordinates representing highly stained and internally clashing molecules, and the scoring algorithm either failed to read the molecules or identified them as bad conformations. Scoring functions using intermolecular interactions, and molecular docking, were not attempted.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{Figures/fragment_sample_bound.png}
-    \caption{Examples of other reference sets and samples fitting binding site}
+    \includegraphics[width=\textwidth]{paper/Figures/Fig4/fig_4_ref_sample_bound.png}
+    \caption{Examples of generated molecules from different reference sets. Molecules were hand-curated. Figure depicts reference fragments used as input to SILVR (left), the sampled molecule (middle), and the sampled molecule translated to the protein binding site (right). Left set of samples (A,C,E) rs=0.005, right set of samples (B, D, F) rs=0.01. Row 1: Three significantly overlapping fragments A and B (x1093, x0072, x2193). Row 2: Two fragments partially overlapping C (x0434, x0305), D (x0072, x0354). Row 3: Two disconnected fragments E and F (x0874, x0397) samples generated including 10 dummy atoms (method described in SI)}
     \label{fig:samples}
 \end{figure}
 
+\subsection{Fragements can be linked with SILVR and through the addition of dummy atoms}
 
 \section{Discussion and Conclusions}
 
-
+When applied to a drug design context, the conservation of key functional groups in exact spacial positions is crucial for maintenance of protein-ligand interactions. The series of molecules in figure X show a loss of the sulfonyl chloride group present in the reference, which may be undesirable. This issue can be solved by changing rs from a scalar to a vector, and by assigning particularly high rs values to selected atoms of the reference. Optimisation of rs vectors for drug design is scope for future work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
