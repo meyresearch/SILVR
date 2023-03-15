@@ -228,7 +228,7 @@ The agreement in the shape of samples and the main protease binding site was det
 
 \subsubsection{Maybe: Docking of molecules}
 
-All data for the experiments carried and instruction on how to reproduce this work can be found at~\url{https://github.com/meyresearch/SILVR}. An updated version of the Hoogeboom et al. EDM that includes SILVR can be found at~\url{https://github.com/nichrun/e3_diffusion_for_molecules}.
+
 
 \section{Results}
 In the following, we will demonstrate how SILVR can be used to generate conditioned samples to a reference using a pre-trained EDM without additional training. Some of the flaws in the presented results stem from the underlying EDM, but retraining an improved EDM is out of the scope of this work.  The main questions we set out to answer with SILVR were:
@@ -304,6 +304,10 @@ To answer structure-based drug design, a scoring function of protein surface pot
 
 
 \section{Conclusions}
+We developed SILVR, a method that can be injected into a pre-trained equivariant diffusion model that serves as a molecular generator to explore new chemical space. SILVR allows the conditioning of molecules based on a reference set of molecules, e.g. a fragment from an X-ray fragment screen. The SILVR rate $r_{\mathrm{S}}$ allows the tuning of 'how much of the reference' molecule should be taken into account when generating new molecules, with medium values of $r_{\mathrm{S}}$ around 0.005 giving the best results. The simple conditioning against a reference set of molecules means that the model can be used for tasks of fragment linker design, as well as generating new molecules that fit into an existing binding pocket without any specific training needed towards these tasks. In the future, given improvements in EDMs that produce more realistic and synthetically accessible molecules this method can cheaply generate structures exploring new chemical space with desired conditioning towards existing fragment hits.
+
+\section{Data Availability}
+All data for the experiments carried out and instructions on how to reproduce this work can be found at~\url{https://github.com/meyresearch/SILVR}. An updated version of Hoogeboom et al. EDM that includes SILVR can be found at~\url{https://github.com/nichrun/e3_diffusion_for_molecules}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
