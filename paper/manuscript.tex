@@ -123,7 +123,12 @@ I'll be an abstract when I grow up.
 - This does not make them suitable candidates for a target binding site. 
 - We combine equivariant diffusion models~\cite{huang2022mdm} with Iterative latent variable refinement proposed in Denoising Diffusion probabilistic models~\cite{choi2021ilvr}.
 - This allows the generation of new molecules in the shape of the binding site using information from existing fragments.
-
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{paper/Figures/Fig1/Schematic.png}
+    \caption{Schematic of the equivariant diffusion model with  SILVR indicated for every denoising step.}
+    \label{fig:schematic}
+\end{figure}
 \section{Theory}
 \subsection{Unconditional Equivariant Denoising Diffusion probabilistic models}
 \subsubsection*{Denoising Diffusion probabilistic models (DDPM) as generative models}
@@ -179,47 +184,17 @@ Choi et al.~\cite{choi2021ilvr} introduced a way to condition DDPMs by sampling 
 \end{algorithm}
 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{Figures/minimal_model.png}
-    \caption{Minimal architecture figure - I prefer this style as it fits better with the theme}
-    \label{fig:fig_1}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{Figures/molecules_silvr_rates_horizontal.png}
-    \caption{This looks much better than I thought}
-    \label{fig:fig_2}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{Figures/silvr_plots.png}
-    \caption{Preliminary SILVR results (labels missing). A) Ratio of stable atoms by considering bond distances (note this includes protons but strictly maybe they should be removed. I would have to make new code for that I think). B) RMSD between samples and reference coordinated - pairwise mapping (samples rotated and translated to minimise RMSD). C)Openeye Shapegauss - still concerned I have run this wrong - lower value indicates better shape agreement with receptor D) Geometry stability - samples converted to smiles, geometry predicted using Auto3D, then RMSD with sample}
-    \label{fig:fig_3}
-\end{figure}
 
 
 
 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{Figures/fragment_sample_bound.png}
-    \caption{Examples of other reference sets and samples fitting binding site}
-    \label{fig:fig_5}
-\end{figure}
 
 
-\begin{figure}
-    \centering
-    \includesvg{Figures/silvr_model_svg.svg}
-    \caption{SVG of SILVR model - text not correctly aligned. Opinion vs previous figure.}
-    \label{fig:fig_6}
-\end{figure}
+
+
+
+
 
 
 \section{Methods}
@@ -252,6 +227,22 @@ The agreement in the shape of samples and the main protease binding site was det
 
 
 \section{Results}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{paper/Figures/Fig3/fig_3_metrics.png}
+    \caption{Preliminary SILVR results (labels missing). A) Ratio of stable atoms by considering bond distances (note this includes protons but strictly maybe they should be removed. I would have to make new code for that I think). B) RMSD between samples and reference coordinated - pairwise mapping (samples rotated and translated to minimise RMSD). C)Openeye Shapegauss - still concerned I have run this wrong - lower value indicates better shape agreement with receptor D) Geometry stability - samples converted to smiles, geometry predicted using Auto3D, then RMSD with sample}
+    \label{fig:metrics}
+\end{figure}
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Figures/fragment_sample_bound.png}
+    \caption{Examples of other reference sets and samples fitting binding site}
+    \label{fig:samples}
+\end{figure}
 
 
 \section{Discussion and Conclusions}
