@@ -69,7 +69,7 @@
 \title[SILVR: Molecular Generation for binding modes]
   {SILVR: Conditional diffusion model for molecule generation without additional training}
 \title[SILVR: Molecular Generation for binding modes]
-  {SILVR: Guided molecular generation from diffusion models without additional training}
+  {SILVR:Directed Diffusion for Molecule Generation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some journals require a list of abbreviations or keywords to be
 %% supplied. These should be set up here, and will be printed after
@@ -123,6 +123,14 @@ I'll be an abstract when I grow up.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 \label{sec:intro}
+One of the challenges as part of computer aided drug-design is to sample from the very large space of possible drug-like compounds to find suitable hits for a given target protein. It is estimated that there are between $10^23$ to $10^60$ possibly feasible compounds, while only around $10^8$ have been synthesised so far~\cite{polishchuk2013estimation, reymond2012exploring}. Different strategies have been employed in the past to try and sample a diverse and synthetically accessible molecular space. In particular, methods based on machine-learning have shown vast amount of promise in recent years in this space~\cite{bilodeau2022generative}. Various different neural network architectures have been proposed for molecular generation, from Varational autoencoders (VAE)~\cite{kingma2022autoencoding, jin2018junction, ma2018constrained}, to generative adversarial networks (GAN)~\cite{hoffmann2019generating} and normalising flows~\cite{shi2021learning}. More recently denoising difusion probailistic models, and particularly equivarient diffusion models have shown promise in moleculear generation~\cite{xu2022geodiff, hoogeboom2022equivariant}.  
+
+- Model generation isn't everything
+- How do models fit into hit design, conditioned training needed.
+
+
+Linker learning with reinforcement learning~\cite{guo2023linkinvent}.
+
 - Equivariant diffusion models have been very promising in predicting 3D structures of drug-like molecules. 
 - This does not make them suitable candidates for a target binding site. 
 - We combine equivariant diffusion models~\cite{huang2022mdm} with Iterative latent variable refinement proposed in Denoising Diffusion probabilistic models~\cite{choi2021ilvr}.
@@ -135,9 +143,8 @@ I'll be an abstract when I grow up.
 \end{figure}
 \section{Theory}
 \label{sec:theory}
-\subsection{Unconditional Equivariant Denoising Diffusion probabilistic models}
-\subsubsection*{Denoising Diffusion probabilistic models (DDPM) as generative models}
-DDPMs are often used as generative models that were developed for the generation of new images~\cite{}. More recently the same idea has also been applied to molecular generation~\cite{}. The main idea behind diffusion models is for a neural network to learn the reverse of a diffusion process, often referred to as denoising to \textit{sample} a new image or in our case a new molecule. In practice this is done by training a neural network $\phi$ and generating samples $\hat{\mathbf{x}}=\psi(X_t,t)$, with $X_t$ with data $X$, noised up to time $t$.  Figure~\ref{fig:diffusion_schematic} shows a schematic of the two main parts of this model, the diffusion part where noise is added for each timestep (shown in blue) and the denoising part (shown in yellow) that allows the generation of a new image (molecule).
+\subsection*{Denoising Diffusion probabilistic models (DDPM) as generative models}
+DDPMs are often used as generative models that were developed for the generation of new images~\cite{sohl-dickstein2015deep, ho2020denoising, nichol2021improved}. More recently the same idea has also been applied to molecular generation~\cite{hoogeboom2022equivariant}. The main idea behind diffusion models is for a neural network to learn the reverse of a diffusion process, often referred to as denoising to \textit{sample} a new image or in our case a new molecule. In practice this is done by training a neural network $\phi$ and generating samples $p(\mathbf{x_{t-1}}|\mathbf{x}_t)=\mathcal(x_{t-1}; \{\mu_{\theta}(x_t;t), \sigma_t^2\mathbf{I}$ from  a Gaussian transition with learned mean ($\mu_{\theta}(x_t;t)$) and variance ($\sigma_t$) with $\mathbf{x}_t$ with data $X$, noised up to time $t$.  Figure~\ref{fig:diffusion_schematic} shows a schematic of the two main parts of such a DDPM, the diffusion part where noise is added for each timestep (shown in blue) and the denoising part (shown in yellow) that allows the generation of a new image (molecule).
 
 The \textit{forward} part of the diffusion model is a Markov process, where you start out with a set of data $\mathbf{x}$ and add noise to this data over a time interval t = [0,\ldots,T] according to the following distribution:
 \begin{equation}
@@ -150,10 +157,28 @@ The product of conditional probabilities $q(..)$ can be modelled as a Gaussian K
 for any $t>s$. The parameters $\alpha_t \in \mathbb{R}^{+}$ contains the amount of retained signal and $\sigma_t \in \mathbb{R}^+$ represents the variance and thus the amount of white noise added. 
 Different people have looked at different noise schedules~\cite{sohl-dickstein2015deep, ho2020denoising}.
 % Next talk about the denoising step
-$\hat{p}$ is the parametric probability distribution we want to learn. 
-\subsubsection*{Euquivariant diffusion model}
+$p_{\theta}$ is the parametric probability distribution we want to learn. This generative process is given by:
+
+\begin{equation}
+p(\mathbf{x_{t-1}}|\mathbf{x}_t)=\mathcal(x_{t-1}; \{\mu_{\theta}(x_t;t), \sigma_t^2\mathbf{I}.
+\end{equation}
+A sample for denoising timestep $t-1$ can be generated from the following equation given the neural network $\phi$ that has been trained on the diffusion process. 
+
+A given samples is generated as:
+\begin{equation}
+ x_{t-1} = \frac{1}{\alpha_t}(x_t-\frac{1-\alpha_t}{\sqrt{1-<\alpha_t>}}\phi(x_t,t) +\sigma z,   
+\end{equation}
+
+with $z\sim\mathcal{N}(0,\mathbf{I})$.
+
+The process is iterated until $t=0$ and as such a new sample is generated. 
+
+%%%%%%%
+% EDMs
+%%%%%%%
+\subsection*{Euquivariant diffusion model}
 Unlike in image problems, the orientation of molecules matter under translations and rotations. For this purpose, equivariant diffusion models (EDMs) are used to account for rotational invarance. For this purpose we chose to equivariant diffusion model (EDM) by Hoogeboom et al.~\cite{hoogeboom2022equivariant} as our baseline generative model, as it provides a generative model for new molecules and has equivariance already built into it.  The basic concept behind equivarience is that the model is invariant to rotations and translation in this case the E(3) group. This means that scalar (features such as atom types) and vector node properties (such as the positions) will be invariant to group transformations. As a result the order in which a rotation is applied does not matter. You can rotate the input to the model then apply the diffusion/denoising process and get a structure out, or you can apply the diffusion/denoising process first and then do the same rotation to get the same output. 
-Mathematically this means that if we have a set of point $\mathbf{x} = (\mathbf{x}_1,\ldots,\mathbf{x}_N) \in \mathbb{^{N\times 3}}$ and each of these points has a set of scalar feature vectors $\mathbf{h}\in \mathbb{R}^{N\times k}$ associated with it these features are invariant to group transformations. The positions translations and rotations are defined according to the orthogonal matrix: $\mathbf{Rx + t} = (\mathbf{R_{x_1}+t},\ldots, \mathbf{R_{x_N}+t})$. Satorras et al.~\cite{} have proposed an E(n) Equivariant Graph Neural Network on which the EDM by Hoogeboom et al. builds. For full details on the architecture and their code see~\cite{hoogeboom2022equivariant}. 
+Mathematically this means that if we have a set of point $\mathbf{x} = (\mathbf{x}_1,\ldots,\mathbf{x}_N) \in \mathbb{^{N\times 3}}$ and each of these points has a set of scalar feature vectors $\mathbf{h}\in \mathbb{R}^{N\times k}$ associated with it these features are invariant to group transformations. The positions translations and rotations are defined according to the orthogonal matrix: $\mathbf{Rx + t} = (\mathbf{R_{x_1}+t},\ldots, \mathbf{R_{x_N}+t})$. Satorras et al.~\cite{satorras2022equivariant} have proposed an E(n) Equivariant Graph Neural Network on which the EDM by Hoogeboom et al. builds. For full details on the architecture and their code see~\cite{hoogeboom2022equivariant}. 
 %%%%
 % Subsection: ILVR
 %%%%
@@ -161,14 +186,16 @@ Mathematically this means that if we have a set of point $\mathbf{x} = (\mathbf{
 Choi et al.~\cite{choi2021ilvr} introduced a way to condition DDPMs by sampling their images from the conditional distribution $p(x_0|c)$, with the condition c:
 \begin{equation}
     P_\theta(x_0|c) = \int p_\theta(x_{0:T}|c)Dx_{1:T}
+    p_{\theta}(x_{0:T}|c)=p(x_T)\prod_{t=1}^{T}p_{\theta}(x_{t-1}\x_t,c)
 \end{equation}
+This iterative latenent variable refinement (ILVR) means that the condition can be applied during the denoising step without additional training. In the case of Choi et al, they used downsampled reference images as conditioning in order to generate images similar to the reference, but still a newly generated images. 
 
 %%%%
 % Subsection: SILVR
 %%%%
 \subsection{Selective Iterative Latent Variable Refinement}
 \label{sec:silvr}
-We propose a new method, that combines the iterative variable refinement (ILVR) by Choi et al.~\cite{choi2021ilvr} proposed in an image generation context and incorporates the ideas into the EDM by Hoogeboom et al.. This allows us to generate a selective iterative laten variable refinement (SILVR) procedure in which we introduce a reference molecule into the denoising step. The reference used can be a small fragment, multiple fragments or even include dummy atoms that do not exist in the original reference. As a result we propose a modification of Algorithm 2 by Hoogeboom et al.~\cite{hoogeboom2022equivariant} to result in the SILVR algorithm~\ref{alg:silvr}.  We are considering latent space variables $\mathbf{z}=[\mathbf{z}^{(x)},\mathbf{z}^{(h)}]$ for the standard denoising process and  $\mathbf{\hat{z}} = [\mathbf{\hat{z}}^{(y)},\mathbf{\hat{z}}^{(h)}]$, for the set of reference coordinates given by $\mathbf{y}$. The vector $\mathbf{h}$ contains all the scalar node properties of the equivariant EDM. 
+We propose a new method, that combines ILVR by Choi et al.~\cite{choi2021ilvr} proposed in an image generation context and incorporates the ideas into the EDM by Hoogeboom et al.. This allows us to generate a selective iterative laten variable refinement (SILVR) procedure in which we introduce a reference molecule into the denoising step. The reference used can be a small fragment, multiple fragments or even include dummy atoms that do not exist in the original reference. As a result we propose a modification of Algorithm 2 by Hoogeboom et al.~\cite{hoogeboom2022equivariant} to result in the SILVR algorithm~\ref{alg:silvr}.  We are considering latent space variables $\mathbf{z}=[\mathbf{z}^{(x)},\mathbf{z}^{(h)}]$ for the standard denoising process and  $\mathbf{\hat{z}} = [\mathbf{\hat{z}}^{(y)},\mathbf{\hat{z}}^{(h)}]$, for the set of reference coordinates given by $\mathbf{y}$. The vector $\mathbf{h}$ contains all the scalar node properties of the equivariant EDM. 
 \begin{algorithm}
 \caption{SILVR}\label{alg:silvr}
 \begin{algorithmic}[1]
@@ -184,23 +211,18 @@ We propose a new method, that combines the iterative variable refinement (ILVR) 
     \State $\mathbf{\hat{z}}_{t-1} = \alpha_{t-1} \mathbf{\hat{z}}_{0} +\sigma_{t-1}\times\boldsymbol{\epsilon}$
     \Comment{Noise reference to t=t-1}
     \State $\mathbf{z}_{t-1} \gets \kappa (\mathbf{z}_t,t)$
-    \Comment{Compute denosing step}
+    \Comment{Compute denoising step}
     \State Update $\mathbf{z}_{t-1} \gets \mathbf{z}_{t-1} - \alpha_{t-1}r_{\mathrm{S}} \mathbf{z}_{t-1} +r_{\mathrm{S}} \mathbf{\hat{z}}_{t-1}$ \Comment{SILVR equation}
     \State Subtract COG from updated $\mathbf{z}_{t-1}$
 
 \EndFor
-\State Add COG (from line 4) to $\mathbf{z}_0$
+\State Add COG($\mathbf{\hat{z}}_0$) to $\mathbf{z}_0$
 \Comment{Move sample back to pocket}
 \State Sample $\mathbf{x,h} \sim p(\mathbf{x,h|z_0})$ 
 \end{algorithmic}
 \end{algorithm}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{paper/Figures/Fig2/fig2.jpg}
-    \caption{Schematic illustrating the influence of SILVR of the molecules in the latent space. At each denoising step if $r_{mathrm{S}}>0$ the latent space vector get scaled by the SILVR rate. This is done from the first denoising timestep (top) until the last one (bottom). Repeatedly applying SILVR will result in a molecule that resembles the references (right) and does not (left)}
-    \label{fig:silvr_explanation}
-\end{figure}
+
 
 The core of the new method is the addition of a refinement process within the denoising part during run time. The resulting SILVR model produces conditional samples without any conditional training when generating new molecules. Figure~\ref{fig:silvr_explanation} shows an illustrative example of how the SILVR rate $r_{\mathrm{S}}$ is used to shift the latent space vector $\mathbf{z}_{t-1}$ at any point in the denoising process from $T\ldots t=1$. Using the silver equation as defined in the SILVR algorithm~\ref{alg:silvr} line 11, an existing denoising step (green) is brought closer to the reference (purple) in latent space. 
 
@@ -209,7 +231,14 @@ To illustrate the usefulness of this run-time modification, we show how SILVR ca
 %As stated before, the selective iterative latent variable refinement (SILVR) method makes use of the pre-trained equivariant diffusion model (EDM) as introduced by Hoogeboom \textit{et al.}~\cite{hoogeboom2022equivariant}. 
 
 \subsection{Conditioning the pre-trained EDM with SILVR}
-The EDM by Hoodgeboom \textit{et al.} was trained on the 30 lowest energy conformations of 430,000 molecules from the GEOM dataset with explicit protons. A simplified schematic describing the EDM architecture is shared in scheme~\ref{fig:_architecture} for more details on the model theory and training refer to Hoogeboom et al.~\cite{hoogeboom2022equivariant}. This model strictly only considers atomic coordinates; all bond information is ignored. A more recent version of the EDM also accounts for bond order and SILVR could also be incorporated into this new model~\cite{hvignac2023midi}. During training, the atomic coordinates (and their element) are passed through a forward diffusion process with iterative addition of Gaussian noise, where the extent of noise added at each step is defined by parameter $\beta$ (N.B. scheme~\ref{fig:schematic} shows the diffusion process as a Markov chain, however in practice the state at time $t$ is determined as a direct transformation of the initial state). The diffusion process is eventually terminated when $t=T$, by which point all structure is lost and all coordinates follow a Gaussian distribution. An equivariant graph neural network (EGNN) is then trained to predict the reverse process, predicting the previous state in the sequence given any state. At run time, the generative model is instantiated with a sample from a Gaussian distribution and the series of denoising steps are applied resulting in a generated sample consisting of atomic coordinates resembling a drug-like molecule. The \texttt{XYZ} coordinates can then be interpreted using cheminformatics software to determine the molecular graph. 
+The EDM by Hoodgeboom \textit{et al.} was trained on the 30 lowest energy conformations of 430,000 molecules from the GEOM dataset with explicit protons~\cite{axelrod2022geom}. A simplified schematic describing the EDM architecture is shared in scheme~\ref{fig:_architecture} for more details on the model theory and training refer to Hoogeboom et al.~\cite{hoogeboom2022equivariant}. This model strictly only considers atomic coordinates; all bond information is ignored. A more recent version of the EDM also accounts for bond order and SILVR could also be incorporated into this new model~\cite{hvignac2023midi}. During training, the atomic coordinates (and their element) are passed through a forward diffusion process with iterative addition of Gaussian noise, where the extent of noise added at each step is defined by parameter $\beta$ (N.B. scheme~\ref{fig:schematic} shows the diffusion process as a Markov chain, however in practice the state at time $t$ is determined as a direct transformation of the initial state). The diffusion process is eventually terminated when $t=T$, by which point all structure is lost and all coordinates follow a Gaussian distribution. An equivariant graph neural network (EGNN) is then trained to predict the reverse process, predicting the previous state in the sequence given any state. At run time, the generative model is instantiated with a sample from a Gaussian distribution and the series of denoising steps are applied resulting in a generated sample consisting of atomic coordinates resembling a drug-like molecule. The \texttt{XYZ} coordinates can then be interpreted using cheminformatics software to determine the molecular graph. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{paper/Figures/Fig2/fig2.jpg}
+    \caption{Schematic illustrating the influence of SILVR of the molecules in the latent space. At each denoising step if $r_{mathrm{S}}>0$ the latent space vector get scaled by the SILVR rate. This is done from the first denoising timestep (top) until the last one (bottom). Repeatedly applying SILVR will result in a molecule that resembles the references (right) and does not (left)}
+    \label{fig:silvr_explanation}
+\end{figure}
 
 The EDM was then adapted by introducing SILVR within the denoising process algorithm~\ref{alg:silvr}, as outlined in~\ref{sec:silvr}. At run time, each atom of the reference set of coordinates is mapped to an atom in the EDM. The reference coordinates are then translated such that their center of mass is at the origin. The reference coordinates are then diffused to the same timestep as that of the denoising process. That is, the amount of structure remaining from the reference should match the amount of structure formed by the generative process. A small refinement is applied to add information from the reference coordinates to the latent variable of the denoising process~\ref{eq:denoising}. This equation has the effect of shrinking the coordinates towards the origin, and then expanding the coordinates out in the direction of the reference, see Figure~\ref{fig:silvr_explanation}. Importantly, the extent of this refinement is defined by the SILVR rate $r_{\mathrm{S}}$, with $r_{\mathrm{S}}=0$ providing no additional refinement and $r_{\mathrm{S}}=1$ will result in a total replacement of atoms. The diffusion of the reference to $t=\tau$ requires the sampling of a Gaussian; while in principle this sampling could be performed only once prior to the denoising loop, in practice better results were obtained when the Gaussian was repeatedly sampled during the denoising process. Once denoising is complete, sampled molecules can be translated back to the same coordinates as the reference by reverting the initial centre of gravity transformation; in the case of fragment data, this has the effect of returning samples to the binding site of the protein.
 
