@@ -137,7 +137,7 @@ I'll be an abstract when I grow up.
 \label{sec:theory}
 \subsection{Unconditional Equivariant Denoising Diffusion probabilistic models}
 \subsubsection*{Denoising Diffusion probabilistic models (DDPM) as generative models}
-DDPMs are often used as generative models that were developed for the generation of new images~\cite{}. More recently the same idea has also been applied to molecular generation~\cite{}. The main idea behind diffusion models is for a neural network to learn the reverse of a diffusion process, often referred to as denoising to \textit{sample} a new image or new molecule. In practice this is done by training a neural network $\phi$ and generating samples $\hat{\mathbf{x}}=\psi(X_t,t)$, with $X_t$ with data $X$, noised up to time $t$.  DDPMs consist of two main parts the diffusion process and the denoising process, see the schematic in figure~\ref{fig:diffusion_schematic}.
+DDPMs are often used as generative models that were developed for the generation of new images~\cite{}. More recently the same idea has also been applied to molecular generation~\cite{}. The main idea behind diffusion models is for a neural network to learn the reverse of a diffusion process, often referred to as denoising to \textit{sample} a new image or in our case a new molecule. In practice this is done by training a neural network $\phi$ and generating samples $\hat{\mathbf{x}}=\psi(X_t,t)$, with $X_t$ with data $X$, noised up to time $t$.  Figure~\ref{fig:diffusion_schematic} shows a schematic of the two main parts of this model, the diffusion part where noise is added for each timestep (shown in blue) and the denoising part (shown in yellow) that allows the generation of a new image (molecule).
 
 The \textit{forward} part of the diffusion model is a Markov process, where you start out with a set of data $\mathbf{x}$ and add noise to this data over a time interval t = [0,\ldots,T] according to the following distribution:
 \begin{equation}
@@ -152,8 +152,8 @@ Different people have looked at different noise schedules~\cite{sohl-dickstein20
 % Next talk about the denoising step
 $\hat{p}$ is the parametric probability distribution we want to learn. 
 \subsubsection*{Euquivariant diffusion model}
-Unlike in image problems, the orientation of molecules matters under translations and rotations. For this purpose, we chose to equivariant diffusion model (EDM) by Hoogeboom et al.~\cite{} as our baseline generative model. The basic concept behind equivarience is that the model is invariant to rotations and translation in this case the E(3) group. This means that scalar (features such as atom types) and vector node properties (such as the positions) will be invariant to group transformations. This means that the order in which a rotation is applied does not matter. You can rotate the input to the model then apply the diffusion/denoising process and get a structure out, or you can apply the diffusion/denoising process first and then do the same rotation to get the same output. 
-Mathematically this means that if we have a set of point $\mathbf{x} = (\mathbf{x}_1,\ldots,\mathbf{x}_N) \in \mathbb{^{N\times 3}}$ and each of these points has a set of scalar feature vectors $\mathbf{h}\in \mathbb{R}^{N\times k}$ associated with it these features are invariant to group transformations. The positions translations and rotations are defined according to the orthogonal matrix: $\mathbf{Rx + t} = (\mathbf{R_{x_1}+t},\ldots, \mathbf{R_{x_N}+t}$.
+Unlike in image problems, the orientation of molecules matter under translations and rotations. For this purpose, equivariant diffusion models (EDMs) are used to account for rotational invarance. For this purpose we chose to equivariant diffusion model (EDM) by Hoogeboom et al.~\cite{hoogeboom2022equivariant} as our baseline generative model, as it provides a generative model for new molecules and has equivariance already built into it.  The basic concept behind equivarience is that the model is invariant to rotations and translation in this case the E(3) group. This means that scalar (features such as atom types) and vector node properties (such as the positions) will be invariant to group transformations. As a result the order in which a rotation is applied does not matter. You can rotate the input to the model then apply the diffusion/denoising process and get a structure out, or you can apply the diffusion/denoising process first and then do the same rotation to get the same output. 
+Mathematically this means that if we have a set of point $\mathbf{x} = (\mathbf{x}_1,\ldots,\mathbf{x}_N) \in \mathbb{^{N\times 3}}$ and each of these points has a set of scalar feature vectors $\mathbf{h}\in \mathbb{R}^{N\times k}$ associated with it these features are invariant to group transformations. The positions translations and rotations are defined according to the orthogonal matrix: $\mathbf{Rx + t} = (\mathbf{R_{x_1}+t},\ldots, \mathbf{R_{x_N}+t})$. Satorras et al.~\cite{} have proposed an E(n) Equivariant Graph Neural Network on which the EDM by Hoogeboom et al. builds. For full details on the architecture and their code see~\cite{hoogeboom2022equivariant}. 
 %%%%
 % Subsection: ILVR
 %%%%
@@ -167,11 +167,16 @@ Choi et al.~\cite{choi2021ilvr} introduced a way to condition DDPMs by sampling 
 % Subsection: SILVR
 %%%%
 \subsection{Selective Iterative Latent Variable Refinement}
-
+We propose a new method, that combines the iterative variable refinement (ILVR) by Choi et al.~\cite{choi2021ilvr} and take it from the image generation process and incorporate it into the EDM by Hoogeboom et al. to produce a way to generate a selective iterative laten variable refinement (SILVR) procedure in which we use a reference molecule to introduce into the denoising step. The reference used can be a small fragment, multiple fragments or even include dummy atoms that do not exist in the original reference. As a result we propose a modification of Algorithm 2 by Hoogeboom et al.~\cite{hoogeboom2022equivariant} to result in the SILVR algorithm~\ref{alg:silvr}
 \begin{algorithm}
-\caption{SILVR}\label{alg:cap}
+\caption{SILVR}\label{alg:silvr}
+\begin{flushleft}
+\textbf{Input:} reference molecule $\mathbf{y,h}$, neural network $\phi$ \\
+\textbf{Output:} generated molecule $\mathbf{x,h}$
+\end{flushleft}
 \begin{algorithmic}
-\State Sample $x_T \sim \mathcal{N}(0,I)$
+\State Align to centre of gravity
+\State Sample $\hat{x}_T \sim \mathcal{N}(0,I)$
 \For {$t$ = $T,...,1$}
     \State $z \sim \mathcal{N}(0,I)$
     \State $x_{t-1}^\prime \sim p_\theta(x_{t-1}^\prime|x_t)$
@@ -183,8 +188,14 @@ Choi et al.~\cite{choi2021ilvr} introduced a way to condition DDPMs by sampling 
 \end{algorithmic}
 \end{algorithm}
 
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
 
-
+The core of the new method is the addition of a refinement process within the denoising part during run time. The resulting SILVR model produces conditional samples without any conditional training when generating new molecules. To illustrate the usefulness of this run-time modification, we show how SILVR can be used in the context of fragment-based drug design. The goal is to produce molecules that resemble a binding site based on exiting fragments and their set of atomic coordinates. 
 
 
 
@@ -198,7 +209,7 @@ Choi et al.~\cite{choi2021ilvr} introduced a way to condition DDPMs by sampling 
 
 
 \section{Methods}
-The selective iterative latent variable refinement (SILVR) method makes use of the pre-trained equivariant diffusion model (EDM) as introduced by Hoogeboom \textit{et al.}~\cite{hoogeboom2022equivariant}. The core of the new method is the addition of a refinement process within the denoising part during run time. The resulting SILVR model produces conditional samples without any conditional training when generating new molecules. To illustrate the usefulness of this run-time modification, we show how SILVR can be used in the context of fragment-based drug design. The goal is to produce molecules that resemble a binding site based on exiting fragments and their set of atomic coordinates. 
+As stated before, the selective iterative latent variable refinement (SILVR) method makes use of the pre-trained equivariant diffusion model (EDM) as introduced by Hoogeboom \textit{et al.}~\cite{hoogeboom2022equivariant}. 
 
 \subsection{Conditioning the pre-trained EDM with SILVR}
 The EDM by Hoodgeboom \textit{et al.} was trained on the 30 lowest energy conformations of 430,000 molecules from the GEOM dataset with explicit protons. A simplified schematic describing the EDM architecture is shared in scheme~\ref{fig:_architecture} for more details on the model theory and training refer to Hoogeboom et al.~\cite{hoogeboom2022equivariant}. This model strictly only considers atomic coordinates; all bond information is ignored. A more recent version of the EDM also accounts for bond order and SILVR could also be incorporated into this new model.~\cite{hvignac2023midi}. During training, the atomic coordinates (and their element) are passed through a forward diffusion process with iterative addition of Gaussian noise, where the extent of noise added at each step is defined by parameter $\beta$ (N.B. scheme X shows the diffusion process as a Markov chain, however in practice the state at time $t$ is determined as a direct transformation of the initial state). The diffusion process is eventually terminated when $t=T$, by which point all structure is lost and all coordinates follow a Gaussian distribution. An equivariant graph neural network (EGNN) is then trained to predict the reverse process, predicting the previous state in the sequence given any state. At run time, the generative model is instantiated with a sample from a Gaussian distribution and the series of denoising steps are applied resulting in a generated sample consisting of atomic coordinates resembling a drug-like molecule. The XYZ coordinates can then be interpreted using cheminformatics software to determine the molecular graph. 
@@ -249,7 +260,7 @@ Figure~\ref{fig:measures} a looks at the \textit{atom stability} measure as intr
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{paper/Figures/Fig3/fig_3_metrics.png}
-    \caption{Validation measures of SILVR model using fragments Mpro-x0072 and Mpro-x0354 as reference coordinates. a) Ratio of stable atoms - an atom is determined as stable if the valence matches the expected valence for the element b) RMSD from reference - the calculated RMSD between the reference and sample, using an absolute one-to-one mapping ignore atom identity c) OpenEye measure “shapegauss” - a gaussian scoring function describing the shape fit between Mpro and samples, ignoring chemical interactions d) Geometry stability - AIMNet geometry optimisation was completed with Auto3D using the SMILES string of each sample. RMSD was calculated between the predicted geometry and the sampled geometry using RDKit.}
+    \caption{Validation measures of SILVR model using fragments \texttt{x0072} and \texttt{x0354} as reference coordinates. A) Ratio of stable atoms - an atom is determined as stable if the valence matches the expected valence for the element B) RMSD from reference - the calculated RMSD between the reference and sample, using an absolute one-to-one mapping ignore atom identity C) OpenEye measure “shapegauss” - a Gaussian scoring function describing the shape fit between Mpro and samples, ignoring chemical interactions D) Geometry stability - AIMNet geometry optimisation was completed with Auto3D using the SMILES string of each sample. RMSD was calculated between the predicted geometry and the sampled geometry using RDKit.}
     \label{fig:measures}
 \end{figure}
 The similarity of samples to their reference set of coordinates was determined by RMSD, with a clear inverse correlation observed between rs and RMSD, as seen in Figure~\ref{fig:measures} b. This indicates that the extent of guidance of atoms towards the reference set of coordinates can be fine-tuned by varying $r_{\mathrm{S}}$. 
@@ -262,7 +273,7 @@ As one of the main motivators for SILVR is to be able to generate new molecules 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{paper/Figures/Fig4/fig_4_ref_sample_bound.png}
-    \caption{Examples of generated molecules from different reference sets. Molecules were hand-curated. Figure depicts reference fragments used as input to SILVR (left), the sampled molecule (middle), and the sampled molecule translated to the protein binding site (right). Left set of samples (A,C,E) rs=0.005, right set of samples (B, D, F) rs=0.01. Row 1: Three significantly overlapping fragments A and B (x1093, x0072, x2193). Row 2: Two fragments partially overlapping C (x0434, x0305), D (x0072, x0354). Row 3: Two disconnected fragments E and F (x0874, x0397) samples generated including 10 dummy atoms (method described in SI)}
+    \caption{Examples of generated molecules from different experiments testing different overlap models. The reference fragments used as input to SILVR  are shown in the left column, the sampled molecule in the middle column, and the sampled molecule translated to the protein binding site in the right column. The left set of samples (A,C,E) has a SILVR rate $r_{\mathrm{S}}=0.005$, and the right set of samples (B, D, F) $r_{\mathrm{S}}=0.01$. Row 1: Three significantly overlapping fragments A and B (\texttt{x1093, x0072, x2193}). Row 2: Two fragments partially overlapping C (\texttt{x0434, x0305}), D (\texttt{x0072, x0354}). Row 3: Two disconnected fragments E and F (\texttt{x0874, x0397}) samples generated including 10 dummy atoms (method described in SI). The selection of molecules was hand-curated.}
     \label{fig:samples}
 \end{figure}
 
@@ -282,9 +293,9 @@ Figure~\ref{fig:samples}C shows a merger of two partially overlapping fragments 
 
 In contrast, Figure~\ref{fig:samples}D shows a stricter merging of two fragments, with $r_{\mathrm{S}}=0.01$. Visibly, the scaffold of the lower fragment has been maintained while the top fragment has contributed to a fused ring. Interestingly, the sulfonamide and carbonyl (from opposing fragments) have merged to form N-oxazinane sulfonyl chloride, demonstrating a particularly creative result from SILVR. 
 
-\subsection{Fragements can be linked using SILVR and additional dummy atoms}
+\subsection{Fragments can be linked using SILVR and additional dummy atoms}
 \label{sec:linker}
-Being able to reliably link fragments that sit in a binding site of a protein is crucial for the design of potential new drugs. Being able to do so without retraining a model as was done by~\cite{huang20223dlinker}. Using conditioning through SILVR allows the generation of linkers between fragments without the need to retrain the EDM. This is illustrated in the example of Figure~\ref{fig:samples}E and F. While it was possible to use SILVR as described in the Theory section~\ref{sec:tehory}, better results were obtained with the addition of \textit{dummy atoms}. These are atoms which are present in the EDM without a mapping to a reference atom, and so are free to explore the whole coordinate space without guidance from SILVR. The successful implementation of dummy atoms requires a slight modification of the SILVR algorithm, and is outlined in the SI. The results of these experiments continue the same trends previously observed where the $r_{\mathrm{S}}=0.005$ produces samples of approximate geometric similarity, whereas $r_{\mathrm{S}}=0.01$ produces a more strict mapping, with a clearly preserved urea group, a slightly modified ring system, and an amide interpreted as a carboxylate.
+Being able to reliably link fragments that sit in a binding site of a protein is crucial for the design of potential new drugs. Being able to do so without retraining a model as was done by~\cite{huang20223dlinker}. Using conditioning through SILVR allows the generation of linkers between fragments without the need to retrain the EDM. This is illustrated in the example of Figure~\ref{fig:samples}E and F. While it was possible to use SILVR as described in the Theory section~\ref{sec:tehory}, better results were obtained with the addition of \textit{dummy atoms}. These are atoms which are present in the EDM without a mapping to a reference atom, and so are free to explore the whole coordinate space without guidance from SILVR. The successful implementation of dummy atoms requires a slight modification of the SILVR algorithm and is outlined in the SI. The results of these experiments continue the same trends previously observed where the $r_{\mathrm{S}}=0.005$ produces samples of approximate geometric similarity, whereas $r_{\mathrm{S}}=0.01$ produces a more strict mapping, with a clearly preserved urea group, a slightly modified ring system, and an amide interpreted as a carboxylate.
 
 \section{Discussion and Outlook}
 \label{sec:discussion}
