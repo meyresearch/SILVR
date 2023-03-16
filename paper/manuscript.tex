@@ -19,7 +19,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%https://www.overleaf.com/project/63f3627b7f8554c152639004
 %% If issues arise when submitting your manuscript, you may want to
 %% un-comment the next line.  This provides information on the
 %% version of every file you have used.
@@ -167,32 +167,34 @@ Choi et al.~\cite{choi2021ilvr} introduced a way to condition DDPMs by sampling 
 % Subsection: SILVR
 %%%%
 \subsection{Selective Iterative Latent Variable Refinement}
-We propose a new method, that combines the iterative variable refinement (ILVR) by Choi et al.~\cite{choi2021ilvr} and take it from the image generation process and incorporate it into the EDM by Hoogeboom et al. to produce a way to generate a selective iterative laten variable refinement (SILVR) procedure in which we use a reference molecule to introduce into the denoising step. The reference used can be a small fragment, multiple fragments or even include dummy atoms that do not exist in the original reference. As a result we propose a modification of Algorithm 2 by Hoogeboom et al.~\cite{hoogeboom2022equivariant} to result in the SILVR algorithm~\ref{alg:silvr}
+We propose a new method, that combines the iterative variable refinement (ILVR) by Choi et al.~\cite{choi2021ilvr} and take it from the image generation process and incorporate it into the EDM by Hoogeboom et al. to produce a way to generate a selective iterative laten variable refinement (SILVR) procedure in which we use a reference molecule to introduce into the denoising step. The reference used can be a small fragment, multiple fragments or even include dummy atoms that do not exist in the original reference. As a result we propose a modification of Algorithm 2 by Hoogeboom et al.~\cite{hoogeboom2022equivariant} to result in the SILVR algorithm~\ref{alg:silvr}.  We are considering latent space variables $\mathbf{z}=[\mathbf{z}^{(x)},\mathbf{z}^{(h)}]$ for the standard denoising process and  $\mathbf{\hat{z}} = [\mathbf{\hat{z}}^{(y)},\mathbf{\hat{z}}^{(h)}]$, for the set of reference coordinates given by $\mathbf{y}$. The vector $\mathbf{h}$ contains all the scalar node properties of the equivariant EDM. 
 \begin{algorithm}
 \caption{SILVR}\label{alg:silvr}
-\begin{flushleft}
-\textbf{Input:} reference molecule $\mathbf{y,h}$, neural network $\phi$ \\
-\textbf{Output:} generated molecule $\mathbf{x,h}$
-\end{flushleft}
-\begin{algorithmic}
-\State Align to centre of gravity
-\State Sample $\hat{x}_T \sim \mathcal{N}(0,I)$
+\begin{algorithmic}[1]
+\State \textbf{Input:} Reference molecule $\mathbf{y,h}$, neural network $\phi$ 
+\State \textbf{Output:} Generated molecule $\mathbf{x,h}$
+
+
+\State Subtract centre of gravity (cg) from $\mathbf{y,h}$
+\State Sample $z_T \sim \mathcal{N}(\mathbf{0,I})$
 \For {$t$ = $T,...,1$}
-    \State $z \sim \mathcal{N}(0,I)$
-    \State $x_{t-1}^\prime \sim p_\theta(x_{t-1}^\prime|x_t)$
-    \State $y_{t-1} \sim q(y_{t-1}^\prime|y)$
-    \State $x_{t-1} \gets x_{t-1}^\prime - k x_{t-1}^\prime +k y_{t-1}$ \Comment{SILVR equation}
+    \State Sample $\boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0,I})$
+    \State Subtract centre of gravity from $\boldsymbol{\epsilon}^{(x)}$
+    \State Get reference to right noise level $\mathbf{\hat{z}}_t = \alpha_t \mathbf{\hat{z}}_{t=0} +\sigma_t\times\boldsymbol{\epsilon}$
+    \State Compute $\mathbf{z}_{t-1}$ using $\phi(\mathbf{z}_t,t)$
+    \State Update $\mathbf{z}_{t-1} \gets \mathbf{z}_{t-1} - \alpha_{t-1}r_{\mathrm{S}} \mathbf{z}_{t-1} +r_{\mathrm{S}} \mathbf{\hat{z}}_{t-1}$ \Comment{SILVR equation}
+    \State Subtract centre of gravity from updated $\mathbf{z}_{t-1}$
 
 \EndFor
-\State Sample $x,h \sim p(x,h|z_0)$ 
+\State Sample $\mathbf{x,h} \sim p(\mathbf{x,h|z_0})$ 
 \end{algorithmic}
 \end{algorithm}
 
 \begin{figure}
     \centering
-    \includegraphics{}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics[width=0.5\textwidth]{paper/Figures/Fig2/fig2.jpg}
+    \caption{Schematic illustrating the influence of SILVR of the molecules in the latent space. At each denoising step if $r_{mathrm{S}}>0$ the latent space vector get scaled by the SILVR rate. This is done from the first denoising timestep (top) until the last one (bottom). Repeatedly applying SILVR will result in a molecule that resembles the references (right) and does not (left)}
+    \label{fig:silvr_explanation}
 \end{figure}
 
 The core of the new method is the addition of a refinement process within the denoising part during run time. The resulting SILVR model produces conditional samples without any conditional training when generating new molecules. To illustrate the usefulness of this run-time modification, we show how SILVR can be used in the context of fragment-based drug design. The goal is to produce molecules that resemble a binding site based on exiting fragments and their set of atomic coordinates. 
