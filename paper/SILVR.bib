@@ -22,6 +22,40 @@
   file = {/Users/toni_brain/Zotero/storage/G726AF6Z/acs.jcim.html}
 }
 
+@misc{axelrod2022geom,
+  title = {{{GEOM}}: {{Energy-annotated}} Molecular Conformations for Property Prediction and Molecular Generation},
+  shorttitle = {{{GEOM}}},
+  author = {Axelrod, Simon and {Gomez-Bombarelli}, Rafael},
+  year = {2022},
+  month = feb,
+  number = {arXiv:2006.05531},
+  eprint = {arXiv:2006.05531},
+  publisher = {{arXiv}},
+  urldate = {2023-03-16},
+  abstract = {Machine learning (ML) outperforms traditional approaches in many molecular design tasks. ML models usually predict molecular properties from a 2D chemical graph or a single 3D structure, but neither of these representations accounts for the ensemble of 3D conformers that are accessible to a molecule. Property prediction could be improved by using conformer ensembles as input, but there is no large-scale dataset that contains graphs annotated with accurate conformers and experimental data. Here we use advanced sampling and semi-empirical density functional theory (DFT) to generate 37 million molecular conformations for over 450,000 molecules. The Geometric Ensemble Of Molecules (GEOM) dataset contains conformers for 133,000 species from QM9, and 317,000 species with experimental data related to biophysics, physiology, and physical chemistry. Ensembles of 1,511 species with BACE-1 inhibition data are also labeled with high-quality DFT free energies in an implicit water solvent, and 534 ensembles are further optimized with DFT. GEOM will assist in the development of models that predict properties from conformer ensembles, and generative models that sample 3D conformations.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Machine Learning,Physics - Computational Physics},
+  file = {/Users/toni_brain/Zotero/storage/R39FVF7Q/Axelrod and Gomez-Bombarelli - 2022 - GEOM Energy-annotated molecular conformations for.pdf;/Users/toni_brain/Zotero/storage/8FB2EIC7/2006.html}
+}
+
+@article{bilodeau2022generative,
+  title = {Generative Models for Molecular Discovery: {{Recent}} Advances and Challenges},
+  shorttitle = {Generative Models for Molecular Discovery},
+  author = {Bilodeau, Camille and Jin, Wengong and Jaakkola, Tommi and Barzilay, Regina and Jensen, Klavs F.},
+  year = {2022},
+  journal = {WIREs Computational Molecular Science},
+  volume = {12},
+  number = {5},
+  pages = {e1608},
+  issn = {1759-0884},
+  doi = {10.1002/wcms.1608},
+  urldate = {2023-03-16},
+  abstract = {Development of new products often relies on the discovery of novel molecules. While conventional molecular design involves using human expertise to propose, synthesize, and test new molecules, this process can be cost and time intensive, limiting the number of molecules that can be reasonably tested. Generative modeling provides an alternative approach to molecular discovery by reformulating molecular design as an inverse design problem. Here, we review the recent advances in the state-of-the-art of generative molecular design and discusses the considerations for integrating these models into real molecular discovery campaigns. We first review the model design choices required to develop and train a generative model including common 1D, 2D, and 3D representations of molecules and typical generative modeling neural network architectures. We then describe different problem statements for molecular discovery applications and explore the benchmarks used to evaluate models based on those problem statements. Finally, we discuss the important factors that play a role in integrating generative models into experimental workflows. Our aim is that this review will equip the reader with the information and context necessary to utilize generative modeling within their domain. This article is categorized under: Data Science {$>$} Artificial Intelligence/Machine Learning},
+  langid = {english},
+  keywords = {generative adversarial networks,generative models,molecular representation,normalizing flow models,variational autoencoders},
+  file = {/Users/toni_brain/Zotero/storage/S6G9U94Y/Bilodeau et al. - 2022 - Generative models for molecular discovery Recent .pdf;/Users/toni_brain/Zotero/storage/H7Z9UK5L/wcms.html}
+}
+
 @misc{choi2021ilvr,
   title = {{{ILVR}}: {{Conditioning Method}} for {{Denoising Diffusion Probabilistic Models}}},
   shorttitle = {{{ILVR}}},
@@ -121,6 +155,19 @@
   file = {/Users/toni_brain/Zotero/storage/5CSCQT2X/Eguida et al. - 2022 - Target-Focused Library Design by Pocket-Applied Co.pdf;/Users/toni_brain/Zotero/storage/KBHPARTH/acs.jmedchem.html}
 }
 
+@article{guo2023linkinvent,
+  title = {Link-{{INVENT}}: Generative Linker Design with Reinforcement Learning},
+  shorttitle = {Link-{{INVENT}}},
+  author = {Guo, Jeff and Knuth, Franziska and Margreitter, Christian and Paul~Janet, Jon and Papadopoulos{\textsection}, Kostas and Engkvist, Ola and Patronov, Atanas},
+  year = {2023},
+  journal = {Digital Discovery},
+  publisher = {{Royal Society of Chemistry}},
+  doi = {10.1039/D2DD00115B},
+  urldate = {2023-03-16},
+  langid = {english},
+  file = {/Users/toni_brain/Zotero/storage/3SP4LPXF/Guo et al. - 2023 - Link-INVENT generative linker design with reinfor.pdf}
+}
+
 @article{hadfield2022incorporating,
   title = {Incorporating {{Target-Specific Pharmacophoric Information}} into {{Deep Generative Models}} for {{Fragment Elaboration}}},
   author = {Hadfield, Thomas E. and Imrie, Fergus and Merritt, Andy and Birchall, Kristian and Deane, Charlotte M.},
@@ -148,6 +195,21 @@
   pages = {6840--6851},
   publisher = {{Curran Associates, Inc.}},
   annotation = {ho2020denoising}
+}
+
+@misc{hoffmann2019generating,
+  title = {Generating Valid {{Euclidean}} Distance Matrices},
+  author = {Hoffmann, Moritz and No{\'e}, Frank},
+  year = {2019},
+  month = nov,
+  number = {arXiv:1910.03131},
+  eprint = {arXiv:1910.03131},
+  publisher = {{arXiv}},
+  urldate = {2023-03-16},
+  abstract = {Generating point clouds, e.g., molecular structures, in arbitrary rotations, translations, and enumerations remains a challenging task. Meanwhile, neural networks utilizing symmetry invariant layers have been shown to be able to optimize their training objective in a data-efficient way. In this spirit, we present an architecture which allows to produce valid Euclidean distance matrices, which by construction are already invariant under rotation and translation of the described object. Motivated by the goal to generate molecular structures in Cartesian space, we use this architecture to construct a Wasserstein GAN utilizing a permutation invariant critic network. This makes it possible to generate molecular structures in a one-shot fashion by producing Euclidean distance matrices which have a three-dimensional embedding.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/Users/toni_brain/Zotero/storage/3LISRCFR/Hoffmann and Noé - 2019 - Generating valid Euclidean distance matrices.pdf;/Users/toni_brain/Zotero/storage/RUHTI45R/1910.html}
 }
 
 @article{hoogeboom2022equivariant,
@@ -203,6 +265,66 @@
   file = {/Users/toni_brain/Zotero/storage/QKSPK427/Imrie et al. - 2020 - Deep Generative Models for 3D Linker Design.pdf}
 }
 
+@inproceedings{jin2018junction,
+  title = {Junction {{Tree Variational Autoencoder}} for {{Molecular Graph Generation}}},
+  booktitle = {Proceedings of the 35th {{International Conference}} on {{Machine Learning}}},
+  author = {Jin, Wengong and Barzilay, Regina and Jaakkola, Tommi},
+  year = {2018},
+  month = jul,
+  pages = {2323--2332},
+  publisher = {{PMLR}},
+  issn = {2640-3498},
+  urldate = {2023-03-16},
+  abstract = {We seek to automate the design of molecules based on specific chemical properties. In computational terms, this task involves continuous embedding and generation of molecular graphs. Our primary contribution is the direct realization of molecular graphs, a task previously approached by generating linear SMILES strings instead of graphs. Our junction tree variational autoencoder generates molecular graphs in two phases, by first generating a tree-structured scaffold over chemical substructures, and then combining them into a molecule with a graph message passing network. This approach allows us to incrementally expand molecules while maintaining chemical validity at every step. We evaluate our model on multiple tasks ranging from molecular generation to optimization. Across these tasks, our model outperforms previous state-of-the-art baselines by a significant margin.},
+  langid = {english},
+  file = {/Users/toni_brain/Zotero/storage/TKAPR3YT/Jin et al. - 2018 - Junction Tree Variational Autoencoder for Molecula.pdf;/Users/toni_brain/Zotero/storage/UUSBGRQH/Jin et al. - 2018 - Junction Tree Variational Autoencoder for Molecula.pdf}
+}
+
+@misc{kingma2022autoencoding,
+  title = {Auto-{{Encoding Variational Bayes}}},
+  author = {Kingma, Diederik P. and Welling, Max},
+  year = {2022},
+  month = dec,
+  number = {arXiv:1312.6114},
+  eprint = {arXiv:1312.6114},
+  publisher = {{arXiv}},
+  urldate = {2023-03-16},
+  abstract = {How can we perform efficient inference and learning in directed probabilistic models, in the presence of continuous latent variables with intractable posterior distributions, and large datasets? We introduce a stochastic variational inference and learning algorithm that scales to large datasets and, under some mild differentiability conditions, even works in the intractable case. Our contributions are two-fold. First, we show that a reparameterization of the variational lower bound yields a lower bound estimator that can be straightforwardly optimized using standard stochastic gradient methods. Second, we show that for i.i.d. datasets with continuous latent variables per datapoint, posterior inference can be made especially efficient by fitting an approximate inference model (also called a recognition model) to the intractable posterior using the proposed lower bound estimator. Theoretical advantages are reflected in experimental results.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/Users/toni_brain/Zotero/storage/4JVAKDJL/Kingma and Welling - 2022 - Auto-Encoding Variational Bayes.pdf;/Users/toni_brain/Zotero/storage/8C6K96FS/1312.html}
+}
+
+@article{li2021structurebased,
+  title = {Structure-Based de Novo Drug Design Using {{3D}} Deep Generative Models},
+  author = {Li, Yibo and Pei, Jianfeng and Lai, Luhua},
+  year = {2021},
+  month = oct,
+  journal = {Chem. Sci.},
+  volume = {12},
+  number = {41},
+  pages = {13664--13675},
+  publisher = {{The Royal Society of Chemistry}},
+  issn = {2041-6539},
+  doi = {10.1039/D1SC04444C},
+  urldate = {2023-03-16},
+  abstract = {Deep generative models are attracting much attention in the field of de novo molecule design. Compared to traditional methods, deep generative models can be trained in a fully data-driven way with little requirement for expert knowledge. Although many models have been developed to generate 1D and 2D molecular structures, 3D molecule generation is less explored, and the direct design of drug-like molecules inside target binding sites remains challenging. In this work, we introduce DeepLigBuilder, a novel deep learning-based method for de novo drug design that generates 3D molecular structures in the binding sites of target proteins. We first developed Ligand Neural Network (L-Net), a novel graph generative model for the end-to-end design of chemically and conformationally valid 3D molecules with high drug-likeness. Then, we combined L-Net with Monte Carlo tree search to perform structure-based de novo drug design tasks. In the case study of inhibitor design for the main protease of SARS-CoV-2, DeepLigBuilder suggested a list of drug-like compounds with novel chemical structures, high predicted affinity, and similar binding features to those of known inhibitors. The current version of L-Net was trained on drug-like compounds from ChEMBL, which could be easily extended to other molecular datasets with desired properties based on users' demands and applied in functional molecule generation. Merging deep generative models with atomic-level interaction evaluation, DeepLigBuilder provides a state-of-the-art model for structure-based de novo drug design and lead optimization.},
+  langid = {english},
+  file = {/Users/toni_brain/Zotero/storage/3IVRJ8T4/Li et al. - 2021 - Structure-based de novo drug design using 3D deep .pdf;/Users/toni_brain/Zotero/storage/GA35TVSA/Li et al. - 2021 - Structure-based de novo drug design using 3D deep .pdf}
+}
+
+@inproceedings{ma2018constrained,
+  title = {Constrained {{Generation}} of {{Semantically Valid Graphs}} via {{Regularizing Variational Autoencoders}}},
+  booktitle = {Advances in {{Neural Information Processing Systems}}},
+  author = {Ma, Tengfei and Chen, Jie and Xiao, Cao},
+  year = {2018},
+  volume = {31},
+  publisher = {{Curran Associates, Inc.}},
+  urldate = {2023-03-16},
+  abstract = {Deep generative models have achieved remarkable success in various data domains, including images, time series, and natural languages. There remain, however, substantial challenges for combinatorial structures, including graphs. One of the key challenges lies in the difficulty of ensuring semantic validity in context. For example, in molecular graphs, the number of bonding-electron pairs must not exceed the valence of an atom; whereas in protein interaction networks, two proteins may be connected only when they belong to the same or correlated gene ontology terms. These constraints are not easy to be incorporated into a generative model. In this work, we propose a regularization framework for variational autoencoders as a step toward semantic validity. We focus on the matrix representation of graphs and formulate penalty terms that regularize the output distribution of the decoder to encourage the satisfaction of validity constraints. Experimental results confirm a much higher likelihood of sampling valid graphs in our approach, compared with others reported in the literature.},
+  file = {/Users/toni_brain/Zotero/storage/M9FTFCX3/Ma et al. - 2018 - Constrained Generation of Semantically Valid Graph.pdf}
+}
+
 @misc{mccorkindale2022fragmentbased,
   title = {Fragment-{{Based Hit Discovery}} via {{Unsupervised Learning}} of {{Fragment-Protein Complexes}}},
   author = {McCorkindale, William and Ahel, Ivan and Barr, Haim and Correy, Galen J. and Fraser, James S. and London, Nir and Schuller, Marion and Shurrush, Khriesto and Lee, Alpha A.},
@@ -236,6 +358,21 @@
   langid = {english},
   keywords = {docking,electronic screening of ligands,Gaussian based docking function,structure based drug design},
   file = {/Users/toni_brain/Zotero/storage/4WCQUE45/McGann et al. - 2003 - Gaussian docking functions.pdf;/Users/toni_brain/Zotero/storage/PLKQCH2Z/bip.html}
+}
+
+@misc{nichol2021improved,
+  title = {Improved {{Denoising Diffusion Probabilistic Models}}},
+  author = {Nichol, Alex and Dhariwal, Prafulla},
+  year = {2021},
+  month = feb,
+  number = {arXiv:2102.09672},
+  eprint = {arXiv:2102.09672},
+  publisher = {{arXiv}},
+  urldate = {2023-03-16},
+  abstract = {Denoising diffusion probabilistic models (DDPM) are a class of generative models which have recently been shown to produce excellent samples. We show that with a few simple modifications, DDPMs can also achieve competitive log-likelihoods while maintaining high sample quality. Additionally, we find that learning variances of the reverse diffusion process allows sampling with an order of magnitude fewer forward passes with a negligible difference in sample quality, which is important for the practical deployment of these models. We additionally use precision and recall to compare how well DDPMs and GANs cover the target distribution. Finally, we show that the sample quality and likelihood of these models scale smoothly with model capacity and training compute, making them easily scalable. We release our code at https://github.com/openai/improved-diffusion},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/Users/toni_brain/Zotero/storage/P8PBHM85/Nichol and Dhariwal - 2021 - Improved Denoising Diffusion Probabilistic Models.pdf;/Users/toni_brain/Zotero/storage/6RRVSNWP/2102.html}
 }
 
 @article{nikiforov2016fragment,
@@ -274,6 +411,44 @@
   file = {/Users/toni_brain/Zotero/storage/UYVHXINB/O'Boyle et al. - 2011 - Open Babel An open chemical toolbox.pdf;/Users/toni_brain/Zotero/storage/8UE398QW/1758-2946-3-33.html}
 }
 
+@article{polishchuk2013estimation,
+  title = {Estimation of the Size of Drug-like Chemical Space Based on {{GDB-17}} Data},
+  author = {Polishchuk, P. G. and Madzhidov, T. I. and Varnek, A.},
+  year = {2013},
+  month = aug,
+  journal = {J Comput Aided Mol Des},
+  volume = {27},
+  number = {8},
+  pages = {675--679},
+  issn = {1573-4951},
+  doi = {10.1007/s10822-013-9672-4},
+  urldate = {2023-03-16},
+  abstract = {The goal of this paper is to estimate the number of realistic drug-like molecules which could ever be synthesized. Unlike previous studies based on exhaustive enumeration of molecular graphs or on combinatorial enumeration preselected fragments, we used results of constrained graphs enumeration by Reymond to establish a correlation between the number of generated structures (M) and the number of heavy atoms (N): logM~=~0.584~\texttimes ~N~\texttimes ~logN~+~0.356. The number of atoms limiting drug-like chemical space of molecules which follow Lipinsky's rules (N~=~36) has been obtained from the analysis of the PubChem database. This results in M~{$\approx~$}1033 which is in between the numbers estimated by Ertl (1023) and by Bohacek (1060).},
+  langid = {english},
+  keywords = {Chemical space,Drug-like chemical space,Graphs enumeration},
+  file = {/Users/toni_brain/Zotero/storage/EVHUXCRX/Polishchuk et al. - 2013 - Estimation of the size of drug-like chemical space.pdf}
+}
+
+@article{ramakrishnan2014quantum,
+  title = {Quantum Chemistry Structures and Properties of 134 Kilo Molecules},
+  author = {Ramakrishnan, Raghunathan and Dral, Pavlo O. and Rupp, Matthias and {von Lilienfeld}, O. Anatole},
+  year = {2014},
+  month = aug,
+  journal = {Sci Data},
+  volume = {1},
+  number = {1},
+  pages = {140022},
+  publisher = {{Nature Publishing Group}},
+  issn = {2052-4463},
+  doi = {10.1038/sdata.2014.22},
+  urldate = {2023-03-16},
+  abstract = {Computational de novo design of new drugs and materials requires rigorous and unbiased exploration of chemical compound space. However, large uncharted territories persist due to its size scaling combinatorially with molecular size. We report computed geometric, energetic, electronic, and thermodynamic properties for 134k stable small organic molecules made up of CHONF. These molecules correspond to the subset of all 133,885 species with up to nine heavy atoms (CONF) out of the GDB-17 chemical universe of 166 billion organic molecules. We report geometries minimal in energy, corresponding harmonic frequencies, dipole moments, polarizabilities, along with energies, enthalpies, and free energies of atomization. All properties were calculated at the B3LYP/6-31G(2df,p) level of quantum chemistry. Furthermore, for the predominant stoichiometry, C7H10O2, there are 6,095 constitutional isomers among the 134k molecules. We report energies, enthalpies, and free energies of atomization at the more accurate G4MP2 level of theory for all of them. As such, this data set provides quantum chemical properties for a relevant, consistent, and comprehensive chemical space of small organic molecules. This database may serve the benchmarking of existing methods, development of new methods, such as hybrid quantum mechanics/machine learning, and systematic identification of structure-property relationships.},
+  copyright = {2014 The Author(s)},
+  langid = {english},
+  keywords = {Computational chemistry,Density functional theory,Quantum chemistry},
+  file = {/Users/toni_brain/Zotero/storage/8MPFZXKK/Ramakrishnan et al. - 2014 - Quantum chemistry structures and properties of 134.pdf}
+}
+
 @misc{ramesh2021zeroshot,
   title = {Zero-{{Shot Text-to-Image Generation}}},
   author = {Ramesh, Aditya and Pavlov, Mikhail and Goh, Gabriel and Gray, Scott and Voss, Chelsea and Radford, Alec and Chen, Mark and Sutskever, Ilya},
@@ -306,6 +481,37 @@
   file = {/Users/toni_brain/Zotero/storage/GHX2CTV6/Ramesh et al. - 2022 - Hierarchical Text-Conditional Image Generation wit.pdf;/Users/toni_brain/Zotero/storage/5BN8BGRU/2204.html}
 }
 
+@article{reymond2012exploring,
+  title = {Exploring {{Chemical Space}} for {{Drug Discovery Using}} the {{Chemical Universe Database}}},
+  author = {Reymond, Jean-Louis and Awale, Mahendra},
+  year = {2012},
+  month = sep,
+  journal = {ACS Chem. Neurosci.},
+  volume = {3},
+  number = {9},
+  pages = {649--657},
+  publisher = {{American Chemical Society}},
+  doi = {10.1021/cn3000422},
+  urldate = {2023-03-16},
+  abstract = {Herein we review our recent efforts in searching for bioactive ligands by enumeration and virtual screening of the unknown chemical space of small molecules. Enumeration from first principles shows that almost all small molecules ({$>$}99.9\%) have never been synthesized and are still available to be prepared and tested. We discuss open access sources of molecules, the classification and representation of chemical space using molecular quantum numbers (MQN), its exhaustive enumeration in form of the chemical universe generated databases (GDB), and examples of using these databases for prospective drug discovery. MQN-searchable GDB, PubChem, and DrugBank are freely accessible at www.gdb.unibe.ch.},
+  file = {/Users/toni_brain/Zotero/storage/TYVFWV95/Reymond and Awale - 2012 - Exploring Chemical Space for Drug Discovery Using .pdf;/Users/toni_brain/Zotero/storage/73MFY2UT/cn3000422.html}
+}
+
+@misc{satorras2022equivariant,
+  title = {E(n) {{Equivariant Graph Neural Networks}}},
+  author = {Satorras, Victor Garcia and Hoogeboom, Emiel and Welling, Max},
+  year = {2022},
+  month = feb,
+  number = {arXiv:2102.09844},
+  eprint = {arXiv:2102.09844},
+  publisher = {{arXiv}},
+  urldate = {2023-03-16},
+  abstract = {This paper introduces a new model to learn graph neural networks equivariant to rotations, translations, reflections and permutations called E(n)-Equivariant Graph Neural Networks (EGNNs). In contrast with existing methods, our work does not require computationally expensive higher-order representations in intermediate layers while it still achieves competitive or better performance. In addition, whereas existing methods are limited to equivariance on 3 dimensional spaces, our model is easily scaled to higher-dimensional spaces. We demonstrate the effectiveness of our method on dynamical systems modelling, representation learning in graph autoencoders and predicting molecular properties.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/Users/toni_brain/Zotero/storage/VMH8N9GT/Satorras et al. - 2022 - E(n) Equivariant Graph Neural Networks.pdf;/Users/toni_brain/Zotero/storage/ISUNUIGK/2102.html}
+}
+
 @article{schneuing2022structurebased,
   title = {Structure-Based {{Drug Design}} with {{Equivariant Diffusion Models}}},
   author = {Schneuing, Arne and Du, Yuanqi and Harris, Charles and Jamasb, Arian and Igashov, Ilia and Du, Weitao and Blundell, Tom and Li{\'o}, Pietro and Gomes, Carla and Welling, Max and Bronstein, Michael and Correia, Bruno},
@@ -329,6 +535,21 @@
   archiveprefix = {arxiv},
   keywords = {Computer Science - Machine Learning,Quantitative Biology - Biomolecules},
   file = {/Users/toni_brain/Zotero/storage/MLDJ2YTT/Schneuing et al. - 2022 - Structure-based Drug Design with Equivariant Diffu.pdf;/Users/toni_brain/Zotero/storage/G7QNC2ZS/2210.html}
+}
+
+@inproceedings{shi2021learning,
+  title = {Learning {{Gradient Fields}} for {{Molecular Conformation Generation}}},
+  booktitle = {Proceedings of the 38th {{International Conference}} on {{Machine Learning}}},
+  author = {Shi, Chence and Luo, Shitong and Xu, Minkai and Tang, Jian},
+  year = {2021},
+  month = jul,
+  pages = {9558--9568},
+  publisher = {{PMLR}},
+  issn = {2640-3498},
+  urldate = {2023-03-16},
+  abstract = {We study a fundamental problem in computational chemistry known as molecular conformation generation, trying to predict stable 3D structures from 2D molecular graphs. Existing machine learning approaches usually first predict distances between atoms and then generate a 3D structure satisfying the distances, where noise in predicted distances may induce extra errors during 3D coordinate generation. Inspired by the traditional force field methods for molecular dynamics simulation, in this paper, we propose a novel approach called ConfGF by directly estimating the gradient fields of the log density of atomic coordinates. The estimated gradient fields allow directly generating stable conformations via Langevin dynamics. However, the problem is very challenging as the gradient fields are roto-translation equivariant. We notice that estimating the gradient fields of atomic coordinates can be translated to estimating the gradient fields of interatomic distances, and hence develop a novel algorithm based on recent score-based generative models to effectively estimate these gradients. Experimental results across multiple tasks show that ConfGF outperforms previous state-of-the-art baselines by a significant margin.},
+  langid = {english},
+  file = {/Users/toni_brain/Zotero/storage/4TUGAGCD/Shi et al. - 2021 - Learning Gradient Fields for Molecular Conformatio.pdf;/Users/toni_brain/Zotero/storage/RIPNH7EV/Shi et al. - 2021 - Learning Gradient Fields for Molecular Conformatio.pdf}
 }
 
 @misc{silvr,
@@ -406,4 +627,17 @@
   archiveprefix = {arxiv},
   keywords = {Computer Science - Machine Learning},
   file = {/Users/toni_brain/Zotero/storage/LSJL3L6I/Vignac et al. - 2023 - MiDi Mixed Graph and 3D Denoising Diffusion for M.pdf;/Users/toni_brain/Zotero/storage/EVF96GNP/2302.html}
+}
+
+@inproceedings{xu2022geodiff,
+  title = {{{GeoDiff}}: {{A Geometric Diffusion Model}} for {{Molecular Conformation Generation}}},
+  shorttitle = {{{GeoDiff}}},
+  booktitle = {International {{Conference}} on {{Learning Representations}}},
+  author = {Xu, Minkai and Yu, Lantao and Song, Yang and Shi, Chence and Ermon, Stefano and Tang, Jian},
+  year = {2022},
+  month = jan,
+  urldate = {2023-03-16},
+  abstract = {Predicting molecular conformations from molecular graphs is a fundamental problem in cheminformatics and drug discovery. Recently, significant progress has been achieved with machine learning approaches, especially with deep generative models. Inspired by the diffusion process in classical non-equilibrium thermodynamics where heated particles will diffuse from original states to a noise distribution, in this paper, we propose a novel generative model named GeoDiff for molecular conformation prediction. GeoDiff treats each atom as a particle and learns to directly reverse the diffusion process (i.e., transforming from a noise distribution to stable conformations) as a Markov chain. Modeling such a generation process is however very challenging as the likelihood of conformations should be roto-translational invariant. We theoretically show that Markov chains evolving with equivariant Markov kernels can induce an invariant distribution by design, and further propose building blocks for the Markov kernels to preserve the desirable equivariance property. The whole framework can be efficiently trained in an end-to-end fashion by optimizing a weighted variational lower bound to the (conditional) likelihood. Experiments on multiple benchmarks show that GeoDiff is superior or comparable to existing state-of-the-art approaches, especially on large molecules.},
+  langid = {english},
+  file = {/Users/toni_brain/Zotero/storage/PBVXTNK5/Xu et al. - 2022 - GeoDiff A Geometric Diffusion Model for Molecular.pdf}
 }
