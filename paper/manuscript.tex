@@ -69,7 +69,7 @@
 \title[SILVR: Molecular Generation for binding modes]
   {SILVR: Conditional diffusion model for molecule generation without additional training}
 \title[SILVR: Molecular Generation for binding modes]
-  {SILVR: Directed Diffusion for Molecule Generation}
+  {SILVR: Directed (Guided?) Diffusion for Molecule Generation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some journals require a list of abbreviations or keywords to be
 %% supplied. These should be set up here, and will be printed after
@@ -123,7 +123,7 @@ I'll be an abstract when I grow up.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 \label{sec:intro}
-One of the challenges as part of computer aided drug-design is to sample from the very large space of possible drug-like compounds to find suitable hits for a given target protein. It is estimated that there are between $10^23$ to $10^60$ possibly feasible compounds, while only around $10^8$ have been synthesised so far~\cite{polishchuk2013estimation, reymond2012exploring}. Different strategies have been employed in the past to try and sample a diverse and synthetically accessible molecular space. In particular, methods based on machine-learning have shown vast amount of promise in recent years in this space~\cite{bilodeau2022generative}. Various different neural network architectures have been proposed for molecular generation, from Varational autoencoders (VAE)~\cite{kingma2022autoencoding, jin2018junction, ma2018constrained}, to generative adversarial networks (GAN)~\cite{hoffmann2019generating} and normalising flows~\cite{shi2021learning}. More recently denoising difusion probailistic models, and particularly equivarient diffusion models have shown promise in moleculear generation~\cite{xu2022geodiff, hoogeboom2022equivariant}.  
+One of the challenges as part of computer aided drug-design is to sample from the very large space of possible drug-like compounds to find suitable hits for a given target protein. It is estimated that there are between $10^{23}$ to $10^{60}$ possibly feasible compounds, while only around $10^8$ have been synthesised so far~\cite{polishchuk2013estimation, reymond2012exploring}. Different strategies have been employed in the past to try and sample a diverse and synthetically accessible molecular space. In particular, methods based on machine-learning have shown vast amount of promise in recent years in this space~\cite{bilodeau2022generative}. Various different neural network architectures have been proposed for molecular generation, from Varational autoencoders (VAE)~\cite{kingma2022autoencoding, jin2018junction, ma2018constrained}, to generative adversarial networks (GAN)~\cite{hoffmann2019generating} and normalising flows~\cite{shi2021learning}. More recently denoising difusion probailistic models, and particularly equivarient diffusion models have shown promise in moleculear generation~\cite{xu2022geodiff, hoogeboom2022equivariant}.  
 
 - Model generation isn't everything
 - How do models fit into hit design, conditioned training needed.
