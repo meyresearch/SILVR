@@ -78,24 +78,34 @@
 \begin{suppinfo}
 
 
-\section{Dataset}
-Figure~\ref{fig:fragments} shows all MPro fragments used for this study. 
+\paragraph{Dataset}
+Figure~\ref{fig:fragments} shows all MPro fragments used for this study from the covid moonshot dataset~\cite{consortium2021open,consortium2023open}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{paper/Figures/FigS1/mpro_ligands_grid_2d.png}
+    \caption{2D Mpro structures from the moonshot dataset.}
+    \label{fig:fragments}
+\end{figure}
+\newpage
+\paragraph{Curated samples from different SILVR rates}
+Figure~\ref{fig:fig_2} contains two examples started from fragments \texttt{xxx} and \texttt{xxx} and resulting samples for different SILVR rates $r_{\mathrm{S}}$.
+\begin{figure}[hb!]
+    \centering
+    \includegraphics[width=\textwidth]{paper/Figures/FigS2/fig_2_sample_vs_rate.png}
+    \caption{Two random samples from the same reference using different SILVR rates. All bonds were inferred from \texttt{XYZ} coordinates with OpenBabel. All bonds were visualised as single bonds and hydrogen atoms were deleted for clarity. Increasing SILVR rate results in sampled atom coordinates coming closer in space, and element type, to the reference while still resembling a truly molecular structure.}
+    \label{fig:fig_2}
+\end{figure}
+\nemapge
+
+\paragraph{Examples of uncurated samples}
 
 \begin{figure}
     \centering
     \includegraphics{}
     \caption{Caption}
-    \label{fig:fragments}
+    \label{fig:my_label}
 \end{figure}
-
-\section{Samples from different SILVR rates}
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{paper/Figures/FigS2/fig_2_sample_vs_rate.png}
-    \caption{Two random samples from the same reference using different SILVR rates. All bonds were inferred from XYZ coordinates with openbabel. All bonds were visualised as single bonds and hydrogen atoms were deleted for clarity. Increasing SILVR rate results in sampled atom coordinates coming closer in space, and element type, to the reference while still resembling a true molecular structure.}
-    \label{fig:fig_2}
-\end{figure}
-
 
 \end{suppinfo}
 
