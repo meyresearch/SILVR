@@ -361,4 +361,57 @@ The authors thank Matteo T. Degiacomi and John D. Chodera for useful discussions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{SILVR}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Supporting Information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage 
+\begin{suppinfo}
+
+The supporting information consists of a series of figures in addition to the figures in the main paper. Figure~\ref{fig:fragments} contains the 2D structures of all fragments used in the experiments as references. In Figure~\ref{fig:fig_2} an example of two curated experiments is shown with different SILVR rates $r_{mathrm{s}}$. An example of how far atoms, even involved in a reference structure are displaced in the denoising diffusion process is shown in an example in Figure~\ref{fig:atom_displacement} \textbf{A} for a whole molecule generated and in \textbf{B} for the heterocycle. The next figure~\ref{fig:fragments} shows on average how many molecules were not-fragmented in a set of 1000 samples for different SILVR rates. The final figure~\ref{fig:uncurated_sample} shows a series of 2D samples from an uncurated list of samples, clearly showing examples of fragmented molecules.  
+\paragraph{Dataset}
+Figure~\ref{fig:fragments} shows all MPro fragments used for this study from the covid moonshot dataset~\cite{consortium2021open,consortium2023open}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{paper/Figures/FigS1/mpro_ligands_grid_2d.png}
+    \caption{2D Mpro structures from the moonshot dataset.}
+    \label{fig:fragments}
+\end{figure}
+\newpage
+
+\begin{figure}[hb!]
+    \centering
+    \includegraphics[width=\textwidth]{paper/Figures/FigS2/fig_2_sample_vs_rate.png}
+    \caption{Two random samples from the same reference using different SILVR rates. All bonds were inferred from \texttt{XYZ} coordinates with OpenBabel. All bonds were visualised as single bonds and hydrogen atoms were deleted for clarity. Increasing SILVR rate results in sampled atom coordinates coming closer in space, and element type, to the reference while still resembling a truly molecular structure.}
+    \label{fig:fig_2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{paper/Figures/FigS3/FigS3.png}
+    \caption{Example looking at the displacement of reference atoms after diffusion. A: for the whole molecule. B: Zoom in, on the displacement of atoms in the 9aH-Pyrido[1,2-a]pyrazine heterocycle. }
+    \label{fig:atom_displacement}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[widht=0.5\textwidth]{paper/Figures/FigS4/FigS4.png}
+    \caption{Fraction of molecules fragmented with respect to the SILVR rate}
+    \label{fig:my_label}
+\end{figure}
+
+
+\newapge
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{paper/Figures/FigS5/mols_grid_silvr_rate_not_curated.png}
+    \caption{Uncurated samples, showing fragmentation of molecules based on input with two starting structures.}
+    \label{fig:uncurated_sample}
+\end{figure}
+
+\end{suppinfo}
+
 \end{document}
