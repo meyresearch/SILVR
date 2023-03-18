@@ -91,7 +91,10 @@
 %% be automatically moved as appropriate.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{tocentry}
-    \includegraphics[width=8cm,height=4.5cm]{paper/Figures/TOC/TOC_stickman_to_mol.eps}
+\centering
+    \includegraphics{paper/Figures/TOC/TOC_stickman_to_mol.jpg}
+    \caption{For Table of Contents Only}
+    \label{fig:toc}
 \end{tocentry}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -107,24 +110,24 @@ I'll be an abstract when I grow up.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 \label{sec:intro}
-One of the challenges as part of computer aided drug-design is to sample from the very large space of possible drug-like compounds to find suitable hits for a given target protein. It is estimated that there are between $10^{23}$ to $10^{60}$ possibly feasible compounds, while only around $10^8$ have been synthesised so far~\cite{polishchuk2013estimation, reymond2012exploring}. Different strategies have been employed in the past to try and sample a diverse and synthetically accessible molecular space. In particular, methods based on machine-learning have shown vast amount of promise in recent years in this space~\cite{bilodeau2022generative}. Various different neural network architectures have been proposed for molecular generation, from Varational autoencoders (VAE)~\cite{kingma2022autoencoding, jin2018junction, ma2018constrained}, to generative adversarial networks (GAN)~\cite{hoffmann2019generating} and normalising flows~\cite{shi2021learning}. More recently denoising difusion probailistic models, and particularly equivarient diffusion models have shown promise in moleculear generation~\cite{xu2022geodiff, hoogeboom2022equivariant}.  
+One of the challenges as part of computer-aided drug design is to sample from a very large space of possible drug-like compounds to find suitable hits for a given target protein. It is estimated that there are between $10^{23}$ to $10^{60}$ possibly feasible compounds, while only around $10^8$ have been synthesised so far~\cite{polishchuk2013estimation, reymond2012exploring}. Different strategies have been employed in the past to try and sample a diverse and synthetically accessible molecular space. In particular, methods based on machine learning have shown vast promise in recent years in this space~\cite{bilodeau2022generative}. Various different neural network architectures have been proposed for molecular generation, from Variational autoencoders (VAE)~\cite{kingma2022autoencoding, jin2018junction, ma2018constrained, agoza2022generating}, to generative adversarial networks (GAN)~\cite{hoffmann2019generating} and normalising flows~\cite{shi2021learning}. More recently denoising diffusion probabilistic models and particularly equivariant diffusion models have shown promise in molecular generation~\cite{xu2022geodiff, hoogeboom2022equivariant}.  
 
-- Model generation isn't everything
-- How do models fit into hit design, conditioned training needed.
+Typically the objective to achieve is to generate a diverse set of molecules, for a given target protein that are easily synthetically accessible and ideally with a high binding affinity and low toxicity prediction~\cite{some gneric caad}. Different machine learning-based  and other strategies have been used to address these ideas. From Recurrent Neural networks (RNN)~\cite{xu2021novo,zhang2022novo} and conditional variational autoencoders~\cite{ragoza2022generating} to GANs~\cite{skalic2019target}, various approaches have been used to generate molecules for a binding site where in each case the training is conditioned based on the target protein~\cite{xie2022advances}. Some of these models incorporate a ligand score directly~\cite{ragoza2022generating}, while others would require other methods through machine learning~\cite{masters2023deep}, or more traditional docking~\cite{fu2018predictive} and molecular simulation-based affinity prediction methods~\cite{mey2016blinded,mey2020best}. Even with a variety of ways to assess the synthetic accessibility of generated compounds~\cite{coley2018scscore, thakkar2021retrosynthetic} often molecules generated in these method are  not easily sythesiable at best or chemically infeasible in the worst cases. 
+Another desirable features for a generative model to have are the ability to generate compounds that are extensions to a known fragment hit or link two existing fragments through different linkers with the desire to improve potency, solubility or other properties of existing hits. Goa et al. have introduced way in which to generate linkers for fragments using reinforcement learning strategies~\cite{guo2023linkinvent}, while Imrie et al.~\cite{imrie2020deep} have used variation atuo encoders on this tasks without the use of protein information. More recently Huang et al.~\cite{huang20223dlinker} and Igashov et al.~\cite{igashov2022equivariant} have tackeled this challenge based on equivariant variational auto-encoder and diffusion based models models respectively. Each of these models were trained for the specific purpose of linker generation.  
+Another objective from a medchem perspective is that once a hit has been found is to generate new compounds that improve this hit to become a good lead compound for optimisation. 
 
-
-Linker learning with reinforcement learning~\cite{guo2023linkinvent}.
-
-- Equivariant diffusion models have been very promising in predicting 3D structures of drug-like molecules. 
-- This does not make them suitable candidates for a target binding site. 
-- We combine equivariant diffusion models~\cite{huang2022mdm} with Iterative latent variable refinement proposed in Denoising Diffusion probabilistic models~\cite{choi2021ilvr}.
-- This allows the generation of new molecules in the shape of the binding site using information from existing fragments.
+The work we present here is a framework for conditioning and existing pretrained equivaraint diffusion model (EDM) towards the task of linker generation between fragments and generating similar compounds to existing hits without specific training towards this task.  To achieve this we combine the EDM by Hoogeboom et al.~\cite{hoogeboom2022equivariant} with the iterative latent variable refinement method proposed by Choi et al. for image generation networks~\cite{choi2021ilvr}. This allows the generation of new molecules in the shape of a binding site using information from existing fragments or linking fragments without specific training or knowledge of this task. 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{paper/Figures/Fig1/Schematic.png}
     \caption{Schematic of the equivariant diffusion model with  SILVR indicated for every denoising step.}
     \label{fig:schematic}
 \end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Theory
+%%%%%%%%%%%%%%%%%%%%%%%
 \section{Theory}
 \label{sec:theory}
 \subsection*{Denoising Diffusion probabilistic models (DDPM) as generative models}
