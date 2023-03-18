@@ -125,7 +125,7 @@ We present, the selective iterative variable refinement (SILVR), a method for co
     \label{fig:schematic}
 \end{figure}
 
-Denoising probabilistic diffusion models can be separated into two parts, the diffusion part and the denoising part, as shown in the schematic in Figure~\ref{fig:schematic} with the ideas originating in image generation machine learning problems. A neural network is trained to learn the second part of the process, denoising a Gaussian distribution until an image--or in this case--a molecule is generated. The idea we propose here is to effectively introduce information of a reference molecule at a given rate to the denoising process of a pre-trained model. This, similar to the concept of inpaining~\cite{qin2021image, xie2012image, squires2023artefact}, guides the denoising process at each step towards the reference. In this paper we show, that we can generate new compounds that are similar to a given reference and even link fragments using multiple references as input. The proposed method is generalizeable to any protein ligand systems with known fragment hits. For illustration purposes we use the original 23 X-ray fragment hits from the Covid-Moonshot dataset~\cite{consortium2021open,consortium2023open}. In the following, we give an overview of how equivariant difusion models work and introduce how our method SILVR fits into the framework of an existing pre-trained EDM. We then show, how the SILVR rate, $r_{\mathrm{S}}$ as modelling parameter can modulate how much of the reference is incorporated in the sample generation and how the original EDM is recovered at  $r_{\mathrm{S}}=0$. As part of this we illustrate how fragments can be linked using dummy atoms and how newly generated molecules can fit into the existing binding site according to shape similarity. Some of the limitations that arise from the proposed methods are connected to the chosen pre-trained EDM with which we conclude our discussions. 
+Denoising probabilistic diffusion models can be separated into two parts, the diffusion part and the denoising part, as shown in the schematic in Figure~\ref{fig:schematic} with the ideas originating in image generation machine learning problems. A neural network is trained to learn the second part of the process, denoising a Gaussian distribution until an image--or in this case--a molecule is generated. The idea we propose here is to effectively introduce information of a reference molecule at a given rate to the denoising process of a pre-trained model. This, similar to the concept of inpaining~\cite{qin2021image, xie2012image, squires2023artefact}, or more precisely re-painting~\cite{lugmayr2022repaint}, guides the denoising process at each step towards the reference. In this paper we show, that we can generate new compounds that are similar to a given reference and even link fragments using multiple references as input. The proposed method is generalizeable to any protein ligand systems with known fragment hits. For illustration purposes we use the original 23 X-ray fragment hits from the Covid-Moonshot dataset~\cite{consortium2021open,consortium2023open}. In the following, we give an overview of how equivariant difusion models work and introduce how our method SILVR fits into the framework of an existing pre-trained EDM. We then show, how the SILVR rate, $r_{\mathrm{S}}$ as modelling parameter can modulate how much of the reference is incorporated in the sample generation and how the original EDM is recovered at  $r_{\mathrm{S}}=0$. As part of this we illustrate how fragments can be linked using dummy atoms and how newly generated molecules can fit into the existing binding site according to shape similarity. Some of the limitations that arise from the proposed methods are connected to the chosen pre-trained EDM with which we conclude our discussions. 
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Theory
@@ -167,7 +167,7 @@ The process is iterated until $t=0$ and as such a new sample is generated.
 %%%%%%%
 \subsection*{Euquivariant diffusion model}
 Unlike in image problems, the orientation of molecules matter under translations and rotations. For this purpose, equivariant diffusion models (EDMs) are used to account for rotational invarance. For this purpose we chose to equivariant diffusion model (EDM) by Hoogeboom et al.~\cite{hoogeboom2022equivariant} as our baseline generative model, as it provides a generative model for new molecules and has equivariance already built into it.  The basic concept behind equivarience is that the model is invariant to rotations and translation in this case the E(3) group. This means that scalar (features such as atom types) and vector node properties (such as the positions) will be invariant to group transformations. As a result the order in which a rotation is applied does not matter. You can rotate the input to the model then apply the diffusion/denoising process and get a structure out, or you can apply the diffusion/denoising process first and then do the same rotation to get the same output. 
-Mathematically this means that if we have a set of point $\mathbf{x} = (\mathbf{x}_1,\ldots,\mathbf{x}_N) \in \mathbb{^{N\times 3}}$ and each of these points has a set of scalar feature vectors $\mathbf{h}\in \mathbb{R}^{N\times k}$ associated with it these features are invariant to group transformations. The positions translations and rotations are defined according to the orthogonal matrix: $\mathbf{Rx + t} = (\mathbf{R_{x_1}+t},\ldots, \mathbf{R_{x_N}+t})$. Satorras et al.~\cite{satorras2022equivariant} have proposed an E(n) Equivariant Graph Neural Network on which the EDM by Hoogeboom et al. builds. For full details on the architecture and their code see~\cite{hoogeboom2022equivariant}. 
+Mathematically this means that if we have a set of point $\mathbf{x} = (\mathbf{x}_1,\ldots,\mathbf{x}_N) \in \mathbb{R}^{N\times 3}$ and each of these points has a set of scalar feature vectors $\mathbf{h}\in \mathbb{R}^{N\times k}$ associated with it these features are invariant to group transformations. The positions translations and rotations are defined according to the orthogonal matrix: $\mathbf{Rx + t} = (\mathbf{R_{x_1}+t},\ldots, \mathbf{R_{x_N}+t})$. Satorras et al.~\cite{satorras2022equivariant} have proposed an E(n) Equivariant Graph Neural Network on which the EDM by Hoogeboom et al. builds. For full details on the architecture and their code see~\cite{hoogeboom2022equivariant}. 
 %%%%
 % Subsection: ILVR
 %%%%
@@ -357,9 +357,19 @@ The authors thank Matteo T. Degiacomi and John D. Chodera for useful discussions
 \newpage 
 \begin{suppinfo}
 
+\section{Summary of figures included in the supporting information}
 The supporting information consists of a series of figures in addition to the figures in the main paper. Figure~\ref{fig:fragments} contains the 2D structures of all fragments used in the experiments as references. In Figure~\ref{fig:fig_2} an example of two curated experiments is shown with different SILVR rates $r_{mathrm{s}}$. An example of how far atoms, even involved in a reference structure are displaced in the denoising diffusion process is shown in an example in Figure~\ref{fig:atom_displacement} \textbf{A} for a whole molecule generated and in \textbf{B} for the heterocycle. The next figure~\ref{fig:fragments} shows on average how many molecules were not-fragmented in a set of 1000 samples for different SILVR rates. The final figure~\ref{fig:uncurated_sample} shows a series of 2D samples from an uncurated list of samples, clearly showing examples of fragmented molecules.  
-\paragraph{Dataset}
-Figure~\ref{fig:fragments} shows all MPro fragments used for this study from the covid moonshot dataset~\cite{consortium2021open,consortium2023open}.
+
+
+\section{Modified SILVR with dummy atoms}
+The SILVR protocol guides latent atoms according to a one-to-one mapping with reference atoms. This model is limited to reference molecules that somewhat overlap. Two fragments that are sufficiently far apart will not be successfully linked together. A universal EDM protocol for interpreting fragment data would ideally be able to do both fragment merging and linking.
+
+Dummy atoms are latent space atoms that do not have a mapping to a reference atom, and instead are free to explore the latent space unguided. It was hoped that in the case of disconnected fragments, these dummy atoms would be able to form a linker. In practice, linker formation was observed both with and without dummy atoms, however, the presence of dummy atoms seemed to produce better results (by visual inspection). It was also observed that dummy atoms often populate unfilled valences as hydrogen atoms. 
+
+The total number of atoms used by the model was set as the sum reference (nr) and dummy atoms (nd). The SILVR vector was created such that the first nr indices held the value of rs defined in the experiment protocol, and the subsequent nd indices were set to zero so that SILVR would not be applied to the dummy atoms. 
+
+The centre of gravity for the reference coordinates was initially aligned at zero. Within the denoising loop, the EDM sampled new coordinates for all atoms. The new coordinates for dummy atoms were then added to the reference coordinates, and the modified reference coordinates were re-aligned at zero. The SILVR equation was applied as described in the main paper, only refining the atoms mapped to a reference. Through each iteration of denoising, the coordinates of the dummy atoms within the reference were continually updated, and the centre of gravity of these coordinates was re-aligned at zero. The total shift in the centre of gravity of the reference was tracked and subtracted from the final sampled molecule. 
+
 
 \begin{figure}
     \centering
@@ -373,22 +383,24 @@ Figure~\ref{fig:fragments} shows all MPro fragments used for this study from the
     \centering
     \includegraphics[width=\textwidth]{paper/Figures/FigS2/fig_2_sample_vs_rate.png}
     \caption{Two random samples from the same reference using different SILVR rates. All bonds were inferred from \texttt{XYZ} coordinates with OpenBabel. All bonds were visualised as single bonds and hydrogen atoms were deleted for clarity. Increasing SILVR rate results in sampled atom coordinates coming closer in space, and element type, to the reference while still resembling a truly molecular structure.}
-    \label{fig:fig_2}
+    \label{fig:examples_curated}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{paper/Figures/FigS3/FigS3.png}
+    \includegraphics[widht=0.5\textwidth]{paper/Figures/FigS3/FigS3.png}
+    \caption{Fraction of molecules fragmented with respect to the SILVR rate}
+    \label{fig:fragmentation}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{paper/Figures/FigS5/F.png}
     \caption{Example looking at the displacement of reference atoms after diffusion. A: for the whole molecule. B: Zoom in, on the displacement of atoms in the 9aH-Pyrido[1,2-a]pyrazine heterocycle. }
     \label{fig:atom_displacement}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[widht=0.5\textwidth]{paper/Figures/FigS4/FigS4.png}
-    \caption{Fraction of molecules fragmented with respect to the SILVR rate}
-    \label{fig:my_label}
-\end{figure}
+
 
 
 \newapge
