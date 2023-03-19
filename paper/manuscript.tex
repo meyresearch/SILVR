@@ -155,7 +155,7 @@ A sample for denoising timestep $t-1$ can be generated from the following equati
 
 A given samples is generated as:
 \begin{equation}
- x_{t-1} = \frac{1}{\alpha_t}(x_t-\frac{1-\alpha_t}{\sqrt{1-<\alpha_t>}}\phi(x_t,t)) +\sigma \mathbf{z},   
+ x_{t-1} = \frac{1}{\alpha_t}(x_t-\frac{1-\alpha_t}{\sqrt{1-\langle\alpha_t\rangle}}\phi(x_t,t)) +\sigma \mathbf{z},   
 \end{equation}
 
 with $\mathbf{z}\sim\mathcal{N}(0,\mathbf{I})$.
@@ -392,7 +392,7 @@ The centre of gravity for the reference coordinates was initially aligned at zer
 
 \begin{figure}
     \centering
-    \includegraphics[widht=0.5\textwidth]{paper/Figures/FigS3/FigS4.png}
+    \includegraphics[width=0.5\textwidth]{paper/Figures/FigS3/fraction_whole_samples.png}
     \caption{Fraction of molecules not fragmented with respect to the SILVR rate}
     \label{fig:fragmentation}
 \end{figure}
