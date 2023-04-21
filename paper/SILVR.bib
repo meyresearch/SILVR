@@ -1,11 +1,10 @@
-@misc{adams2022equivariant,
+@article{adams2022equivariant,
   title = {Equivariant {{Shape-Conditioned Generation}} of {{3D Molecules}} for {{Ligand-Based Drug Design}}},
   author = {Adams, Keir and Coley, Connor W.},
   year = {2022},
   month = oct,
-  number = {arXiv:2210.04893},
-  eprint = {arXiv:2210.04893},
-  publisher = {{arXiv}},
+  eprint = {2210.04893},
+  primaryclass = {physics, q-bio},
   doi = {10.48550/arXiv.2210.04893},
   urldate = {2023-03-28},
   abstract = {Shape-based virtual screening is widely employed in ligand-based drug design to search chemical libraries for molecules with similar 3D shapes yet novel 2D chemical structures compared to known ligands. 3D deep generative models have the potential to automate this exploration of shape-conditioned 3D chemical space; however, no existing models can reliably generate valid drug-like molecules in conformations that adopt a specific shape such as a known binding pose. We introduce a new multimodal 3D generative model that enables shape-conditioned 3D molecular design by equivariantly encoding molecular shape and variationally encoding chemical identity. We ensure local geometric and chemical validity of generated molecules by using autoregressive fragment-based generation with heuristic bonding geometries, allowing the model to prioritize the scoring of rotatable bonds to best align the growing conformational structure to the target shape. We evaluate our 3D generative model in tasks relevant to drug design including shape-conditioned generation of chemically diverse molecular structures and shape-constrained molecular property optimization, demonstrating its utility over virtual screening of enumerated libraries.},
@@ -26,16 +25,8 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.0c00343},
-  urldate = {2023-03-07},
   abstract = {Deep learning approaches have become popular in recent years in the field of de novo molecular design. While a variety of different methods are available, it is still a challenge to assess and compare their performance. A particularly promising approach for automated drug design is to use recurrent neural networks (RNNs) as SMILES generators and train them with the learning procedure called ``transfer learning''. This involves first training the initial model on a large generic data set of molecules to learn the general syntax of SMILES, followed by fine-tuning on a smaller set of molecules, coming from, e.g., a lead optimization program. To create a well-performing transfer learning application which can be automated, it is important to understand how the size of the second data set affects the training process. In addition, extensive postfiltering using similarity metrics of the molecules generated after transfer learning should be avoided, as it can introduce new biases toward the selection of drug candidates. Here, we present results from the application of a gated recurrent unit cell (GRU)-RNN to transfer learning on data sets of varying sizes and complexity. Analysis of the results has allowed us to provide some general guidelines for transfer learning. In particular, we show that data set sizes containing at least 190 molecules are needed for effective GRU-RNN-based molecular generation using transfer learning. The methods presented here should be applicable generally to the benchmarking of other deep learning methodologies for molecule generation.},
   file = {/Users/toni_brain/Zotero/storage/PVCBQKQP/Amabilino et al. - 2020 - Guidelines for Recurrent Neural Network Transfer L.pdf}
-}
-
-@misc{auto3d,
-  title = {{{Auto3D}}: {{Automatic Generation}} of the {{Low-Energy 3D Structures}} with {{ANI Neural Network Potentials}} | {{Journal}} of {{Chemical Information}} and {{Modeling}}},
-  urldate = {2023-03-03},
-  howpublished = {https://pubs.acs.org/doi/full/10.1021/acs.jcim.2c00817},
-  file = {/Users/toni_brain/Zotero/storage/G726AF6Z/acs.jcim.html}
 }
 
 @misc{axelrod2022geom,
@@ -57,16 +48,15 @@
 @article{bian2018computational,
   title = {Computational {{Fragment-Based Drug Design}}: {{Current Trends}}, {{Strategies}}, and {{Applications}}},
   shorttitle = {Computational {{Fragment-Based Drug Design}}},
-  author = {Bian, Yuemin and Xie, Xiang-Qun (Sean)},
+  author = {Bian, Yuemin and Xie, Xiang-Qun},
   year = {2018},
   month = apr,
-  journal = {AAPS J},
+  journal = {AAPS J.},
   volume = {20},
   number = {3},
   pages = {59},
   issn = {1550-7416},
   doi = {10.1208/s12248-018-0216-7},
-  urldate = {2023-04-10},
   abstract = {Fragment-based drug design (FBDD) has become an effective methodology for drug development for decades. Successful applications of this strategy brought both opportunities and challenges to the field of Pharmaceutical Science. Recent progress in the computational fragment-based drug design provide an additional approach for future research in a time- and labor-efficient manner. Combining multiple in silico methodologies, computational FBDD possesses flexibilities on fragment library selection, protein model generation, and fragments/compounds docking mode prediction. These characteristics provide computational FBDD superiority in designing novel and potential compounds for a certain target. The purpose of this review is to discuss the latest advances, ranging from commonly used strategies to novel concepts and technologies in computational fragment-based drug design. Particularly, in this review, specifications and advantages are compared between experimental and computational FBDD, and additionally, limitations and future prospective are discussed and emphasized.},
   langid = {english},
   keywords = {drug discovery,fragment database,fragment docking,fragment-based drug design,virtual screening},
@@ -78,14 +68,13 @@
   author = {Bickerton, G. Richard and Paolini, Gaia V. and Besnard, J{\'e}r{\'e}my and Muresan, Sorel and Hopkins, Andrew L.},
   year = {2012},
   month = feb,
-  journal = {Nature Chem},
+  journal = {Nature Chem.},
   volume = {4},
   number = {2},
   pages = {90--98},
   publisher = {{Nature Publishing Group}},
   issn = {1755-4349},
   doi = {10.1038/nchem.1243},
-  urldate = {2023-03-19},
   abstract = {Drug-likeness is a key consideration when selecting compounds during the early stages of drug discovery. However, evaluation of drug-likeness in absolute terms does not reflect adequately the whole spectrum of compound quality. More worryingly, widely used rules may inadvertently foster undesirable molecular property inflation as they permit the encroachment of rule-compliant compounds towards their boundaries. We propose a measure of drug-likeness based on the concept of desirability called the quantitative estimate of drug-likeness (QED). The empirical rationale of QED reflects the underlying distribution of molecular properties. QED is intuitive, transparent, straightforward to implement in many practical settings and allows compounds to be ranked by their relative merit. We extended the utility of QED by applying it to the problem of molecular target druggability assessment by prioritizing a large set of published bioactive compounds. The measure may also capture the abstract notion of aesthetics in medicinal chemistry.},
   copyright = {2011 Nature Publishing Group},
   langid = {english},
@@ -98,13 +87,12 @@
   shorttitle = {Generative Models for Molecular Discovery},
   author = {Bilodeau, Camille and Jin, Wengong and Jaakkola, Tommi and Barzilay, Regina and Jensen, Klavs F.},
   year = {2022},
-  journal = {WIREs Computational Molecular Science},
+  journal = {WIREs Comput. Mol. Sci.},
   volume = {12},
   number = {5},
   pages = {e1608},
   issn = {1759-0884},
   doi = {10.1002/wcms.1608},
-  urldate = {2023-03-16},
   abstract = {Development of new products often relies on the discovery of novel molecules. While conventional molecular design involves using human expertise to propose, synthesize, and test new molecules, this process can be cost and time intensive, limiting the number of molecules that can be reasonably tested. Generative modeling provides an alternative approach to molecular discovery by reformulating molecular design as an inverse design problem. Here, we review the recent advances in the state-of-the-art of generative molecular design and discusses the considerations for integrating these models into real molecular discovery campaigns. We first review the model design choices required to develop and train a generative model including common 1D, 2D, and 3D representations of molecules and typical generative modeling neural network architectures. We then describe different problem statements for molecular discovery applications and explore the benchmarks used to evaluate models based on those problem statements. Finally, we discuss the important factors that play a role in integrating generative models into experimental workflows. Our aim is that this review will equip the reader with the information and context necessary to utilize generative modeling within their domain. This article is categorized under: Data Science {$>$} Artificial Intelligence/Machine Learning},
   langid = {english},
   keywords = {generative adversarial networks,generative models,molecular representation,normalizing flow models,variational autoencoders},
@@ -117,13 +105,12 @@
   author = {Bray, Simon and Dudgeon, Tim and Skyner, Rachael and Backofen, Rolf and Gr{\"u}ning, Bj{\"o}rn and {von Delft}, Frank},
   year = {2022},
   month = apr,
-  journal = {Journal of Cheminformatics},
+  journal = {J. Cheminformatics},
   volume = {14},
   number = {1},
   pages = {22},
   issn = {1758-2946},
   doi = {10.1186/s13321-022-00588-6},
-  urldate = {2023-04-10},
   abstract = {We present several workflows for protein-ligand docking and free energy calculation for use in the workflow management system Galaxy. The workflows are composed of several widely used open-source tools, including rDock and GROMACS, and can be executed on public infrastructure using either Galaxy's graphical interface or the command line. We demonstrate the utility of the workflows by running a high-throughput virtual screening of around 50000 compounds against the SARS-CoV-2 main protease, a system which has been the subject of intense study in the last year.},
   keywords = {Computational chemistry,Fragment screening,SARS-CoV-2,Workflows},
   file = {/Users/toni_brain/Zotero/storage/3ZA5JV4U/Bray et al. - 2022 - Galaxy workflows for fragment-based virtual screen.pdf;/Users/toni_brain/Zotero/storage/HHMLJV9J/s13321-022-00588-6.html}
@@ -175,7 +162,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.7b00622},
-  urldate = {2023-03-18},
   abstract = {Several definitions of molecular complexity exist to facilitate prioritization of lead compounds, to identify diversity-inducing and complexifying reactions, and to guide retrosynthetic searches. In this work, we focus on synthetic complexity and reformalize its definition to correlate with the expected number of reaction steps required to produce a target molecule, with implicit knowledge about what compounds are reasonable starting materials. We train a neural network model on 12 million reactions from the Reaxys database to impose a pairwise inequality constraint enforcing the premise of this definition: that on average, the products of published chemical reactions should be more synthetically complex than their corresponding reactants. The learned metric (SCScore) exhibits highly desirable nonlinear behavior, particularly in recognizing increases in synthetic complexity throughout a number of linear synthetic routes.}
 }
 
@@ -184,14 +170,13 @@
   author = {Consortium, The COVID Moonshot and Chodera, John and Lee, Alpha and London, Nir and von Delft, Frank},
   year = {2021},
   month = oct,
-  publisher = {{ChemRxiv}},
-  doi = {10.26434/chemrxiv-2021-585ks-v2},
-  urldate = {2023-03-03},
-  abstract = {The COVID-19 pandemic is a stark reminder that a barren global antiviral pipeline has grave humanitarian consequences. Future pandemics could be prevented by accessible, easily deployable broad-spectrum oral antivirals and open knowledge bases that derisk and accelerate novel antiviral discovery and development. Here, we report the results of the COVID Moonshot, a fully open-science structure-enabled drug discovery campaign targeting the SARS-CoV-2 main protease. We discovered a novel chemical scaffold that is differentiated to current clinical candidates in terms of toxicity and pharmacokinetics liabilities, and developed it into orally-bioavailable inhibitors with clinical potential. Our approach leverages crowdsourcing, high throughput structural biology, machine learning, and exascale molecular simulations. In the process, we generated a detailed map of the structural plasticity of the main protease, extensive structure-activity relationships for multiple chemotypes, and a wealth of biochemical activity data. In a first for a structure-based drug discovery campaign, all compound designs ({$>$}18,000 designs), crystallographic data ({$>$}500 ligand-bound X-ray structures), assay data ({$>$}10,000 measurements), and synthesized molecules ({$>$}2,400 compounds) for this campaign were shared rapidly and openly, creating a rich open and IP-free knowledgebase for future anti-coronavirus drug discovery.},
+  %publisher = {{ChemRxiv}},
+  %number = {chemrxiv:2021-585ks-v2},
+  %eprint = {chemrxiv:2021-585ks-v2},
+  eprint = {10.26434/chemrxiv-2021-585ks-v2},
+  %urldate = {2023-03-03},
   archiveprefix = {ChemRxiv},
   langid = {english},
-  keywords = {COVID19,Crowdsourcing,Drug Discovery,Machine learning,Molecular Simulations},
-  file = {/Users/toni_brain/Zotero/storage/ENCQN8W8/Consortium et al. - 2021 - Open Science Discovery of Oral Non-Covalent SARS-C.pdf}
 }
 
 @misc{consortium2023open,
@@ -199,17 +184,11 @@
   author = {Consortium, The COVID Moonshot and Achdout, Hagit and Aimon, Anthony and Alonzi, Dominic S. and Arbon, Robert and {Bar-David}, Elad and Barr, Haim and {Ben-Shmuel}, Amir and Bennett, James and Bilenko, Vitaliy A. and Boby, Melissa L. and Borden, Bruce and Boulet, Pascale and Bowman, Gregory R. and Brun, Juliane and Brwewitz, Lennart and Bvnbs, Sarma and Calmiano, Mark and Carbery, Anna and Carney, Daniel and Cattermole, Emma and Chang, Edcon and Chernyshenko, Eugene and Chodera, John D. and Clyde, Austin and Coffland, Joseph E. and Cohen, Galit and Cole, Jason and Contini, Alessandro and Cox, Lisa and Croll, Tristan Ian and Cvitkovic, Milan and Dias, Alex and Donckers, Kim and Dotson, David L. and Douangamath, Alice and Duberstein, Shirly and Dudgeon, Tim and Dunnett, Louise and Eastman, Peter K. and Erez, Noam and Eyermann, Charles J. and Fairhead, Mike and Fate, Gwen and Fearon, Daren and Fedorov, Oleg and Ferla, Matteo and Fernandes, Rafaela S. and Ferrins, Lori and Filep, Mihajlo and Foster, Richard and Foster, Holly and Fraisse, Laurent and Gabizon, Ronen and {Garcia-Sastre}, Adolfo and Gawriljuk, Victor O. and Gehrtz, Paul and Gileadi, Carina and Giroud, Charline and Glass, William G. and Glen, Robert and Glinert, Itai and Godoy, Andre S. and Gorichko, Marian and {Gorrie-Stone}, Tyler and Griffen, Ed J. and Hahn, Sophie and Haneef, Amna and Hart, Storm Hassell and Heer, Jag and Henry, Michael and Hill, Michelle and Horrell, Sam and Huang, Qiu Yu and Huliak, Victor D. and Hurley, Matthew F. D. and Israely, Tomer and Jajack, Andrew and Jansen, Jitske and Jnoff, Eric and Jochmans, Dirk and John, Tobias and Jonghe, Steven De and Kaminow, Benjamin and Kang, Lulu and Kantsadi, Anastassia L. and Kenny, Peter W. and Kiappes, J. L. and Kinakh, Serhii O. and Koekemoer, Lizbe and Kovar, Boris and Krojer, Tobias and La, Van and Lee, Alpha A. and Lefker, Bruce A. and Levy, Haim and Logvinenko, Ivan G. and London, Nir and Lukacik, Petra and Macdonald, Hannah Bruce and MacLean, Elizabeth M. and Makower, Laetitia L. and Malla, Tika R. and Matviiuk, Tatiana and McCorkindale, Willam and McGovern, Briana L. and Melamed, Sharon and Melnykov, Kostiantyn P. and Michurin, Oleg and Miesen, Pascal and Mikolajek, Halina and Milne, Bruce F. and Minh, David and Morris, Aaron and Morris, Garrett M. and Morwitzer, Melody Jane and Moustakas, Demetri and Mowbray, Charles and Nakamura, Aline M. and Neto, Jose Brandao and Neyts, Johan and Nguyen, Luong and Noske, Gabriela D. and Oleinikovas, Vladas and Oliva, Glaucius and Overheul, Gijs J. and Owen, David and Pai, Ruby and Pan, Jin and Paran, Nir and Payne, Alexander and Perry, Benjamin and Pingle, Maneesh and Pinjari, Jakir and Politi, Boaz and Powell, Ailsa and Psenak, Vladimir and Pulido, Ivan and Puni, Reut and Rangel, Victor L. and Reddi, Rambabu N. and Rees, Paul and Reid, St Patrick and Reid, Lauren and Resnick, Efrat and Ripka, Emily Grace and Robinson, Matthew C. and Robinson, Ralph P. and {Rodriguez-Guerra}, Jaime and Rosales, Romel and Rufa, Dominic A. and Saar, Kadi and Saikatendu, Kumar Singh and Salah, Eidarus and Schaller, David and Scheen, Jenke and Schiffer, Celia A. and Schofield, Chris and Shafeev, Mikhail and Shaikh, Aarif and Shaqra, Ala M. and Shi, Jiye and Shurrush, Khriesto and Singh, Sukrit and Sittner, Assa and Sjo, Peter and Skyner, Rachael and Smalley, Adam and Smeets, Bart and Smilova, Mihaela D. and Solmesky, Leonardo J. and Spencer, John and {Strain-Damerell}, Claire and Swamy, Vishwanath and Tamir, Hadas and Taylor, Jenny C. and Tennant, Rachael E. and Thompson, Warren and Thompson, Andrew and Tomasio, Susana and Tomlinson, Charlie and Tsurupa, Igor S. and Tumber, Anthony and Vakonakis, Ioannis and van Rij, Ronald P. and Vangeel, Laura and Varghese, Finny S. and Vaschetto, Mariana and Vitner, Einat B. and Voelz, Vincent and Volkamer, Andrea and von Delft, Frank and von Delft, Annette and Walsh, Martin and Ward, Walter and Weatherall, Charlie and Weiss, Shay and White, Kris M. and Wild, Conor Francis and Witt, Karolina D. and Wittmann, Matthew and Wright, Nathan and {Yahalom-Ronen}, Yfat and Yilmaz, Nese Kurt and Zaidmann, Daniel and Zhang, Ivy and Zidane, Hadeer and Zitzmann, Nicole and Zvornicanin, Sarah N.},
   year = {2023},
   month = mar,
-  primaryclass = {New Results},
-  pages = {2020.10.29.339317},
+  eprint = {2020.10.29.339317},
   publisher = {{bioRxiv}},
   doi = {10.1101/2020.10.29.339317},
   urldate = {2023-03-03},
-  abstract = {The COVID-19 pandemic was a stark reminder that a barren global antiviral pipeline has grave humanitarian consequences. Pandemics could be prevented in principle by accessible, easily deployable broad-spectrum oral antivirals. Here we report the results of the COVID Moonshot, a fully open-science, crowd sourced, structure-enabled drug discovery campaign targeting the SARS-CoV-2 main protease. We discovered a novel chemical series that is differentiated from current Mpro inhibitors in that it maintains a new non-covalent, non-peptidic scaffold with nanomolar potency. Our approach leveraged crowdsourcing, high-throughput structural biology, machine learning, and exascale molecular simulations and high-throughput chemistry. In the process, we generated a detailed map of the structural plasticity of the SARS-CoV-2 main protease, extensive structure-activity relationships for multiple chemotypes, and a wealth of biochemical activity data. In a first for a structure-based drug discovery campaign, all compound designs ({$>$}18,000 designs), crystallographic data ({$>$}840 ligand-bound X-ray structures), assay data ({$>$}10,000 measurements), and synthesized molecules ({$>$}2,400 compounds) for this campaign were shared rapidly and openly, creating a rich open and IP-free knowledgebase for future anti-coronavirus drug discovery.},
   archiveprefix = {bioRxiv},
-  chapter = {New Results},
-  copyright = {\textcopyright{} 2023, Posted by Cold Spring Harbor Laboratory. This pre-print is available under a Creative Commons License (Attribution 4.0 International), CC BY 4.0, as described at http://creativecommons.org/licenses/by/4.0/},
-  langid = {english},
-  file = {/Users/toni_brain/Zotero/storage/ZCPBCI3N/Consortium et al. - 2023 - Open Science Discovery of Potent Non-Covalent SARS.pdf}
 }
 
 @misc{dhariwal2021diffusion,
@@ -233,14 +212,13 @@
   author = {Douangamath, Alice and Fearon, Daren and Gehrtz, Paul and Krojer, Tobias and Lukacik, Petra and Owen, C. David and Resnick, Efrat and {Strain-Damerell}, Claire and Aimon, Anthony and {\'A}br{\'a}nyi-Balogh, P{\'e}ter and {Brand{\~a}o-Neto}, Jos{\'e} and Carbery, Anna and Davison, Gemma and Dias, Alexandre and Downes, Thomas D. and Dunnett, Louise and Fairhead, Michael and Firth, James D. and Jones, S. Paul and Keeley, Aaron and Keser{\"u}, Gy{\"o}rgy M. and Klein, Hanna F. and Martin, Mathew P. and Noble, Martin E. M. and O'Brien, Peter and Powell, Ailsa and Reddi, Rambabu N. and Skyner, Rachael and Snee, Matthew and Waring, Michael J. and Wild, Conor and London, Nir and {von Delft}, Frank and Walsh, Martin A.},
   year = {2020},
   month = oct,
-  journal = {Nat Commun},
+  journal = {Nat. Commun.},
   volume = {11},
   number = {1},
   pages = {5047},
   publisher = {{Nature Publishing Group}},
   issn = {2041-1723},
   doi = {10.1038/s41467-020-18709-w},
-  urldate = {2023-04-10},
   abstract = {COVID-19, caused by SARS-CoV-2, lacks effective therapeutics. Additionally, no antiviral drugs or vaccines were developed against the closely related coronavirus, SARS-CoV-1 or MERS-CoV, despite previous zoonotic outbreaks. To identify starting points for such therapeutics, we performed a large-scale screen of electrophile and non-covalent fragments through a combined mass spectrometry and X-ray approach against the SARS-CoV-2 main protease, one of two cysteine viral proteases essential for viral replication. Our crystallographic screen identified 71 hits that span the entire active site, as well as 3 hits at the dimer interface. These structures reveal routes to rapidly develop more potent inhibitors through merging of covalent and non-covalent fragment hits; one series of low-reactivity, tractable covalent fragments were progressed to discover improved binders. These combined hits offer unprecedented structural and reactivity information for on-going structure-based drug design against SARS-CoV-2 main protease.},
   copyright = {2020 The Author(s)},
   langid = {english},
@@ -260,7 +238,6 @@
   publisher = {{American Chemical Society}},
   issn = {0022-2623},
   doi = {10.1021/acs.jmedchem.2c00931},
-  urldate = {2023-03-07},
   abstract = {We here describe a computational approach (POEM: Pocket Oriented Elaboration of Molecules) to drive the generation of target-focused libraries while taking advantage of all publicly available structural information on protein\textendash ligand complexes. A collection of 31\,384 PDB-derived images with key shapes and pharmacophoric properties, describing fragment-bound microenvironments, is first aligned to the query target cavity by a computer vision method. The fragments of the most similar PDB subpockets are then directly positioned in the query cavity using the corresponding image transformation matrices. Lastly, suitable connectable atoms of oriented fragment pairs are linked by a deep generative model to yield fully connected molecules. POEM was applied to generate a library of 1.5 million potential cyclin-dependent kinase 8 inhibitors. By synthesizing and testing as few as 43 compounds, a few nanomolar inhibitors were quickly obtained with limited resources in just two iterative cycles.},
   file = {/Users/toni_brain/Zotero/storage/5CSCQT2X/Eguida et al. - 2022 - Target-Focused Library Design by Pocket-Applied Co.pdf;/Users/toni_brain/Zotero/storage/KBHPARTH/acs.jmedchem.html}
 }
@@ -270,13 +247,12 @@
   author = {Ertl, Peter and Schuffenhauer, Ansgar},
   year = {2009},
   month = jun,
-  journal = {Journal of Cheminformatics},
+  journal = {J. Cheminformatics},
   volume = {1},
   number = {1},
   pages = {8},
   issn = {1758-2946},
   doi = {10.1186/1758-2946-1-8},
-  urldate = {2023-03-19},
   abstract = {A method to estimate ease of synthesis (synthetic accessibility) of drug-like molecules is needed in many areas of the drug discovery process. The development and validation of such a method that is able to characterize molecule synthetic accessibility as a score between 1 (easy to make) and 10 (very difficult to make) is described in this article.},
   keywords = {Boda,Chemist Score,Cleavage Type,Common Fragment,Lead Candidate},
   file = {/Users/toni_brain/Zotero/storage/T74YM9QU/Ertl and Schuffenhauer - 2009 - Estimation of synthetic accessibility score of dru.pdf;/Users/toni_brain/Zotero/storage/G9FVXCV6/1758-2946-1-8.html}
@@ -295,7 +271,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.7b00418},
-  urldate = {2023-03-18},
   abstract = {Incorporating experimental restraints is a powerful method of increasing accuracy in computational protein small molecule docking simulations. Different algorithms integrate distinct forms of biochemical data during the docking and/or scoring stages. These so-called hybrid methods make use of receptor-based information such as nuclear magnetic resonance (NMR) restraints or small molecule-based information such as structure\textendash activity relationships (SARs). A third class of methods directly interrogates contacts between the protein receptor and the small molecule. This work reviews the current state of using such restraints in docking simulations, evaluates their feasibility across broad systems, and identifies potential areas of algorithm development.},
   file = {/Users/toni_brain/Zotero/storage/HD5QJVTL/Fu and Meiler - 2018 - Predictive Power of Different Types of Experimenta.pdf;/Users/toni_brain/Zotero/storage/ZT4AXXDX/acs.jcim.html}
 }
@@ -303,12 +278,11 @@
 @article{guo2023linkinvent,
   title = {Link-{{INVENT}}: Generative Linker Design with Reinforcement Learning},
   shorttitle = {Link-{{INVENT}}},
-  author = {Guo, Jeff and Knuth, Franziska and Margreitter, Christian and Paul~Janet, Jon and Papadopoulos{\textsection}, Kostas and Engkvist, Ola and Patronov, Atanas},
+  author = {Guo, Jeff and Knuth, Franziska and Margreitter, Christian and Paul~Janet, Jon and Papadopoulos, Kostas and Engkvist, Ola and Patronov, Atanas},
   year = {2023},
   journal = {Digital Discovery},
   publisher = {{Royal Society of Chemistry}},
   doi = {10.1039/D2DD00115B},
-  urldate = {2023-03-16},
   langid = {english},
   file = {/Users/toni_brain/Zotero/storage/3SP4LPXF/Guo et al. - 2023 - Link-INVENT generative linker design with reinfor.pdf}
 }
@@ -325,7 +299,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.1c01311},
-  urldate = {2023-03-07},
   abstract = {Despite recent interest in deep generative models for scaffold elaboration, their applicability to fragment-to-lead campaigns has so far been limited. This is primarily due to their inability to account for local protein structure or a user's design hypothesis. We propose a novel method for fragment elaboration, STRIFE, that overcomes these issues. STRIFE takes as input fragment hotspot maps (FHMs) extracted from a protein target and processes them to provide meaningful and interpretable structural information to its generative model, which in turn is able to rapidly generate elaborations with complementary pharmacophores to the protein. In a large-scale evaluation, STRIFE outperforms existing, structure-unaware, fragment elaboration methods in proposing highly ligand-efficient elaborations. In addition to automatically extracting pharmacophoric information from a protein target's FHM, STRIFE optionally allows the user to specify their own design hypotheses.},
   file = {/Users/toni_brain/Zotero/storage/RASHFYRX/Hadfield et al. - 2022 - Incorporating Target-Specific Pharmacophoric Infor.pdf}
 }
@@ -336,14 +309,13 @@
   author = {Hajduk, Philip J. and Greer, Jonathan},
   year = {2007},
   month = mar,
-  journal = {Nat Rev Drug Discov},
+  journal = {Nat. Rev. Drug Discov.},
   volume = {6},
   number = {3},
   pages = {211--219},
   publisher = {{Nature Publishing Group}},
   issn = {1474-1784},
   doi = {10.1038/nrd2220},
-  urldate = {2023-04-10},
   abstract = {Fragment-based drug design is based on screening smaller numbers of compounds (typically several thousand) in the hopes of finding low-affinity fragments (Kd values in the high micromolar to millimolar range), in contrast to conventional high-throughput screening (HTS), which attempts to evaluate as many compounds as technologically possible (typically a million or more) in the hopes of finding relatively potent drug leads (Kd values ideally less than 1 {$\mu$}M).The combination of broader sampling of the potential chemical universe than HTS and increased hit rates for molecules of low complexity makes fragment-based screening a powerful tool for lead generation. Fragment-based screening is also less prone to artefacts as the low-molecular-mass compounds tend to be more soluble and the methods of detection are simpler and more robust.Two-dimensional, isotope-edited nuclear magnetic resonance (NMR) spectroscopy was the first approach used in fragment-based drug design. It is well suited to this purpose as NMR chemical shifts are exquisitely sensitive to ligand binding, and problems with compound interference can be solved by spectral editing.During the past decade, the popularity of fragment-based screening has grown at a remarkable rate in both industry and academia. A range of different strategies have been developed, including alternative NMR-based approaches that obviate the need for isotope labelling, approaches based on X-ray-crystallography and fragment tethering, which are discussed here.The ability to obtain NMR or X-ray crystal structures on fragment leads has a dramatic influence on the success of fragment-based drug design.The successful applications of fragment-based drug design have provided ample support that the use of fragments could, in many cases, be the most direct route to the best achievable balance between potency and pharmacokinetics.},
   copyright = {2007 Nature Publishing Group},
   langid = {english},
@@ -378,22 +350,37 @@
   file = {/Users/toni_brain/Zotero/storage/3LISRCFR/Hoffmann and Noé - 2019 - Generating valid Euclidean distance matrices.pdf;/Users/toni_brain/Zotero/storage/RUHTI45R/1910.html}
 }
 
-@article{hoogeboom2022equivariant,
+@misc{hoogeboom2022equivariant,
   title = {Equivariant {{Diffusion}} for {{Molecule Generation}} in {{3D}}},
   author = {Hoogeboom, Emiel and Satorras, Victor Garcia and Vignac, Cl{\'e}ment and Welling, Max},
   year = {2022},
-  month = mar,
-  doi = {10.48550/arxiv.2203.17003},
-  abstract = {This work introduces a diffusion model for molecule generation in 3D that is equivariant to Euclidean transformations. Our E(3) Equivariant Diffusion Model (EDM) learns to denoise a diffusion process with an equivariant network that jointly operates on both continuous (atom coordinates) and categorical features (atom types). In addition, we provide a probabilistic analysis which admits likelihood computation of molecules using our model. Experimentally, the proposed method significantly outperforms previous 3D molecular generative methods regarding the quality of generated samples and efficiency at training time.}
+  month = jun,
+  number = {arXiv:2203.17003},
+  eprint = {arXiv:2203.17003},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.2203.17003},
+  urldate = {2023-04-18},
+  abstract = {This work introduces a diffusion model for molecule generation in 3D that is equivariant to Euclidean transformations. Our E(3) Equivariant Diffusion Model (EDM) learns to denoise a diffusion process with an equivariant network that jointly operates on both continuous (atom coordinates) and categorical features (atom types). In addition, we provide a probabilistic analysis which admits likelihood computation of molecules using our model. Experimentally, the proposed method significantly outperforms previous 3D molecular generative methods regarding the quality of generated samples and efficiency at training time.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Machine Learning,Quantitative Biology - Quantitative Methods,Statistics - Machine Learning},
+  file = {/Users/toni_brain/Zotero/storage/U4SD8YQ4/Hoogeboom et al. - 2022 - Equivariant Diffusion for Molecule Generation in 3.pdf;/Users/toni_brain/Zotero/storage/H6TA29NB/2203.html}
 }
 
-@article{huang20223dlinker,
+@misc{huang20223dlinker,
   title = {{{3DLinker}}: {{An E}}(3) {{Equivariant Variational Autoencoder}} for {{Molecular Linker Design}}},
+  shorttitle = {{{3DLinker}}},
   author = {Huang, Yinan and Peng, Xingang and Ma, Jianzhu and Zhang, Muhan},
   year = {2022},
   month = may,
-  doi = {10.48550/arxiv.2205.07309},
-  abstract = {Deep learning has achieved tremendous success in designing novel chemical compounds with desirable pharmaceutical properties. In this work, we focus on a new type of drug design problem \textendash{} generating a small "linker" to physically attach two independent molecules with their distinct functions. The main computational challenges include: 1) the generation of linkers is conditional on the two given molecules, in contrast to generating full molecules from scratch in previous works; 2) linkers heavily depend on the anchor atoms of the two molecules to be connected, which are not known beforehand; 3) 3D structures and orientations of the molecules need to be considered to avoid atom clashes, for which equivariance to E(3) group are necessary. To address these problems, we propose a conditional generative model, named 3DLinker, which is able to predict anchor atoms and jointly generate linker graphs and their 3D structures based on an E(3) equivariant graph variational autoencoder. So far as we know, there are no previous models that could achieve this task. We compare our model with multiple conditional generative models modified from other molecular design tasks and find that our model has a significantly higher rate in recovering molecular graphs, and more importantly, accurately predicting the 3D coordinates of all the atoms.}
+  number = {arXiv:2205.07309},
+  eprint = {arXiv:2205.07309},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.2205.07309},
+  urldate = {2023-04-18},
+  abstract = {Deep learning has achieved tremendous success in designing novel chemical compounds with desirable pharmaceutical properties. In this work, we focus on a new type of drug design problem -- generating a small "linker" to physically attach two independent molecules with their distinct functions. The main computational challenges include: 1) the generation of linkers is conditional on the two given molecules, in contrast to generating full molecules from scratch in previous works; 2) linkers heavily depend on the anchor atoms of the two molecules to be connected, which are not known beforehand; 3) 3D structures and orientations of the molecules need to be considered to avoid atom clashes, for which equivariance to E(3) group are necessary. To address these problems, we propose a conditional generative model, named 3DLinker, which is able to predict anchor atoms and jointly generate linker graphs and their 3D structures based on an E(3) equivariant graph variational autoencoder. So far as we know, there are no previous models that could achieve this task. We compare our model with multiple conditional generative models modified from other molecular design tasks and find that our model has a significantly higher rate in recovering molecular graphs, and more importantly, accurately predicting the 3D coordinates of all the atoms.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Quantitative Biology - Biomolecules},
+  file = {/Users/toni_brain/Zotero/storage/ULJ6YPXB/Huang et al. - 2022 - 3DLinker An E(3) Equivariant Variational Autoenco.pdf;/Users/toni_brain/Zotero/storage/I6UWDMXG/2205.html}
 }
 
 @article{huang2022mdm,
@@ -405,13 +392,20 @@
   abstract = {Molecule generation, especially generating 3D molecular geometries from scratch (i.e., 3D \textbackslash textit\{de novo\} generation), has become a fundamental task in drug designs. Existing diffusion-based 3D molecule generation methods could suffer from unsatisfactory performances, especially when generating large molecules. At the same time, the generated molecules lack enough diversity. This paper proposes a novel diffusion model to address those two challenges. First, interatomic relations are not in molecules' 3D point cloud representations. Thus, it is difficult for existing generative models to capture the potential interatomic forces and abundant local constraints. To tackle this challenge, we propose to augment the potential interatomic forces and further involve dual equivariant encoders to encode interatomic forces of different strengths. Second, existing diffusion-based models essentially shift elements in geometry along the gradient of data density. Such a process lacks enough exploration in the intermediate steps of the Langevin dynamics. To address this issue, we introduce a distributional controlling variable in each diffusion/reverse step to enforce thorough explorations and further improve generation diversity. Extensive experiments on multiple benchmarks demonstrate that the proposed model significantly outperforms existing methods for both unconditional and conditional generation tasks. We also conduct case studies to help understand the physicochemical properties of the generated molecules.}
 }
 
-@article{igashov2022equivariant,
+@misc{igashov2022equivariant,
   title = {Equivariant {{3D-Conditional Diffusion Models}} for {{Molecular Linker Design}}},
   author = {Igashov, Ilia and St{\"a}rk, Hannes and Vignac, Cl{\'e}ment and Satorras, Victor Garcia and Frossard, Pascal and Welling, Max and Bronstein, Michael and Correia, Bruno},
   year = {2022},
   month = oct,
-  doi = {10.48550/arxiv.2210.05274},
-  abstract = {Fragment-based drug discovery has been an effective paradigm in early-stage drug development. An open challenge in this area is designing linkers between disconnected molecular fragments of interest to obtain chemically-relevant candidate drug molecules. In this work, we propose DiffLinker, an E(3)-equivariant 3D-conditional diffusion model for molecular linker design. Given a set of disconnected fragments, our model places missing atoms in between and designs a molecule incorporating all the initial fragments. Unlike previous approaches that are only able to connect pairs of molecular fragments, our method can link an arbitrary number of fragments. Additionally, the model automatically determines the number of atoms in the linker and its attachment points to the input fragments. We demonstrate that DiffLinker outperforms other methods on the standard datasets generating more diverse and synthetically-accessible molecules. Besides, we experimentally test our method in real-world applications, showing that it can successfully generate valid linkers conditioned on target protein pockets.}
+  number = {arXiv:2210.05274},
+  eprint = {arXiv:2210.05274},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.2210.05274},
+  urldate = {2023-04-18},
+  abstract = {Fragment-based drug discovery has been an effective paradigm in early-stage drug development. An open challenge in this area is designing linkers between disconnected molecular fragments of interest to obtain chemically-relevant candidate drug molecules. In this work, we propose DiffLinker, an E(3)-equivariant 3D-conditional diffusion model for molecular linker design. Given a set of disconnected fragments, our model places missing atoms in between and designs a molecule incorporating all the initial fragments. Unlike previous approaches that are only able to connect pairs of molecular fragments, our method can link an arbitrary number of fragments. Additionally, the model automatically determines the number of atoms in the linker and its attachment points to the input fragments. We demonstrate that DiffLinker outperforms other methods on the standard datasets generating more diverse and synthetically-accessible molecules. Besides, we experimentally test our method in real-world applications, showing that it can successfully generate valid linkers conditioned on target protein pockets.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Machine Learning,Quantitative Biology - Biomolecules},
+  file = {/Users/toni_brain/Zotero/storage/GYNJ7PYE/Igashov et al. - 2022 - Equivariant 3D-Conditional Diffusion Models for Mo.pdf;/Users/toni_brain/Zotero/storage/YG8ZVJX4/2210.html}
 }
 
 @article{imrie2020deep,
@@ -426,7 +420,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.9b01120},
-  urldate = {2023-03-14},
   abstract = {Rational compound design remains a challenging problem for both computational methods and medicinal chemists. Computational generative methods have begun to show promising results for the design problem. However, they have not yet used the power of three-dimensional (3D) structural information. We have developed a novel graph-based deep generative model that combines state-of-the-art machine learning techniques with structural knowledge. Our method (``DeLinker'') takes two fragments or partial structures and designs a molecule incorporating both. The generation process is protein-context-dependent, utilizing the relative distance and orientation between the partial structures. This 3D information is vital to successful compound design, and we demonstrate its impact on the generation process and the limitations of omitting such information. In a large-scale evaluation, DeLinker designed 60\% more molecules with high 3D similarity to the original molecule than a database baseline. When considering the more relevant problem of longer linkers with at least five atoms, the outperformance increased to 200\%. We demonstrate the effectiveness and applicability of this approach on a diverse range of design problems: fragment linking, scaffold hopping, and proteolysis targeting chimera (PROTAC) design. As far as we are aware, this is the first molecular generative model to incorporate 3D structural information directly in the design process. The code is available at https://github.com/oxpig/DeLinker.},
   file = {/Users/toni_brain/Zotero/storage/QKSPK427/Imrie et al. - 2020 - Deep Generative Models for 3D Linker Design.pdf}
 }
@@ -459,7 +452,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.5b00142},
-  urldate = {2023-03-19},
   abstract = {We present a new approach to structure-based drug design (POSIT) rigorously built on the simple concept that pose prediction is intimately coupled to the quality and availability of experimental structural data. We demonstrate the feasibility of the approach by performing retrospective analyses on three data sets designed to explore the strengths and weaknesses of POSIT relative to existing methods. We then present results documenting 2.5 years of prospective use of POSIT across a variety of structure-based industrial drug-discovery research projects. We find that POSIT is well-suited to guiding research decision making for structure-based design and, in particular, excels at enabling lead-optimization campaigns. We show that the POSIT framework can drive superior pose-prediction performance and generate results that naturally lend themselves to prospective decision making during lead optimization. We believe the results presented here are (1) the largest prospective validation of a pose prediction method reported to date (71 crystal structures); (2) provide an unprecedented look at the scope of impact of a computational tool; and (3) represent a first-of-its-kind analysis. We hope that this work inspires additional studies that look at the real impact and performance of computational research tools on prospective drug design.},
   file = {/Users/toni_brain/Zotero/storage/HA88FW26/Kelley et al. - 2015 - POSIT Flexible Shape-Guided Docking For Pose Pred.pdf;/Users/toni_brain/Zotero/storage/UQB7LZXM/acs.jcim.html}
 }
@@ -485,7 +477,7 @@
   author = {Kumar, A. and Voet, A. and Zhang, K.Y.J.},
   year = {2012},
   month = oct,
-  journal = {Current Medicinal Chemistry},
+  journal = {Curr. Med. Chem.},
   volume = {19},
   number = {30},
   pages = {5128--5147},
@@ -506,10 +498,26 @@
   publisher = {{The Royal Society of Chemistry}},
   issn = {2041-6539},
   doi = {10.1039/D1SC04444C},
-  urldate = {2023-03-16},
   abstract = {Deep generative models are attracting much attention in the field of de novo molecule design. Compared to traditional methods, deep generative models can be trained in a fully data-driven way with little requirement for expert knowledge. Although many models have been developed to generate 1D and 2D molecular structures, 3D molecule generation is less explored, and the direct design of drug-like molecules inside target binding sites remains challenging. In this work, we introduce DeepLigBuilder, a novel deep learning-based method for de novo drug design that generates 3D molecular structures in the binding sites of target proteins. We first developed Ligand Neural Network (L-Net), a novel graph generative model for the end-to-end design of chemically and conformationally valid 3D molecules with high drug-likeness. Then, we combined L-Net with Monte Carlo tree search to perform structure-based de novo drug design tasks. In the case study of inhibitor design for the main protease of SARS-CoV-2, DeepLigBuilder suggested a list of drug-like compounds with novel chemical structures, high predicted affinity, and similar binding features to those of known inhibitors. The current version of L-Net was trained on drug-like compounds from ChEMBL, which could be easily extended to other molecular datasets with desired properties based on users' demands and applied in functional molecule generation. Merging deep generative models with atomic-level interaction evaluation, DeepLigBuilder provides a state-of-the-art model for structure-based de novo drug design and lead optimization.},
   langid = {english},
   file = {/Users/toni_brain/Zotero/storage/3IVRJ8T4/Li et al. - 2021 - Structure-based de novo drug design using 3D deep .pdf;/Users/toni_brain/Zotero/storage/GA35TVSA/Li et al. - 2021 - Structure-based de novo drug design using 3D deep .pdf}
+}
+
+@article{liu2022auto3d,
+  title = {{{Auto3D}}: {{Automatic Generation}} of the {{Low-Energy 3D Structures}} with {{ANI Neural Network Potentials}}},
+  shorttitle = {{{Auto3D}}},
+  author = {Liu, Zhen and Zubatiuk, Tetiana and Roitberg, Adrian and Isayev, Olexandr},
+  year = {2022},
+  month = nov,
+  journal = {J. Chem. Inf. Model.},
+  volume = {62},
+  number = {22},
+  pages = {5373--5382},
+  publisher = {{American Chemical Society}},
+  issn = {1549-9596},
+  doi = {10.1021/acs.jcim.2c00817},
+  abstract = {Computational programs accelerate the chemical discovery processes but often need proper three-dimensional molecular information as part of the input. Getting optimal molecular structures is challenging because it requires enumerating and optimizing a huge space of stereoisomers and conformers. We developed the Python-based Auto3D package for generating the low-energy 3D structures using SMILES as the input. Auto3D is based on state-of-the-art algorithms and can automatize the isomer enumeration and duplicate filtering process, 3D building process, geometry optimization, and ranking process. Tested on 50 molecules with multiple unspecified stereocenters, Auto3D is guaranteed to find the stereoconfiguration that yields the lowest-energy conformer. With Auto3D, we provide an extension of the ANI model. The new model, dubbed ANI-2xt, is trained on a tautomer-rich data set. ANI-2xt is benchmarked with DFT methods on geometry optimization and electronic and Gibbs free energy calculations. Compared with ANI-2x, ANI-2xt provides a 42\% error reduction for tautomeric reaction energy calculations when using the gold-standard coupled-cluster calculation as the reference. ANI-2xt can accurately predict the energies and is several orders of magnitude faster than DFT methods.},
+  file = {/Users/toni_brain/Zotero/storage/ELI5KXC3/Liu et al. - 2022 - Auto3D Automatic Generation of the Low-Energy 3D .pdf;/Users/toni_brain/Zotero/storage/Q87EV6CA/acs.jcim.html}
 }
 
 @misc{lugmayr2022repaint,
@@ -550,7 +558,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.2c01436},
-  urldate = {2023-03-18},
   abstract = {Protein\textendash ligand docking is an essential tool in structure-based drug design with applications ranging from virtual high-throughput screening to pose prediction for lead optimization. Most docking programs for pose prediction are optimized for redocking to an existing cocrystallized protein structure, ignoring protein flexibility. In real-world drug design applications, however, protein flexibility is an essential feature of the ligand-binding process. Flexible protein\textendash ligand docking still remains a significant challenge to computational drug design. To target this challenge, we present a deep learning (DL) model for flexible protein\textendash ligand docking based on the prediction of an intermolecular Euclidean distance matrix (EDM), making the typical use of iterative search algorithms obsolete. The model was trained on a large-scale data set of protein\textendash ligand complexes and evaluated on independent test sets. Our model generates high quality poses for a diverse set of protein and ligand structures and outperforms comparable docking methods.},
   file = {/Users/toni_brain/Zotero/storage/NRTX2KCC/Masters et al. - 2023 - Deep Learning Model for Efficient Protein–Ligand D.pdf;/Users/toni_brain/Zotero/storage/U8ZKKEXQ/acs.jcim.html}
 }
@@ -583,7 +590,6 @@
   pages = {76--90},
   issn = {1097-0282},
   doi = {10.1002/bip.10207},
-  urldate = {2023-03-03},
   abstract = {A shape-based Gaussian docking function is constructed which uses Gaussian functions to represent the shapes of individual atoms. A set of 20 trypsin ligand\textendash protein complexes are drawn from the Protein Data Bank (PDB), the ligands are separated from the proteins, and then are docked back into the active sites using numerical optimization of this function. It is found that by employing this docking function, quasi-Newton optimization is capable of moving ligands great distances [on average 7 \AA{} root mean square distance (RMSD)] to locate the correctly docked structure. It is also found that a ligand drawn from one PDB file can be docked into a trypsin structure drawn from any of the trypsin PDB files. This implies that this scoring function is not limited to more accurate x-ray structures, as is the case for many of the conventional docking methods, but could be extended to homology models. \textcopyright{} 2002 Wiley Periodicals, Inc. Biopolymers 68: 76\textendash 90, 2003},
   langid = {english},
   keywords = {docking,electronic screening of ligands,Gaussian based docking function,structure based drug design},
@@ -595,14 +601,13 @@
   author = {Mey, Antonia S. J. S. and {Ju{\'a}rez-Jim{\'e}nez}, Jordi and Hennessy, Alexis and Michel, Julien},
   year = {2016},
   month = oct,
-  journal = {Bioorganic \& Medicinal Chemistry},
+  journal = {Bioorgan. Med. Chem.},
   series = {Advances in {{Computational}} and {{Medicinal Chemistry}}},
   volume = {24},
   number = {20},
   pages = {4890--4899},
   issn = {0968-0896},
   doi = {10.1016/j.bmc.2016.07.044},
-  urldate = {2023-03-18},
   abstract = {In the framework of the 2015 D3R inaugural grand challenge, blind binding pose and affinity predictions were performed for a set of 180 ligands of the Heat Shock Protein HSP90-{$\alpha$} protein, a relevant cancer target. Spectral clustering was used to rapidly identify alternative binding site conformations in publicly available crystallographic HSP90-{$\alpha$} structures. Subsequently, multiple docking and scoring protocols employing the software Autodock Vina and rDock were applied to predict binding modes and rank order ligands. Alchemical free energy calculations were performed with the software FESetup and Sire/OpenMM to predict binding affinities for three congeneric series subsets. Some of the protocols used here were ranked among the top submissions according to most of the evaluation metrics. Docking performance was excellent, but the scoring results were disappointing. A critical assessment of the results is reported, as well as suggestions for future similar competitions.},
   langid = {english},
   keywords = {Alchemical free energy calculations,Computer-aided drug design,Docking,Protein–ligand interactions,Ranking,Scoring},
@@ -614,13 +619,12 @@
   author = {Mey, Antonia S. J. S. and Allen, Bryce K. and McDonald, Hannah E. Bruce and Chodera, John D. and Hahn, David F. and Kuhn, Maxmillian and Michel, Julien and Mobley, David L. and Naden, Levi N. and Prasad, Samarjeet and Rizzi, Andrea and Scheen, Jenke and Shirts, Michael R. and Tresadern, Gary and Xu, Huafeng},
   year = {2020},
   month = dec,
-  journal = {Living Journal of Computational Molecular Science},
+  journal = {Living J. Comp. Mol. Sci.},
   volume = {2},
   number = {1},
   pages = {18378--18378},
   issn = {2575-6524},
   doi = {10.33011/livecoms.2.1.18378},
-  urldate = {2023-03-18},
   abstract = {Alchemical free energy calculations are a useful tool for predicting free energy differences associated with the transfer of molecules from one environment to another. The hallmark of these methods is the use of "bridging" potential energy functions representing \_alchemical\_ intermediate states that cannot exist as real chemical species. The data collected from these bridging alchemical thermodynamic states allows the efficient computation of transfer free energies (or differences in transfer free energies) with orders of magnitude less simulation time than simulating the transfer process directly. While these methods are highly flexible, care must be taken in avoiding common pitfalls to ensure that computed free energy differences can be robust and reproducible for the chosen force field, and that appropriate corrections are included to permit direct comparison with experimental data. In this paper, we review current best practices for several popular application domains of alchemical free energy calculations, including relative and absolute small molecule binding free energy calculations to biomolecular targets.},
   copyright = {Copyright (c) 2020},
   langid = {english},
@@ -655,7 +659,6 @@
   publisher = {{The Royal Society of Chemistry}},
   issn = {1477-0539},
   doi = {10.1039/C5OB02630J},
-  urldate = {2023-03-07},
   abstract = {With the ever-increasing instances of resistance to frontline TB drugs there is the need to develop novel strategies to fight the worldwide TB epidemic. Boosting the effect of the existing second-line antibiotic ethionamide by inhibiting the mycobacterial transcriptional repressor protein EthR is an attractive therapeutic strategy. Herein we report the use of a fragment based drug discovery approach for the structure-guided systematic merging of two fragment molecules, each binding twice to the hydrophobic cavity of EthR from M. tuberculosis. These together fill the entire binding pocket of EthR. We elaborated these fragment hits and developed small molecule inhibitors which have a 100-fold improvement of potency in vitro over the initial fragments.},
   langid = {english},
   file = {/Users/toni_brain/Zotero/storage/XDKEUL3P/Nikiforov et al. - 2016 - A fragment merging approach towards the developmen.pdf;/Users/toni_brain/Zotero/storage/ZURUPZY8/Nikiforov et al. - 2016 - A fragment merging approach towards the developmen.pdf}
@@ -667,13 +670,12 @@
   author = {O'Boyle, Noel M. and Banck, Michael and James, Craig A. and Morley, Chris and Vandermeersch, Tim and Hutchison, Geoffrey R.},
   year = {2011},
   month = oct,
-  journal = {Journal of Cheminformatics},
+  journal = {J. Cheminformatics},
   volume = {3},
   number = {1},
   pages = {33},
   issn = {1758-2946},
   doi = {10.1186/1758-2946-3-33},
-  urldate = {2023-02-22},
   abstract = {A frequent problem in computational modeling is the interconversion of chemical structures between different formats. While standard interchange formats exist (for example, Chemical Markup Language) and de facto standards have arisen (for example, SMILES format), the need to interconvert formats is a continuing problem due to the multitude of different application areas for chemistry data, differences in the data stored by different formats (0D versus 3D, for example), and competition between software along with a lack of vendor-neutral formats.},
   keywords = {Atom Type,Bond Connectivity,Canonical Code,Chemical Markup Language,File Format},
   file = {/Users/toni_brain/Zotero/storage/UYVHXINB/O'Boyle et al. - 2011 - Open Babel An open chemical toolbox.pdf;/Users/toni_brain/Zotero/storage/8UE398QW/1758-2946-3-33.html}
@@ -690,13 +692,12 @@
   author = {Polishchuk, P. G. and Madzhidov, T. I. and Varnek, A.},
   year = {2013},
   month = aug,
-  journal = {J Comput Aided Mol Des},
+  journal = {J. Comput. Aided Mol. Des.},
   volume = {27},
   number = {8},
   pages = {675--679},
   issn = {1573-4951},
   doi = {10.1007/s10822-013-9672-4},
-  urldate = {2023-03-16},
   abstract = {The goal of this paper is to estimate the number of realistic drug-like molecules which could ever be synthesized. Unlike previous studies based on exhaustive enumeration of molecular graphs or on combinatorial enumeration preselected fragments, we used results of constrained graphs enumeration by Reymond to establish a correlation between the number of generated structures (M) and the number of heavy atoms (N): logM~=~0.584~\texttimes ~N~\texttimes ~logN~+~0.356. The number of atoms limiting drug-like chemical space of molecules which follow Lipinsky's rules (N~=~36) has been obtained from the analysis of the PubChem database. This results in M~{$\approx~$}1033 which is in between the numbers estimated by Ertl (1023) and by Bohacek (1060).},
   langid = {english},
   keywords = {Chemical space,Drug-like chemical space,Graphs enumeration},
@@ -713,7 +714,6 @@
   pages = {19--44},
   publisher = {{Academic Press}},
   doi = {10.1016/B978-0-12-816125-8.00002-X},
-  urldate = {2023-03-19},
   abstract = {Computer-aided drug design (CADD) comprises a broad range of theoretical and computational approaches that are part of modern drug discovery. CADD methods have made key contributions to the development of drugs that are in clinical use or in clinical trials. Such methods have emerged and evolved along with experimental approaches used in drug design. In this chapter we discuss the major CADD methods and examples of recent applications to drugs that have advanced in clinical trials or that have been approved for clinical use. We also comment on representative trends in current drug discovery that are shaping the development of novel methods, such as computer-aided drug repurposing. Similarly we present emerging concepts and technologies in molecular modeling and chemoinformatics. Furthermore, this chapter discusses the authors' point of view of the challenges of traditional and novel CADD methods to increase their positive impact in drug discovery.},
   isbn = {978-0-12-816125-8},
   langid = {english},
@@ -732,7 +732,6 @@
   pages = {102028},
   issn = {0141-9382},
   doi = {10.1016/j.displa.2021.102028},
-  urldate = {2023-03-18},
   abstract = {Image inpainting aims to restore the pixel features of damaged parts in incomplete image and plays a key role in many computer vision tasks. Image inpainting technology based on deep learning is a major current research hotspot. To deeply understand related methods and technologies, this article combs and summarizes the latest research status in this field. Firstly, we summarize inpainting methods of different types of neural network structure based on deep learning, then analyze and study important technical improvement mechanisms. In addition, various algorithms are comprehensively reviewed from the aspects of model network structure and restoration methods. And we select some representative image inpainting methods for comparison and analysis. Finally, the current problems of image inpainting are summarized, and the future development trend and research direction are prospected.},
   langid = {english},
   keywords = {Computer vision,Generative adversarial networks (GAN),Image inpainting,Variational autoencoder (VAE)},
@@ -743,13 +742,12 @@
   title = {Generating {{3D}} Molecules Conditional on Receptor Binding Sites with Deep Generative Models},
   author = {Ragoza, Matthew and Masuda, Tomohide and Ryan~Koes, David},
   year = {2022},
-  journal = {Chemical Science},
+  journal = {Chem. Sci.},
   volume = {13},
   number = {9},
   pages = {2701--2713},
   publisher = {{Royal Society of Chemistry}},
   doi = {10.1039/D1SC05976A},
-  urldate = {2023-03-18},
   langid = {english},
   file = {/Users/toni_brain/Zotero/storage/PNP64RVH/Ragoza et al. - 2022 - Generating 3D molecules conditional on receptor bi.pdf}
 }
@@ -759,14 +757,13 @@
   author = {Ramakrishnan, Raghunathan and Dral, Pavlo O. and Rupp, Matthias and {von Lilienfeld}, O. Anatole},
   year = {2014},
   month = aug,
-  journal = {Sci Data},
+  journal = {Sci. Data},
   volume = {1},
   number = {1},
   pages = {140022},
   publisher = {{Nature Publishing Group}},
   issn = {2052-4463},
   doi = {10.1038/sdata.2014.22},
-  urldate = {2023-03-16},
   abstract = {Computational de novo design of new drugs and materials requires rigorous and unbiased exploration of chemical compound space. However, large uncharted territories persist due to its size scaling combinatorially with molecular size. We report computed geometric, energetic, electronic, and thermodynamic properties for 134k stable small organic molecules made up of CHONF. These molecules correspond to the subset of all 133,885 species with up to nine heavy atoms (CONF) out of the GDB-17 chemical universe of 166 billion organic molecules. We report geometries minimal in energy, corresponding harmonic frequencies, dipole moments, polarizabilities, along with energies, enthalpies, and free energies of atomization. All properties were calculated at the B3LYP/6-31G(2df,p) level of quantum chemistry. Furthermore, for the predominant stoichiometry, C7H10O2, there are 6,095 constitutional isomers among the 134k molecules. We report energies, enthalpies, and free energies of atomization at the more accurate G4MP2 level of theory for all of them. As such, this data set provides quantum chemical properties for a relevant, consistent, and comprehensive chemical space of small organic molecules. This database may serve the benchmarking of existing methods, development of new methods, such as hybrid quantum mechanics/machine learning, and systematic identification of structure-property relationships.},
   copyright = {2014 The Author(s)},
   langid = {english},
@@ -817,7 +814,6 @@
   pages = {649--657},
   publisher = {{American Chemical Society}},
   doi = {10.1021/cn3000422},
-  urldate = {2023-03-16},
   abstract = {Herein we review our recent efforts in searching for bioactive ligands by enumeration and virtual screening of the unknown chemical space of small molecules. Enumeration from first principles shows that almost all small molecules ({$>$}99.9\%) have never been synthesized and are still available to be prepared and tested. We discuss open access sources of molecules, the classification and representation of chemical space using molecular quantum numbers (MQN), its exhaustive enumeration in form of the chemical universe generated databases (GDB), and examples of using these databases for prospective drug discovery. MQN-searchable GDB, PubChem, and DrugBank are freely accessible at www.gdb.unibe.ch.},
   file = {/Users/toni_brain/Zotero/storage/TYVFWV95/Reymond and Awale - 2012 - Exploring Chemical Space for Drug Discovery Using .pdf;/Users/toni_brain/Zotero/storage/73MFY2UT/cn3000422.html}
 }
@@ -846,35 +842,18 @@
   abstract = {Structure-based drug design (SBDD) aims to design small-molecule ligands that bind with high affinity and specificity to pre-determined protein targets. Traditional SBDD pipelines start with large-scale docking of compound libraries from public databases, thus limiting the exploration of chemical space to existent previously studied regions. Recent machine learning methods approached this problem using an atom-by-atom generation approach, which is computationally expensive. In this paper, we formulate SBDD as a 3D-conditional generation problem and present DiffSBDD, an E(3)-equivariant 3D-conditional diffusion model that generates novel ligands conditioned on protein pockets. Furthermore, we curate a new dataset of experimentally determined binding complex data from Binding MOAD to provide a realistic binding scenario that complements the synthetic CrossDocked dataset. Comprehensive in silico experiments demonstrate the efficiency of DiffSBDD in generating novel and diverse drug-like ligands that engage protein pockets with high binding energies as predicted by in silico docking.}
 }
 
-@misc{schneuing2022structurebaseda,
-  title = {Structure-Based {{Drug Design}} with {{Equivariant Diffusion Models}}},
-  author = {Schneuing, Arne and Du, Yuanqi and Harris, Charles and Jamasb, Arian and Igashov, Ilia and Du, Weitao and Blundell, Tom and Li{\'o}, Pietro and Gomes, Carla and Welling, Max and Bronstein, Michael and Correia, Bruno},
-  year = {2022},
-  month = oct,
-  number = {arXiv:2210.13695},
-  eprint = {arXiv:2210.13695},
-  publisher = {{arXiv}},
-  doi = {10.48550/arXiv.2210.13695},
-  urldate = {2023-03-03},
-  abstract = {Structure-based drug design (SBDD) aims to design small-molecule ligands that bind with high affinity and specificity to pre-determined protein targets. Traditional SBDD pipelines start with large-scale docking of compound libraries from public databases, thus limiting the exploration of chemical space to existent previously studied regions. Recent machine learning methods approached this problem using an atom-by-atom generation approach, which is computationally expensive. In this paper, we formulate SBDD as a 3D-conditional generation problem and present DiffSBDD, an E(3)-equivariant 3D-conditional diffusion model that generates novel ligands conditioned on protein pockets. Furthermore, we curate a new dataset of experimentally determined binding complex data from Binding MOAD to provide a realistic binding scenario that complements the synthetic CrossDocked dataset. Comprehensive in silico experiments demonstrate the efficiency of DiffSBDD in generating novel and diverse drug-like ligands that engage protein pockets with high binding energies as predicted by in silico docking.},
-  archiveprefix = {arxiv},
-  keywords = {Computer Science - Machine Learning,Quantitative Biology - Biomolecules},
-  file = {/Users/toni_brain/Zotero/storage/MLDJ2YTT/Schneuing et al. - 2022 - Structure-based Drug Design with Equivariant Diffu.pdf;/Users/toni_brain/Zotero/storage/G7QNC2ZS/2210.html}
-}
-
 @article{schwab2010conformations,
   title = {Conformations and {{3D}} Pharmacophore Searching},
   author = {Schwab, Christof H.},
   year = {2010},
   month = dec,
-  journal = {Drug Discovery Today: Technologies},
+  journal = {Drug Discov. Today},
   series = {{{3D Pharmacophore Elucidation}} and {{Virtual Screening}}},
   volume = {7},
   number = {4},
   pages = {e245-e253},
   issn = {1740-6749},
   doi = {10.1016/j.ddtec.2010.10.003},
-  urldate = {2023-04-10},
   abstract = {Several methods have been developed and published over the past years to generate sets of diverse and pharmacologically relevant conformations which can be used within 3D pharmacophore search protocols to increase the number of meaningful hits of such experiments. This review gives some insights into the general challenges and problems in the area of 3D structure and conformation generation and focuses on some available and recent software technologies and approaches applicable for this task. The methods, algorithms and philosophies behind the approaches are briefly described and discussed and some examples on the performance and results obtained with the different tools are given.},
   langid = {english},
   file = {/Users/toni_brain/Zotero/storage/2AFXC6NJ/S1740674910000326.html}
@@ -889,21 +868,9 @@
   pages = {9558--9568},
   publisher = {{PMLR}},
   issn = {2640-3498},
-  urldate = {2023-03-16},
   abstract = {We study a fundamental problem in computational chemistry known as molecular conformation generation, trying to predict stable 3D structures from 2D molecular graphs. Existing machine learning approaches usually first predict distances between atoms and then generate a 3D structure satisfying the distances, where noise in predicted distances may induce extra errors during 3D coordinate generation. Inspired by the traditional force field methods for molecular dynamics simulation, in this paper, we propose a novel approach called ConfGF by directly estimating the gradient fields of the log density of atomic coordinates. The estimated gradient fields allow directly generating stable conformations via Langevin dynamics. However, the problem is very challenging as the gradient fields are roto-translation equivariant. We notice that estimating the gradient fields of atomic coordinates can be translated to estimating the gradient fields of interatomic distances, and hence develop a novel algorithm based on recent score-based generative models to effectively estimate these gradients. Experimental results across multiple tasks show that ConfGF outperforms previous state-of-the-art baselines by a significant margin.},
   langid = {english},
   file = {/Users/toni_brain/Zotero/storage/4TUGAGCD/Shi et al. - 2021 - Learning Gradient Fields for Molecular Conformatio.pdf;/Users/toni_brain/Zotero/storage/RIPNH7EV/Shi et al. - 2021 - Learning Gradient Fields for Molecular Conformatio.pdf}
-}
-
-@misc{silvr,
-  title = {Silvr: Working Title},
-  shorttitle = {Silvr},
-  journal = {Google Docs},
-  urldate = {2023-03-14},
-  abstract = {Authors: Nicholas Runcie, A Mey Target journal: My first choice is still JCIM, and second is Digital Discovery. Only because if HR was checking my CV they would recognise JCIM as a reputable journal, whereas digital discovery is new. Anyone in the field should respect them both though.  SILVR: Co...},
-  howpublished = {https://docs.google.com/document/d/19XYxFLQ077zCaiO4M6evnPt4wU\_uOmSlMYhhpdDA3hM/edit?usp=embed\_facebook},
-  langid = {english},
-  file = {/Users/toni_brain/Zotero/storage/P4TNFKCP/edit.html}
 }
 
 @article{skalic2019shapebased,
@@ -918,7 +885,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.8b00706},
-  urldate = {2023-03-07},
   abstract = {In this work, we propose a machine learning approach to generate novel molecules starting from a seed compound, its three-dimensional (3D) shape, and its pharmacophoric features. The pipeline draws inspiration from generative models used in image analysis and represents a first example of the de novo design of lead-like molecules guided by shape-based features. A variational autoencoder is used to perturb the 3D representation of a compound, followed by a system of convolutional and recurrent neural networks that generate a sequence of SMILES tokens. The generative design of novel scaffolds and functional groups can cover unexplored regions of chemical space that still possess lead-like properties.},
   file = {/Users/toni_brain/Zotero/storage/Y67HFQ7R/Skalic et al. - 2019 - Shape-Based Generative Modeling for de Novo Drug D.pdf}
 }
@@ -936,7 +902,6 @@
   publisher = {{American Chemical Society}},
   issn = {1543-8384},
   doi = {10.1021/acs.molpharmaceut.9b00634},
-  urldate = {2023-03-18},
   abstract = {Chemical space is impractically large, and conventional structure-based virtual screening techniques cannot be used to simply search through the entire space to discover effective bioactive molecules. To address this shortcoming, we propose a generative adversarial network to generate, rather than search, diverse three-dimensional ligand shapes complementary to the pocket. Furthermore, we show that the generated molecule shapes can be decoded using a shape-captioning network into a sequence of SMILES enabling directly the structure-based de novo drug design. We evaluate the quality of the method by both structure- (docking) and ligand-based [quantitative structure\textendash activity relationship (QSAR)] virtual screening methods. For both evaluation approaches, we observed enrichment compared to random sampling from initial chemical space of ZINC drug-like compounds.},
   file = {/Users/toni_brain/Zotero/storage/86SN3MHP/Skalic et al. - 2019 - From Target to Drug Generative Modeling for the M.pdf;/Users/toni_brain/Zotero/storage/TIPDHJYC/acs.molpharmaceut.html}
 }
@@ -980,7 +945,6 @@
   publisher = {{The Royal Society of Chemistry}},
   issn = {2041-6539},
   doi = {10.1039/D0SC05401A},
-  urldate = {2023-03-18},
   abstract = {Computer aided synthesis planning (CASP) is part of a suite of artificial intelligence (AI) based tools that are able to propose synthesis routes to a wide range of compounds. However, at present they are too slow to be used to screen the synthetic feasibility of millions of generated or enumerated compounds before identification of potential bioactivity by virtual screening (VS) workflows. Herein we report a machine learning (ML) based method capable of classifying whether a synthetic route can be identified for a particular compound or not by the CASP tool AiZynthFinder. The resulting ML models return a retrosynthetic accessibility score (RAscore) of any molecule of interest, and computes at least 4500 times faster than retrosynthetic analysis performed by the underlying CASP tool. The RAscore should be useful for pre-screening millions of virtual molecules from enumerated databases or generative models for synthetic accessibility and produce higher quality databases for virtual screening of biological activity.},
   langid = {english},
   file = {/Users/toni_brain/Zotero/storage/YDHM2FCP/Thakkar et al. - 2021 - Retrosynthetic accessibility score (RAscore) – rap.pdf}
@@ -1001,23 +965,6 @@
   archiveprefix = {arxiv},
   keywords = {Computer Science - Machine Learning},
   file = {/Users/toni_brain/Zotero/storage/S9MSHLTW/Vignac et al. - 2023 - MiDi Mixed Graph and 3D Denoising Diffusion for M.pdf;/Users/toni_brain/Zotero/storage/NZ4U8LVE/2302.html}
-}
-
-@misc{vignac2023midia,
-  title = {{{MiDi}}: {{Mixed Graph}} and {{3D Denoising Diffusion}} for {{Molecule Generation}}},
-  shorttitle = {{{MiDi}}},
-  author = {Vignac, Clement and Osman, Nagham and Toni, Laura and Frossard, Pascal},
-  year = {2023},
-  month = feb,
-  number = {arXiv:2302.09048},
-  eprint = {arXiv:2302.09048},
-  publisher = {{arXiv}},
-  doi = {10.48550/arXiv.2302.09048},
-  urldate = {2023-03-14},
-  abstract = {This work introduces MiDi, a diffusion model for jointly generating molecular graphs and corresponding 3D conformers. In contrast to existing models, which derive molecular bonds from the conformation using predefined rules, MiDi streamlines the molecule generation process with an end-to-end differentiable model. Experimental results demonstrate the benefits of this approach: on the complex GEOM-DRUGS dataset, our model generates significantly better molecular graphs than 3D-based models and even surpasses specialized algorithms that directly optimize the bond orders for validity. Our code is available at github.com/cvignac/MiDi.},
-  archiveprefix = {arxiv},
-  keywords = {Computer Science - Machine Learning},
-  file = {/Users/toni_brain/Zotero/storage/LSJL3L6I/Vignac et al. - 2023 - MiDi Mixed Graph and 3D Denoising Diffusion for M.pdf;/Users/toni_brain/Zotero/storage/EVF96GNP/2302.html}
 }
 
 @article{wildman1999prediction,
@@ -1060,7 +1007,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.2c00042},
-  urldate = {2023-03-18},
   abstract = {A persistent goal for de novo drug design is to generate novel chemical compounds with desirable properties in a labor-, time-, and cost-efficient manner. Deep generative models provide alternative routes to this goal. Numerous model architectures and optimization strategies have been explored in recent years, most of which have been developed to generate two-dimensional molecular structures. Some generative models aiming at three-dimensional (3D) molecule generation have also been proposed, gaining attention for their unique advantages and potential to directly design drug-like molecules in a target-conditioning manner. This review highlights current developments in 3D molecular generative models combined with deep learning and discusses future directions for de novo drug design.},
   file = {/Users/toni_brain/Zotero/storage/V2VMSS5N/Xie et al. - 2022 - Advances and Challenges in De Novo Drug Design Usi.pdf;/Users/toni_brain/Zotero/storage/EY3H2LFY/acs.jcim.html}
 }
@@ -1077,7 +1023,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.0c01494},
-  urldate = {2023-03-18},
   abstract = {De novo molecule design through the molecular generative model has gained increasing attention in recent years. Here, a novel generative model was proposed by integrating the three-dimensional (3D) structural information of the protein binding pocket into the conditional RNN (cRNN) model to control the generation of drug-like molecules. In this model, the composition of the protein binding pocket is effectively characterized through a coarse-grain strategy and the 3D information of the pocket can be represented by the sorted eigenvalues of the Coulomb matrix (EGCM) of the coarse-grained atoms composing the binding pocket. In current work, we used our EGCM method and a previously reported binding pocket descriptor, DeeplyTough, to train cRNN models and evaluated their performance. It has been shown that the model trained with the constraint of protein environment information has a clear tendency on generating compounds with higher similarity to the original X-ray-bound ligand than the normal RNN model and also better docking scores. Our results demonstrate the potential application of the controlled generative model for the targeted molecule generation and guided exploration on the drug-like chemical space.},
   file = {/Users/toni_brain/Zotero/storage/W55LQSR2/Xu et al. - 2021 - De Novo Molecule Design Through the Molecular Gene.pdf;/Users/toni_brain/Zotero/storage/8PNG6DB4/acs.jcim.html}
 }
@@ -1107,7 +1052,6 @@
   publisher = {{American Chemical Society}},
   issn = {1549-9596},
   doi = {10.1021/acs.jcim.2c00177},
-  urldate = {2023-03-18},
   abstract = {In recent years, molecular deep generative models have attracted much attention for its application in de novo drug design. The data-driven molecular deep generative model approximates the high dimensional distribution of the chemical space through learning from a large number of molecular structural data. So far, most of the molecular generative models rely on purely 2D ligand information in structure generation. Here, we propose a novel molecular deep generative model which adopts a recurrent neural network architecture coupled with a ligand\textendash protein interaction fingerprint as constraints. The fingerprint was constructed on ligand docking poses and represents the 3D binding mode of ligands in the protein pocket. In the current work, generative models constrained with interaction fingerprints were trained and compared with normal RNN models. It has been shown that models trained with constraints of ligand\textendash protein interaction fingerprint have a clear tendency to generating compounds maintaining similar binding modes. Our results demonstrate the potential application of the interaction fingerprint-constrained generative model for the targeted molecule generation and guided exploration on the drug-like chemical space.},
   file = {/Users/toni_brain/Zotero/storage/2PNII5CS/Zhang and Chen - 2022 - De Novo Molecule Design Using Molecular Generative.pdf;/Users/toni_brain/Zotero/storage/UFUDQ6PX/acs.jcim.html}
 }
